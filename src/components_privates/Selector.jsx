@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import MiContext from "../Context/Micontext";
 
-const Selector = ({ handleChangeSelect, select,onclickCategoria,categoriasresult }) => {
+const Selector = ({ handleChangeSelect }) => {
   const { categories } = useContext(MiContext);
 
   return (
@@ -21,7 +21,7 @@ const Selector = ({ handleChangeSelect, select,onclickCategoria,categoriasresult
           ))}
         </select>
         <div className="d-flex justify-content-center">
-          <button className="btn btn-info m-3 " onClick={()=>categoriasresult()}>
+          <button className="btn btn-info m-3 " onClick="">
             seleccionar
           </button>
         </div>

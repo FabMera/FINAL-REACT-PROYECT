@@ -57,6 +57,7 @@ const GaleriaGeneral = () => {
     }
     return 0;
   };
+  
   const handleChangeSelect = (e) => {
     setSelect(e.target.value);
     categoriasresult(e.target.value);

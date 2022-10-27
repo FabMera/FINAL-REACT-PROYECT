@@ -12,7 +12,7 @@ const CardsMasComprado = () => {
       {/* {JSON.stringify(user)}  */}
       {productos.map((ele) => (
         <div className="col-9 mx-auto col-md-6 col-sm-6 col-lg-4 col-xl-3 ">
-          <div  className="card mb-3 shadow-lg p-3 bg-body rounded">
+          <div className="card mb-3 shadow-lg p-3 bg-body rounded">
             <img  src={ele.imagen} className="card-img-top" alt="foto" />
             <div className="card-body">
               <h5 className="card-title">{ele.tipo}</h5>

@@ -22,7 +22,7 @@ function App() {
   const [datos,setDatos] =useState({})
   const [categories, setCategories] = useState([]);
 
-  const endpoint = "https://dummyjson.com/products?limit=10";
+  const endpoint = "https://dummyjson.com/products?limit=12";
 
   const cargarProductos = async () => {
     const res = await axios.get(endpoint);

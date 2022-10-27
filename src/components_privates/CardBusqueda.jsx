@@ -2,6 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 
 const CardBusqueda = ({ busqueda }) => {
+  //componente que se ejecuta cuando se realiza alguna busqueda 
+  
   const { user } = useAuth0();
   return (
     <>

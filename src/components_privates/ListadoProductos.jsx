@@ -18,7 +18,7 @@ const ListadoProductos = () => {
     const product = publicacion.filter((ele) => ele.id !== id);
     setPublicacion(product);
     Swal.fire({
-      title: `Eliminastes un producto de tu Lista!`,
+      title: `Eliminastes un producto de tu Lista`,
       text: "Eliminado",
       icon: "warning",
     });
