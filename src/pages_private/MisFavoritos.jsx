@@ -53,7 +53,7 @@ const MisFavoritos = () => {
                     </li>
                   </ul>
                   <div className="card-body d-flex justify-content-between">
-                    <button onClick={()=>clickDelete(ele)} className="btn btn-warning">Sacar de Favoritos</button>
+                    <button onClick={()=>clickDelete(ele)} className="btn btn-warning">Eliminar de Favoritos</button>
                     <button className="btn btn-info">Comprar</button>
                   </div>
                   <div className="card-footer mt-2 ">

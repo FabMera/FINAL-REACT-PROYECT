@@ -3,14 +3,14 @@ import Swal from "sweetalert2";
 import MiContext from "../Context/Micontext";
 
 const ListadoProductos = () => {
-  const { publicacion, datos, setDatos, setPublicacion } =
+  const { publicacion, datos, setDatos, setPublicacion} =
     useContext(MiContext);
 
   const edit = (item) => {
-    const elemento = publicacion.filter((ele) => ele.id === item.id);
+    const elemento = publicacion.find((ele) => ele.id === item.id);
     setDatos(elemento);
     console.log(elemento);
-    
+   //aqui deberia abrir un modal para pode editar el objeto actual (elemento)
   };
  
 
@@ -52,8 +52,8 @@ const ListadoProductos = () => {
               <p className="">Estado del Producto:{item.estado}</p>
 
               <p className="">Precio $:{item.precio}</p>
+              <p className="">Unidades ofrecidas :{item.cantidad}</p>
               <p className="">Descripcion de tu producto: {item.descrip}</p>
-              <p className="">URL imagen producto: {item.imagen}</p>
 
               <div className="d-flex justify-content-between">
                 <button

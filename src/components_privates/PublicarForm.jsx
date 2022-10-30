@@ -14,6 +14,7 @@ const PublicarForm = () => {
   const [precio, setPrecio] = useState("");
   const [imagen, setImagen] = useState("");
   const [descrip, setDescrip] = useState("");
+  const [cantidad,setCantidad] = useState(0)
   const [favorito, setFavorito] = useState(false);
 
   const [error, setError] = useState(false);
@@ -21,7 +22,7 @@ const PublicarForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //validamos formulario
-    if ([tipo, categoria, estado, precio, descrip].includes("")) {
+    if ([tipo, categoria, estado, precio, descrip,cantidad].includes("")) {
       setError(true);
       return;
     }
@@ -34,6 +35,8 @@ const PublicarForm = () => {
       imagen,
       descrip,
       favorito,
+      cantidad,
+      add:false,
       id: generarId(),
     };
 
@@ -46,6 +49,7 @@ const PublicarForm = () => {
     setPrecio("")
     setImagen("")
     setDescrip("")
+    setCantidad("");
 
   };
 
@@ -136,6 +140,22 @@ const PublicarForm = () => {
             placeholder=""
             value={precio}
             onChange={(e) => setPrecio(e.target.value)}
+          />
+        </div>
+        <div className="mb-5">
+          <label //for o htmlfor en react es para asociar un elemento con algo
+            htmlFor=""
+            className="form-label"
+          >
+            Cantidad :
+          </label>
+
+          <input
+            type="number"
+            className="form-control"
+            placeholder=""
+            value={cantidad}
+            onChange={(e)=>setCantidad(e.target.value)}
           />
         </div>
         <div className="mb-5">

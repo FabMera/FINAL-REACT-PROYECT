@@ -12,32 +12,38 @@ import InicioSesion from "./pages_public/InicioSesion";
 import Registro from "./pages_public/Registro";
 import MisFavoritos from "./pages_private/MisFavoritos";
 import DetalleProducto from "./pages_private/DetalleProducto";
-
+import Carrito from "./pages_private/Carrito";
+import { useAuth0 } from "@auth0/auth0-react";
+import Spinner from "./components_privates/Spinner"
 
 function App() {
-
-
+  const { isAuthenticated } = useAuth0();
   const [productos, setProductos] = useState([]);
-  const [publicacion,setPublicacion] = useState([])
-  const [datos,setDatos] =useState({})
+  const [publicacion, setPublicacion] = useState([]);
+  const [datos, setDatos] = useState({});
   const [categories, setCategories] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [carroCompra, setCarroCompra] = useState([]);
 
   const endpoint = "https://dummyjson.com/products?limit=12";
 
   const cargarProductos = async () => {
-    const res = await axios.get(endpoint);
-    const info = res.data.products;
-    //console.log(info)
+    try {
+      const res = await axios.get(endpoint);
+      const info = res.data.products;
 
-    const dataProductos = info.map((ele) => ({
-      id: ele.id,
-      descrip: ele.description,
-      categoria: ele.category,
-      imagen: ele.thumbnail,
-      tipo: ele.title,
-      precio: ele.price,
-    }));
-    setProductos(dataProductos);
+      const dataProductos = info.map((ele) => ({
+        id: ele.id,
+        descrip: ele.description,
+        categoria: ele.category,
+        imagen: ele.thumbnail,
+        tipo: ele.title,
+        precio: ele.price,
+      }));
+      setProductos(dataProductos);
+    } catch (error) {
+      console.log("error conexion" + error);
+    }
   };
 
   useEffect(() => {
@@ -45,21 +51,70 @@ function App() {
   }, []);
 
 
+  const { isLoading } = useAuth0();
+  if (isLoading)
+    return (
+     <Spinner/>
+    );
 
+  // solicito los datos a la local storage y los transformo
+  /*  useEffect(() => {
+    const obtenerDataLocal = () => {
+      const publicacionLS =
+        JSON.parse(localStorage.getItem("publicacion")) ?? [];
+      setPublicacion(publicacionLS);
+    };
+    obtenerDataLocal();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("publicacion", JSON.stringify(publicacion));
+  }, [publicacion]);
+ */
   return (
     <>
-      <Micontext.Provider value={{ productos, setProductos,publicacion,setPublicacion,datos,setDatos,categories,setCategories }}>
+      <Micontext.Provider
+        value={{
+          productos,
+          setProductos,
+          publicacion,
+          setPublicacion,
+          datos,
+          setDatos,
+          categories,
+          setCategories,
+          total,
+          setTotal,
+          carroCompra,
+          setCarroCompra,
+        }}
+      >
         <BrowserRouter>
+        {isLoading?<Spinner/>:null}
           <NavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/inicio" element={<InicioSesion />} />
-            <Route path="/registro" element={<Registro />} />
-            <Route path="/mispublicaciones" element={<MisPublicaciones />} />
-            <Route path="/galeria" element={<GaleriaGeneral />} />
-            <Route path="/miperfil" element={<Miperfil />} />
-            <Route path="/favoritos" element={<MisFavoritos/>}/>
-            <Route path="/producto/:id" element={<DetalleProducto />} />
+            {isAuthenticated ? (
+              <>
+                {" "}
+                <Route
+                  path="/mispublicaciones"
+                  element={<MisPublicaciones />}
+                />
+                <Route path="/" element={<Home />} />
+                <Route path="/galeria" element={<GaleriaGeneral />} />
+                <Route path="/miperfil" element={<Miperfil />} />
+                <Route path="/favoritos" element={<MisFavoritos />} />
+                <Route path="/producto/:id" element={<DetalleProducto />} />
+                <Route path="/carrito" element={<Carrito />} />
+              </>
+            ) : (
+              <>
+                {" "}
+                <Route path="/" element={<Home />} />
+                <Route path="/inicio" element={<InicioSesion />} />
+                <Route path="/registro" element={<Registro />} />{" "}
+              </>
+            )}
           </Routes>
         </BrowserRouter>
       </Micontext.Provider>

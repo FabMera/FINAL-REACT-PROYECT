@@ -6,22 +6,58 @@ import Selector from "../components_privates/Selector";
 import SelectOrderby from "../components_privates/SelectOrderby";
 import MiContext from "../Context/Micontext";
 import Error from "../components_privates/Error";
-import CardBusqueda from "../components_privates/CardBusqueda";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const GaleriaGeneral = () => {
-  const { setCategories, publicacion,setPublicacion } = useContext(MiContext);
-    
   const [search, setSearch] = useState("");
   const [busqueda, setBusqueda] = useState([{}]);
   const [select, setSelect] = useState("");
+  const [selectBusqueda, setSelectBusqueda] = useState([{}]);
+
   const [errorBusqueda, setErrorBusqueda] = useState(false);
+  const {
+    publicacion,
+    datos,
+    setDatos,
+    setPublicacion,
+    carroCompra,
+    setCarroCompra,
+    setCategories,
+  } = useContext(MiContext);
+
+  const { user } = useAuth0();
+  const navigate = useNavigate();
+
+  const irAlDetalle = (id) => {
+    navigate(`/producto/${id}`);
+  };
+
+  const onClickHeart = (product) => {
+    const favoritas = [...publicacion];
+    const index = favoritas.findIndex((item) => item.id === product.id);
+    favoritas[index].favorito = !favoritas[index].favorito;
+    setPublicacion(favoritas);
+    if (favoritas[index].favorito) {
+      return Swal.fire({
+        title: "!Perfecto!",
+        text: "Agregado a Favoritos",
+        icon: "success",
+      });
+    }
+  };
 
   const url = "https://dummyjson.com/products/categories";
+
   const cargarCategories = async () => {
-    const res = await axios.get(url);
-    const info = res.data;
-    setCategories(info);
+    try {
+      const res = await axios.get(url);
+      const info = res.data;
+      setCategories(info);
+    } catch (error) {
+      console.log("error conexion" + error);
+    }
   };
 
   useEffect(() => {
@@ -33,8 +69,6 @@ const GaleriaGeneral = () => {
     searchProducto(e.target.value);
   };
 
-
-
   const searchProducto = (buscar) => {
     const results = publicacion.filter((valor) => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
@@ -42,12 +76,9 @@ const GaleriaGeneral = () => {
       } else {
         return setErrorBusqueda(true);
       }
-      
     });
     setBusqueda(results);
-    
   };
-
 
   const compara = (a, b) => {
     if (a.precio < b.precio) {
@@ -57,7 +88,7 @@ const GaleriaGeneral = () => {
     }
     return 0;
   };
-  
+
   const handleChangeSelect = (e) => {
     setSelect(e.target.value);
     categoriasresult(e.target.value);
@@ -69,9 +100,53 @@ const GaleriaGeneral = () => {
         return valor;
       }
     });
-    setBusqueda(filterporCat);
+    setSelectBusqueda(filterporCat);
   };
 
+  const addProduct = (ele) => {
+    const carrito = [...publicacion];
+    const index = carrito.findIndex((item) => item.id === ele.id);
+    carrito[index].add = true;
+    setPublicacion(carrito);
+    console.log(publicacion);
+  };
+
+  const busquedaTotal = () => {
+    if (search === "" && select === "") {
+      return publicacion.map((product) => (
+        <Cards
+          key={product.id}
+          product={product}
+          onClickHeart={onClickHeart}
+          user={user}
+          addProduct={addProduct}
+          irAlDetalle={irAlDetalle}
+        />
+      ));
+    } else if (search === "" && select !== "") {
+      return selectBusqueda.map((product) => (
+        <Cards
+          key={product.id}
+          product={product}
+          onClickHeart={onClickHeart}
+          user={user}
+          addProduct={addProduct}
+          irAlDetalle={irAlDetalle}
+        />
+      ));
+    } else if (search !== "" && select === "") {
+      return busqueda.map((product) => (
+        <Cards
+          key={product.id}
+          product={product}
+          onClickHeart={onClickHeart}
+          user={user}
+          addProduct={addProduct}
+          irAlDetalle={irAlDetalle}
+        />
+      ));
+    }
+  };
 
   return (
     <>
@@ -80,9 +155,11 @@ const GaleriaGeneral = () => {
         <div className="row">
           <div className="col-12 col-md-4">
             <Buscador search={search} handleInput={handleInput} />
-            {errorBusqueda && <Error>*No hay resultados para su busqueda</Error>}
+            {errorBusqueda && (
+              <Error>*No hay resultados para su busqueda</Error>
+            )}
           </div>
-          
+
           <div className="col-12 col-md-4">
             <Selector handleChangeSelect={handleChangeSelect} />
           </div>
@@ -92,17 +169,8 @@ const GaleriaGeneral = () => {
         </div>
 
         <div className="row">
-          {search === ""? (
-            <Cards />
-          ) : (
-           <CardBusqueda busqueda={busqueda}/>
-          )}
+          {busquedaTotal()}
         </div>
-        {select === ""? (
-            ""
-        ) : (
-            <CardBusqueda busqueda={busqueda}/>
-        )}
       </div>
     </>
   );
