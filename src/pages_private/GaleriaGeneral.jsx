@@ -103,11 +103,11 @@ const GaleriaGeneral = () => {
     setSelectBusqueda(filterporCat);
   };
 
-  const addProduct = (ele) => {
+  const addProduct = (product) => {
     const carrito = [...publicacion];
-    const index = carrito.findIndex((item) => item.id === ele.id);
-    carrito[index].add = true;
-    setPublicacion(carrito);
+    const index = carrito.findIndex((item) => item.id === product.id);
+    carrito[index].add = true ;
+    setCarroCompra(carrito);
     console.log(publicacion);
   };
 

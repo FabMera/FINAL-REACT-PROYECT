@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import TablaCarro from "../components_privates/TablaCarro";
 
 import MiContext from "../Context/Micontext";
 
@@ -15,18 +16,10 @@ const Carrito = () => {
   const incrementCount = () => {};
   const decrementCount = () => {};
 
-  useEffect(() => {
-    const filtradoCarrito =publicacion.filter((ele) => ele.add);
-    setCarroCompra(filtradoCarrito);
-    console.log(filtradoCarrito)
-  },[]);
-
-
-
   const deleteItem = (id) => {
     const product = carroCompra.filter((item) => item.id !== id);
     setCarroCompra(product);
-    console.log(product)
+    console.log(product);
   };
 
   return (
@@ -52,36 +45,15 @@ const Carrito = () => {
                   <th scope="col">Subtotal</th>
                 </tr>
               </thead>
-
-              {carroCompra.map((ele) => (
-                <tbody>
-                  <tr>
-                    <th scope="row">{ele.tipo}</th>
-                    <div><button onClick={()=>deleteItem(ele.id)} className="btn btn-danger">X</button></div>
-                    <td>{ele.precio}</td>
-                    <td>
-                      {" "}
-                      <div className="flex justify-between">
-                        <button
-                          className="btn btn-primary"
-                          onClick={() => incrementCount(ele)}
-                        >
-                          ✚
-                        </button>
-                        <span className="m-3"></span>
-                        <button
-                          disabled={ele.cantidad <= 0}
-                          className="btn btn-danger"
-                          onClick={() => decrementCount(ele)}
-                        >
-                          ‒
-                        </button>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              ))}
+              {carroCompra
+                .filter((producto) => producto.add)
+                .map((producto) => (
+                  <TablaCarro
+                    key={producto}
+                    producto={producto}
+                    deleteItem={deleteItem}
+                  />
+                ))}
             </table>
 
             <li className="list-group-item d-flex justify-content-end">
