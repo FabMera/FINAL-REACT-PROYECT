@@ -78,6 +78,7 @@ const GaleriaGeneral = () => {
       }
     });
     setBusqueda(results);
+    setErrorBusqueda(false)
   };
 
   const compara = (a, b) => {
@@ -105,10 +106,10 @@ const GaleriaGeneral = () => {
 
   const addProduct = (product) => {
     const carrito = [...publicacion];
-    const index = carrito.findIndex((item) => item.id === product.id);
-    carrito[index].add = true ;
-    setCarroCompra(carrito);
-    console.log(publicacion);
+    const resultado = carrito.find((item) => item.id === product.id);
+    setCarroCompra([...carroCompra,resultado]) 
+   console.log(resultado)
+   console.log(carroCompra)
   };
 
   const busquedaTotal = () => {

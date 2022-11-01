@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import TablaCarro from "../components_privates/TablaCarro";
 
 import MiContext from "../Context/Micontext";
@@ -6,6 +6,8 @@ import MiContext from "../Context/Micontext";
 const Carrito = () => {
   const { carroCompra, total, setTotal, publicacion, setCarroCompra } =
     useContext(MiContext);
+
+    const [cantidad,setCantidad] = useState(0)
 
   /*   const totalCarrito = () => {
     setTotal(
@@ -17,10 +19,17 @@ const Carrito = () => {
   const decrementCount = () => {};
 
   const deleteItem = (id) => {
-    const product = carroCompra.filter((item) => item.id !== id);
-    setCarroCompra(product);
-    console.log(product);
+    const productoCarroCompra = carroCompra.filter((item) => item.id !== id);
+    setCarroCompra(productoCarroCompra);
+    
   };
+const subTotal = (handleCantidad,producto)=>{
+    return producto.precio*handleCantidad();
+ }
+ const handleCantidad =(e)=>{
+     return e.target.value;
+    
+ }
 
   return (
     <>
@@ -43,17 +52,19 @@ const Carrito = () => {
                   <th scope="col">Precio</th>
                   <th scope="col">Cantidad</th>
                   <th scope="col">Subtotal</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
-              {carroCompra
-                .filter((producto) => producto.add)
-                .map((producto) => (
-                  <TablaCarro
-                    key={producto}
-                    producto={producto}
-                    deleteItem={deleteItem}
-                  />
-                ))}
+              {carroCompra.map((producto) => (
+                <TablaCarro
+                  key={producto}
+                  producto={producto}
+                  deleteItem={deleteItem}
+                  handleCantidad={handleCantidad()}
+                  subTotal={subTotal}
+                  
+                />
+              ))}
             </table>
 
             <li className="list-group-item d-flex justify-content-end">

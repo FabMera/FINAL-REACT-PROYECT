@@ -14,8 +14,7 @@ import MisFavoritos from "./pages_private/MisFavoritos";
 import DetalleProducto from "./pages_private/DetalleProducto";
 import Carrito from "./pages_private/Carrito";
 import { useAuth0 } from "@auth0/auth0-react";
-import Spinner from "./components_privates/Spinner"
-
+import Spinner from "./components_privates/Spinner";
 function App() {
   const { isAuthenticated } = useAuth0();
   const [productos, setProductos] = useState([]);
@@ -24,8 +23,11 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [carroCompra, setCarroCompra] = useState([]);
+  const [cargando, setCargando] = useState(false);
 
-  const endpoint = "https://dummyjson.com/products?limit=12";
+  const { isLoading } = useAuth0();
+
+  const endpoint = "https://dummyjson.com/products?limit=10";
 
   const cargarProductos = async () => {
     try {
@@ -46,19 +48,8 @@ function App() {
     }
   };
 
+
   useEffect(() => {
-    cargarProductos();
-  }, []);
-
-
-  const { isLoading } = useAuth0();
-  if (isLoading)
-    return (
-     <Spinner/>
-    );
-
-  // solicito los datos a la local storage y los transformo
-  /*  useEffect(() => {
     const obtenerDataLocal = () => {
       const publicacionLS =
         JSON.parse(localStorage.getItem("publicacion")) ?? [];
@@ -67,10 +58,17 @@ function App() {
     obtenerDataLocal();
   }, []);
 
+  // solicito los datos a la local storage y los transformo
+
   useEffect(() => {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
   }, [publicacion]);
- */
+  useEffect(() => {
+    cargarProductos();
+    if (isLoading) {
+      return <Spinner />;
+    }
+  }, []);
   return (
     <>
       <Micontext.Provider
@@ -90,7 +88,7 @@ function App() {
         }}
       >
         <BrowserRouter>
-        {isLoading?<Spinner/>:null}
+          {isLoading ? <Spinner /> : null}
           <NavBar />
           <Routes>
             {isAuthenticated ? (
