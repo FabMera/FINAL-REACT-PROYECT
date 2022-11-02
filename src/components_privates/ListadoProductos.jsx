@@ -1,37 +1,18 @@
 import { useContext, useEffect } from "react";
-import Swal from "sweetalert2";
+
 import MiContext from "../Context/Micontext";
 
-const ListadoProductos = () => {
-  const { publicacion, datos, setDatos, setPublicacion} =
-    useContext(MiContext);
+const ListadoProductos = ({ deleteItem, edit }) => {
+  const { publicacion } = useContext(MiContext);
 
-  const edit = (item) => {
-    const elemento = publicacion.find((ele) => ele.id === item.id);
-    setDatos(elemento);
-    console.log(elemento);
-   //aqui deberia abrir un modal para pode editar el objeto actual (elemento)
-  };
- 
-
-  const deleteItem = (id) => {
-    const product = publicacion.filter((ele) => ele.id !== id);
-    setPublicacion(product);
-    Swal.fire({
-      title: `Eliminastes un producto de tu Lista`,
-      text: "Eliminado",
-      icon: "warning",
-    });
-  };
-//verificamos contenido del objeto
+  //verificamos contenido del objeto para comprobar el formulario
   useEffect(() => {
     if (Object.keys(publicacion).length > 0) {
       console.log("Producto Agregado");
-    }else{
-      console.log('Formulario Vacio')
+    } else {
+      console.log("Formulario Vacio");
     }
   }, [publicacion]);
-
 
   return (
     <div>
@@ -57,7 +38,7 @@ const ListadoProductos = () => {
 
               <div className="d-flex justify-content-between">
                 <button
-                  onClick={() => edit(item)}
+                  onClick={() => edit(item.id)}
                   className="btn btn-success"
                   type="button"
                 >

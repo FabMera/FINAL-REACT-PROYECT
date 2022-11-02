@@ -15,20 +15,28 @@ import DetalleProducto from "./pages_private/DetalleProducto";
 import Carrito from "./pages_private/Carrito";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
+
 function App() {
   const { isAuthenticated } = useAuth0();
   const [productos, setProductos] = useState([]);
   const [publicacion, setPublicacion] = useState([]);
-  const [datos, setDatos] = useState({});
   const [categories, setCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [carroCompra, setCarroCompra] = useState([]);
-  const [cargando, setCargando] = useState(false);
 
+  const [tipo, setTipo] = useState("");
+  const [categoria, setCategoria] = useState([]);
+  const [estado, setEstado] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [imagen, setImagen] = useState("");
+  const [descrip, setDescrip] = useState("");
+  const [cantidad, setCantidad] = useState(0);
+  const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
 
   const endpoint = "https://dummyjson.com/products?limit=10";
 
+  //api para mostrar productos en portada.
   const cargarProductos = async () => {
     try {
       const res = await axios.get(endpoint);
@@ -41,13 +49,13 @@ function App() {
         imagen: ele.thumbnail,
         tipo: ele.title,
         precio: ele.price,
+        favorito: false,
       }));
       setProductos(dataProductos);
     } catch (error) {
       console.log("error conexion" + error);
     }
   };
-
 
   useEffect(() => {
     const obtenerDataLocal = () => {
@@ -69,6 +77,7 @@ function App() {
       return <Spinner />;
     }
   }, []);
+
   return (
     <>
       <Micontext.Provider
@@ -77,18 +86,31 @@ function App() {
           setProductos,
           publicacion,
           setPublicacion,
-          datos,
-          setDatos,
           categories,
           setCategories,
           total,
           setTotal,
           carroCompra,
           setCarroCompra,
+          tipo,
+          setTipo,
+          categoria,
+          setCategoria,
+          estado,
+          setEstado,
+          precio,
+          setPrecio,
+          imagen,
+          setImagen,
+          descrip,
+          setDescrip,
+          cantidad,
+          setCantidad,
+          modoedicion,
+          setModoEdicion,
         }}
       >
         <BrowserRouter>
-          {isLoading ? <Spinner /> : null}
           <NavBar />
           <Routes>
             {isAuthenticated ? (

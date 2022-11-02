@@ -1,18 +1,16 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
-
-//import { Container } from "react-bootstrap";
+import React, { useContext } from "react";
 import CardsMasComprado from "../components_public/CardsMasComprado";
 import Carrousel from "../components_public/Carrousel";
 import Categorias from "../components_public/Categorias";
+import MiContext from "../Context/Micontext";
 
 const Home = () => {
-
+  const { productos } = useContext(MiContext);
 
   return (
     <>
-
-      <div className="container">
+      <div className="container bg-light">
         <div className="row">
           <div className="col-12 col-md-8  mx-auto">
             <Carrousel />
@@ -25,9 +23,10 @@ const Home = () => {
           <div className="col-3 border">4</div>
         </div>
         <div className="row">
-          <CardsMasComprado />
+          {productos.map((product) => (
+            <CardsMasComprado product={product} />
+          ))}
         </div>
-        
 
         <div className="row">
           <div className="col-12 border">FOOTER</div>

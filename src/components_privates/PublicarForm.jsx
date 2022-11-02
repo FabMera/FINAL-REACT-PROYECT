@@ -3,26 +3,37 @@ import React, { useContext, useState, useEffect } from "react";
 import MiContext from "../Context/Micontext";
 import Error from "./Error";
 
-const PublicarForm = () => {
-  const { productos, setProductos, publicacion, setPublicacion, datos,categories,setCategories } =
-    useContext(MiContext);
-
-  
-  const [tipo, setTipo] = useState("");
-  const [categoria, setCategoria] = useState([]);
-  const [estado, setEstado] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [imagen, setImagen] = useState("");
-  const [descrip, setDescrip] = useState("");
-  const [cantidad,setCantidad] = useState(0)
-  const [favorito, setFavorito] = useState(false);
+const PublicarForm = ({edicion}) => {
+  const {
+    productos,
+    setProductos,
+    publicacion,
+    setPublicacion,
+    categories,
+    setCategories,
+    tipo,
+    categoria,
+    estado,
+    precio,
+    descrip,
+    cantidad,
+    imagen,
+    setTipo,
+    setCategoria,
+    setEstado,
+    setPrecio,
+    setDescrip,
+    setImagen,
+    setCantidad,
+    modoedicion,
+  } = useContext(MiContext);
 
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //validamos formulario
-    if ([tipo, categoria, estado, precio, descrip,cantidad].includes("")) {
+    if ([tipo, categoria, estado, precio, descrip, cantidad].includes("")) {
       setError(true);
       return;
     }
@@ -34,24 +45,23 @@ const PublicarForm = () => {
       precio,
       imagen,
       descrip,
-      favorito,
+      favorito: false,
       cantidad,
-      add:false,
       id: generarId(),
     };
 
     setProductos([...productos, objProducto]); //Producto de la API + producto formulario;
-    setPublicacion([...publicacion,objProducto]); //Solo producto agregado desde el formulario;
+    setPublicacion([...publicacion, objProducto]); //Solo producto agregado desde el formulario;
 
-    setTipo("")
-    setCategoria("")
-    setEstado("")
-    setPrecio("")
-    setImagen("")
-    setDescrip("")
+    setTipo("");
+    setCategoria("");
+    setEstado("");
+    setPrecio("");
+    setImagen("");
+    setDescrip("");
     setCantidad("");
-
   };
+
 
   //Generamos un id aleatorio para el nuevo producto que agregamos
   const generarId = () => {
@@ -72,19 +82,20 @@ const PublicarForm = () => {
     cargarCategories();
   }, []);
 
-
   useEffect(() => {
     if (Object.keys(publicacion).length > 0) {
       setTipo(publicacion.tipo);
     }
   }, [publicacion]);
 
-
   return (
     <>
       <h4 className="text-center mt-4">Publicar Nuevo Aviso</h4>
 
-      <form onSubmit={handleSubmit} className="form-control mb-4 mt-4 shadow p-3  bg-body rounded">
+      <form
+        onSubmit={handleSubmit}
+        className="form-control mb-4 mt-4 shadow p-3  bg-body rounded"
+      >
         {error && <Error>*Todos los campos son necesarios</Error>}
 
         <div className="mb-5">
@@ -155,7 +166,7 @@ const PublicarForm = () => {
             className="form-control"
             placeholder=""
             value={cantidad}
-            onChange={(e)=>setCantidad(e.target.value)}
+            onChange={(e) => setCantidad(e.target.value)}
           />
         </div>
         <div className="mb-5">
@@ -167,7 +178,7 @@ const PublicarForm = () => {
           </label>
 
           <input
-            type="text"
+            type="url"
             className="form-control"
             placeholder="Ingresa la URL: debe ser formato imagen PNG,IMG,"
             value={imagen}
@@ -190,10 +201,23 @@ const PublicarForm = () => {
             onChange={(e) => setDescrip(e.target.value)}
           />
         </div>
-        <input type="submit" className="btn btn-success" value="Publicar" />
+        
+           <input
+            type="submit"
+            className="btn btn-info w-100"
+            value="Publicar Producto"
+          />
+             <input
+            type="submit"
+            className="btn btn-info w-100"
+            value="editar"
+            onClick={()=>edicion(publicacion.id)}
+          />
+      
       </form>
     </>
   );
 };
 
 export default PublicarForm;
+ 

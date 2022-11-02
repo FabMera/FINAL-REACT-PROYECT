@@ -7,7 +7,7 @@ const Carrito = () => {
   const { carroCompra, total, setTotal, publicacion, setCarroCompra } =
     useContext(MiContext);
 
-    const [cantidad,setCantidad] = useState(0)
+  const [cantidad, setCantidad] = useState(0);
 
   /*   const totalCarrito = () => {
     setTotal(
@@ -17,19 +17,20 @@ const Carrito = () => {
 
   const incrementCount = () => {};
   const decrementCount = () => {};
-
+  
+//funcion para eliminar producto del CARRITO
   const deleteItem = (id) => {
     const productoCarroCompra = carroCompra.filter((item) => item.id !== id);
     setCarroCompra(productoCarroCompra);
-    
   };
-const subTotal = (handleCantidad,producto)=>{
-    return producto.precio*handleCantidad();
- }
- const handleCantidad =(e)=>{
-     return e.target.value;
-    
- }
+
+/*   const subTotal = (producto) => {
+    return producto.precio*2;
+  }; */
+/*   const handleCantidad = (e,producto) => {
+    const resultado=e.target.value*producto.precio;
+    return resultado;
+  }; */
 
   return (
     <>
@@ -60,9 +61,8 @@ const subTotal = (handleCantidad,producto)=>{
                   key={producto}
                   producto={producto}
                   deleteItem={deleteItem}
-                  handleCantidad={handleCantidad()}
-                  subTotal={subTotal}
-                  
+                  handleCantidad=""
+                  subTotal=""
                 />
               ))}
             </table>

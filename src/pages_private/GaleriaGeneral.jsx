@@ -19,8 +19,6 @@ const GaleriaGeneral = () => {
   const [errorBusqueda, setErrorBusqueda] = useState(false);
   const {
     publicacion,
-    datos,
-    setDatos,
     setPublicacion,
     carroCompra,
     setCarroCompra,
@@ -33,7 +31,7 @@ const GaleriaGeneral = () => {
   const irAlDetalle = (id) => {
     navigate(`/producto/${id}`);
   };
-
+//FUNCION para favoritos
   const onClickHeart = (product) => {
     const favoritas = [...publicacion];
     const index = favoritas.findIndex((item) => item.id === product.id);
@@ -68,7 +66,7 @@ const GaleriaGeneral = () => {
     setSearch(e.target.value);
     searchProducto(e.target.value);
   };
-
+//funcion para busqueda en el input
   const searchProducto = (buscar) => {
     const results = publicacion.filter((valor) => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
@@ -78,7 +76,7 @@ const GaleriaGeneral = () => {
       }
     });
     setBusqueda(results);
-    setErrorBusqueda(false)
+    setErrorBusqueda(false);
   };
 
   const compara = (a, b) => {
@@ -94,7 +92,7 @@ const GaleriaGeneral = () => {
     setSelect(e.target.value);
     categoriasresult(e.target.value);
   };
-
+//funcion para busqueda por categorias
   const categoriasresult = (select) => {
     const filterporCat = publicacion.filter((valor) => {
       if (valor.categoria === select) {
@@ -103,15 +101,15 @@ const GaleriaGeneral = () => {
     });
     setSelectBusqueda(filterporCat);
   };
-
+//funcion para agregar producto al carrito
   const addProduct = (product) => {
     const carrito = [...publicacion];
     const resultado = carrito.find((item) => item.id === product.id);
-    setCarroCompra([...carroCompra,resultado]) 
-   console.log(resultado)
-   console.log(carroCompra)
+    setCarroCompra([...carroCompra, resultado]);
+    console.log(resultado);
+    console.log(carroCompra);
   };
-
+//funcion para limitar la busqueda por input y select
   const busquedaTotal = () => {
     if (search === "" && select === "") {
       return publicacion.map((product) => (
@@ -169,9 +167,7 @@ const GaleriaGeneral = () => {
           </div>
         </div>
 
-        <div className="row">
-          {busquedaTotal()}
-        </div>
+        <div className="row">{busquedaTotal()}</div>
       </div>
     </>
   );
