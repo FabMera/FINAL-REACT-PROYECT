@@ -11,12 +11,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 
 const GaleriaGeneral = () => {
-  const [search, setSearch] = useState("");
-  const [busqueda, setBusqueda] = useState([{}]);
-  const [select, setSelect] = useState("");
-  const [selectBusqueda, setSelectBusqueda] = useState([{}]);
 
+
+//---------------------------Estados para el input de busqueda y selectores----------//
+  const [search, setSearch] = useState(""); //Estado de la busqueda por includes.
+  const [busqueda, setBusqueda] = useState([{}]); //muestra los resultados de search
+  const [select, setSelect] = useState(""); //Estado del select de categorias
+  const [selectBusqueda, setSelectBusqueda] = useState([{}]); //muestra los resultados del Select por Categoria
+  const [selectprecio, setSelectPrecio] = useState(""); //Estado del select por precio
   const [errorBusqueda, setErrorBusqueda] = useState(false);
+  //-----------------------------------CONTEXTOS----------------------------------------//
   const {
     publicacion,
     setPublicacion,
@@ -25,13 +29,16 @@ const GaleriaGeneral = () => {
     setCategories,
   } = useContext(MiContext);
 
+  //-------------------------funciones autenticacion y navigate por id------------------//
   const { user } = useAuth0();
   const navigate = useNavigate();
 
   const irAlDetalle = (id) => {
     navigate(`/producto/${id}`);
   };
-//FUNCION para favoritos
+  //------------------------------------fin ---------------------------------------------------//
+
+  //---------------------------funcion  para favoritos----------------------------------------//
   const onClickHeart = (product) => {
     const favoritas = [...publicacion];
     const index = favoritas.findIndex((item) => item.id === product.id);
@@ -45,7 +52,9 @@ const GaleriaGeneral = () => {
       });
     }
   };
+  //------------------------------------fin ---------------------------------------------------//
 
+  //------------------Funcion axios para llamar a la api y cargar categorias------------------//
   const url = "https://dummyjson.com/products/categories";
 
   const cargarCategories = async () => {
@@ -61,12 +70,12 @@ const GaleriaGeneral = () => {
   useEffect(() => {
     cargarCategories();
   }, []);
-
+  //------------------------------------fin ----------------------------------------------//
   const handleInput = (e) => {
     setSearch(e.target.value);
     searchProducto(e.target.value);
   };
-//funcion para busqueda en el input
+  //----------------------funcion para busqueda en el input-------------------------------//
   const searchProducto = (buscar) => {
     const results = publicacion.filter((valor) => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
@@ -78,21 +87,45 @@ const GaleriaGeneral = () => {
     setBusqueda(results);
     setErrorBusqueda(false);
   };
+  //------------------------------------fin ---------------------------------------------//
 
-  const compara = (a, b) => {
-    if (a.precio < b.precio) {
+  //------------------funciones de orden por precio-------------------------------------//
+  const comparamenor = (a, b) => {
+    if (parseInt(a.precio) === parseInt(b.precio)) {
+      return 0;
+    } else if (parseInt(a.precio) > parseInt(b.precio)) {
       return -1;
-    } else if (a.precio > b.precio) {
-      return 1;
     }
-    return 0;
+    return 1;
   };
 
+  const comparamayor = (a, b) => {
+    if (parseInt(a.precio) === parseInt(b.precio)) {
+      return 0;
+    } else if (parseInt(a.precio) > parseInt(b.precio)) {
+      return 1;
+    }
+    return -1;
+  };
+  const renderSelect = (selectprecio) => {
+    if (selectprecio === "mayoramenor") {
+      return setPublicacion(publicacion.sort(comparamayor));
+    } else if (selectprecio === "menoramayor") {
+      return setPublicacion(publicacion.sort(comparamenor));
+    }
+  };
+
+  const handleSelectPrecio = (e) => {
+    setSelectPrecio(e.target.value);
+    renderSelect(selectprecio);
+  };
+  //------------------------------------fin -------------------------------------------//
   const handleChangeSelect = (e) => {
     setSelect(e.target.value);
     categoriasresult(e.target.value);
   };
-//funcion para busqueda por categorias
+
+  //-----------------------funcion para busqueda por categorias----------------------//
   const categoriasresult = (select) => {
     const filterporCat = publicacion.filter((valor) => {
       if (valor.categoria === select) {
@@ -101,7 +134,9 @@ const GaleriaGeneral = () => {
     });
     setSelectBusqueda(filterporCat);
   };
-//funcion para agregar producto al carrito
+  //------------------------------------fin ------------------------------------------//
+
+  //-----------------------funcion para agregar producto al carrito------------------//
   const addProduct = (product) => {
     const carrito = [...publicacion];
     const resultado = carrito.find((item) => item.id === product.id);
@@ -109,7 +144,7 @@ const GaleriaGeneral = () => {
     console.log(resultado);
     console.log(carroCompra);
   };
-//funcion para limitar la busqueda por input y select
+  //--------------funcion para limitar la busqueda por input y select----------------//
   const busquedaTotal = () => {
     if (search === "" && select === "") {
       return publicacion.map((product) => (
@@ -163,7 +198,7 @@ const GaleriaGeneral = () => {
             <Selector handleChangeSelect={handleChangeSelect} />
           </div>
           <div className="col-12 col-md-4">
-            <SelectOrderby select="" handleInput="" />
+            <SelectOrderby handleSelectPrecio={handleSelectPrecio} />
           </div>
         </div>
 

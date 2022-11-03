@@ -2,8 +2,8 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
     
   return (
     <>
-      <div className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3 mx-auto">
-        <div  className="card mb-3 shadow-lg p-3 bg-body rounded  ">
+      <div className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3 mx-auto mt-3 ">
+        <div  className="card  shadow-lg p-3 bg-body rounded-5 h-100 ">
           <img style={{width:'180px',height:'220px'}} src={product.imagen} className="card-img-top w-100" alt="foto" />
           <div className="card-body">
             <h6 className="card-title">{product.tipo}</h6>
@@ -13,7 +13,7 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
             </p>
           </div>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">Precio: $ {product.precio}</li>
+            <li className="list-group-item">Precio: US$ {product.precio}</li>
             <li className="list-group-item">Categoria : {product.categoria}</li>
             <li className="list-group-item">
               Favorito :
