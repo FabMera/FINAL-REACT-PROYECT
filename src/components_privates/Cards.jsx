@@ -2,11 +2,11 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
     
   return (
     <>
-      <div className="col-12 col-md-4 col-sm-6 col-lg-4 col-xl-3 ">
-        <div className="card mb-3 shadow-lg p-3 bg-body rounded">
-          <img src={product.imagen} className="card-img-top" alt="foto" />
+      <div className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3 mx-auto">
+        <div  className="card mb-3 shadow-lg p-3 bg-body rounded  ">
+          <img style={{width:'180px',height:'220px'}} src={product.imagen} className="card-img-top w-100" alt="foto" />
           <div className="card-body">
-            <h5 className="card-title">{product.tipo}</h5>
+            <h6 className="card-title">{product.tipo}</h6>
             <p className="card-text">
               <b>Estado del Producto: </b>
               {product.estado}
@@ -29,7 +29,6 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
                 />
               </svg>
             </li>
-            <li className="list-group-item">Categoria : {product.categoria}</li>
           </ul>
           <div className="card-body d-flex justify-content-between">
             <button

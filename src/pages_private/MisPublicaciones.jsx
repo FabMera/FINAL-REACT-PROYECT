@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ListadoProductos from "../components_privates/ListadoProductos";
 import PublicarForm from "../components_privates/PublicarForm";
 import MiContext from "../Context/Micontext";
 import Swal from "sweetalert2";
+import axios from "axios";
+import ModalForm from "../components_privates/ModalForm";
 
 const MisPublicaciones = () => {
   const {
@@ -22,8 +24,13 @@ const MisPublicaciones = () => {
     setDescrip,
     setImagen,
     setCantidad,
-    setModoEdicion,
+    productos,
+    setProductos,
+    setCategories,
   } = useContext(MiContext);
+
+  const [error, setError] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   //funcion eliminar producto de mis publicaciones
   const deleteItem = (id) => {
@@ -36,29 +43,27 @@ const MisPublicaciones = () => {
     });
   };
 
-  const edit = (id) => {
-  
+ const edit = (id) => {
     const temp = [...publicacion];
-    const elemento = temp.find((ele) =>ele.id === id);
-    setTipo(elemento.tipo)
-    setCategoria(elemento.categoria)
-    setEstado(elemento.estado)
-    setPrecio(elemento.precio)
-    setImagen(elemento.imagen)
-    setDescrip(elemento.descrip)
-    setCantidad(elemento.cantidad)
-    setPublicacion(temp)
-    setModoEdicion(true);
-  };
+    const elemento = temp.find((ele) => ele.id === id);
+    setTipo(elemento.tipo);
+   /*  setCategoria(elemento.categoria);
+    setEstado(elemento.estado);
+    setPrecio(elemento.precio);
+    setImagen(elemento.imagen);
+    setDescrip(elemento.descrip);
+    setCantidad(elemento.cantidad);
+    setPublicacion(temp);
+    setModoEdicion(true); */
+  }; 
 
-  const edicion = () => {
-   
+  /*   const edicion = () => {
     const editado = publicacion.map((item) =>
       item.id === tipo
         ? { tipo, categoria, estado, precio, imagen, descrip, cantidad }
         : item
     );
-    console.log(editado)
+    console.log(editado);
     setPublicacion(editado);
     setModoEdicion(false);
     setTipo("");
@@ -68,7 +73,64 @@ const MisPublicaciones = () => {
     setImagen("");
     setDescrip("");
     setCantidad("");
+  }; */
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //validamos formulario
+    if ([tipo, categoria, estado, precio, descrip, cantidad].includes("")) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    const objProducto = {
+      tipo,
+      categoria,
+      estado,
+      precio,
+      imagen,
+      descrip,
+      favorito: false,
+      cantidad,
+      id: generarId(),
+    };
+
+    setProductos([...productos, objProducto]); //Producto de la API + producto formulario;
+    setPublicacion([...publicacion, objProducto]); //Solo producto agregado desde el formulario;
+
+    setTipo("");
+    setCategoria("");
+    setEstado("");
+    setPrecio("");
+    setImagen("");
+    setDescrip("");
+    setCantidad("");
   };
+
+  //Generamos un id aleatorio para el nuevo producto que agregamos
+  const generarId = () => {
+    const fecha = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2);
+    return fecha + random;
+  };
+
+  //funcion para el SELECT de Categorias
+  const url = "https://dummyjson.com/products/categories";
+  const cargarCategories = async () => {
+    const res = await axios.get(url);
+    const info = res.data;
+    setCategories(info);
+  };
+
+  useEffect(() => {
+    cargarCategories();
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(publicacion).length > 0) {
+      setTipo(publicacion.tipo);
+    }
+  }, [publicacion]);
 
   return (
     <div
@@ -77,19 +139,11 @@ const MisPublicaciones = () => {
     >
       <div className="row">
         <div className="col-12 col-md-6">
-          <PublicarForm
-            publicacion={publicacion}
-            setPublicacion={setPublicacion}
-            edicion={edicion}
-          />
+          <PublicarForm error={error} handleSubmit={handleSubmit} />
         </div>
         <div className="col-12 col-md-6">
-          <ListadoProductos
-            publicacion={publicacion}
-            setPublicacion={setPublicacion}
-            edit={edit}
-            deleteItem={deleteItem}
-          />
+          {isEdit ? <ModalForm /> : ""}
+          <ListadoProductos deleteItem={deleteItem} setIsEdit={setIsEdit} />
         </div>
       </div>
     </div>

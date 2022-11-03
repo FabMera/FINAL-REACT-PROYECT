@@ -1,23 +1,14 @@
-import axios from "axios";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import MiContext from "../Context/Micontext";
 import Error from "./Error";
 
-const PublicarForm = ({edicion}) => {
+const PublicarForm = ({ error, handleSubmit }) => {
   const {
-    productos,
-    setProductos,
-    publicacion,
-    setPublicacion,
-    categories,
-    setCategories,
     tipo,
-    categoria,
-    estado,
     precio,
+    imagen,
     descrip,
     cantidad,
-    imagen,
     setTipo,
     setCategoria,
     setEstado,
@@ -25,68 +16,8 @@ const PublicarForm = ({edicion}) => {
     setDescrip,
     setImagen,
     setCantidad,
-    modoedicion,
+    categories,
   } = useContext(MiContext);
-
-  const [error, setError] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    //validamos formulario
-    if ([tipo, categoria, estado, precio, descrip, cantidad].includes("")) {
-      setError(true);
-      return;
-    }
-    setError(false);
-    const objProducto = {
-      tipo,
-      categoria,
-      estado,
-      precio,
-      imagen,
-      descrip,
-      favorito: false,
-      cantidad,
-      id: generarId(),
-    };
-
-    setProductos([...productos, objProducto]); //Producto de la API + producto formulario;
-    setPublicacion([...publicacion, objProducto]); //Solo producto agregado desde el formulario;
-
-    setTipo("");
-    setCategoria("");
-    setEstado("");
-    setPrecio("");
-    setImagen("");
-    setDescrip("");
-    setCantidad("");
-  };
-
-
-  //Generamos un id aleatorio para el nuevo producto que agregamos
-  const generarId = () => {
-    const fecha = Date.now().toString(36);
-    const random = Math.random().toString(36).substring(2);
-    return fecha + random;
-  };
-
-  //funcion para el SELECT de Categorias
-  const url = "https://dummyjson.com/products/categories";
-  const cargarCategories = async () => {
-    const res = await axios.get(url);
-    const info = res.data;
-    setCategories(info);
-  };
-
-  useEffect(() => {
-    cargarCategories();
-  }, []);
-
-  useEffect(() => {
-    if (Object.keys(publicacion).length > 0) {
-      setTipo(publicacion.tipo);
-    }
-  }, [publicacion]);
 
   return (
     <>
@@ -112,6 +43,7 @@ const PublicarForm = ({edicion}) => {
         <div className="mb-5">
           <label className="form-label">Categoria de Producto:</label>
           <select
+            id=""
             onChange={(e) => setCategoria(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -126,7 +58,7 @@ const PublicarForm = ({edicion}) => {
         </div>
         <div className="mb-5">
           <label className="form-label">Estado de tu Producto:</label>
-          <select
+          <select id=""
             onChange={(e) => setEstado(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -201,23 +133,16 @@ const PublicarForm = ({edicion}) => {
             onChange={(e) => setDescrip(e.target.value)}
           />
         </div>
-        
-           <input
-            type="submit"
-            className="btn btn-info w-100"
-            value="Publicar Producto"
-          />
-             <input
-            type="submit"
-            className="btn btn-info w-100"
-            value="editar"
-            onClick={()=>edicion(publicacion.id)}
-          />
-      
+
+        <input
+          type="submit"
+          className="btn btn-info w-100"
+          value="Publicar Producto"
+        />
+        <input type="submit" className="btn btn-info w-100" value="editar" />
       </form>
     </>
   );
 };
 
 export default PublicarForm;
- 
