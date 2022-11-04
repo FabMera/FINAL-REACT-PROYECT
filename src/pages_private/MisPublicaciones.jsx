@@ -30,8 +30,7 @@ const MisPublicaciones = () => {
   } = useContext(MiContext);
 
   const [error, setError] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-
+  const [modoedicion, setModoEdicion] = useState(false);
   //funcion eliminar producto de mis publicaciones
   const deleteItem = (id) => {
     const product = publicacion.filter((ele) => ele.id !== id);
@@ -43,27 +42,27 @@ const MisPublicaciones = () => {
     });
   };
 
- const edit = (id) => {
+  const edit = (id) => {
     const temp = [...publicacion];
     const elemento = temp.find((ele) => ele.id === id);
     setTipo(elemento.tipo);
-   /*  setCategoria(elemento.categoria);
+    setCategoria(elemento.categoria);
     setEstado(elemento.estado);
     setPrecio(elemento.precio);
     setImagen(elemento.imagen);
     setDescrip(elemento.descrip);
     setCantidad(elemento.cantidad);
     setPublicacion(temp);
-    setModoEdicion(true); */
-  }; 
+    setModoEdicion(true);
+    console.log(elemento)
+  };
 
-  /*   const edicion = () => {
+    const edicion = (id) => {
     const editado = publicacion.map((item) =>
-      item.id === tipo
+      item.id === id
         ? { tipo, categoria, estado, precio, imagen, descrip, cantidad }
         : item
     );
-    console.log(editado);
     setPublicacion(editado);
     setModoEdicion(false);
     setTipo("");
@@ -73,7 +72,7 @@ const MisPublicaciones = () => {
     setImagen("");
     setDescrip("");
     setCantidad("");
-  }; */
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -139,11 +138,11 @@ const MisPublicaciones = () => {
     >
       <div className="row">
         <div className="col-12 col-md-6">
-          <PublicarForm error={error} handleSubmit={handleSubmit} />
+          <PublicarForm error={error} handleSubmit={handleSubmit} edicion={edicion} />
         </div>
         <div className="col-12 col-md-6">
-          {isEdit ? <ModalForm /> : ""}
-          <ListadoProductos deleteItem={deleteItem} setIsEdit={setIsEdit} />
+          {modoedicion ? <ModalForm /> : ""}
+          <ListadoProductos deleteItem={deleteItem} edit={edit} />
         </div>
       </div>
     </div>

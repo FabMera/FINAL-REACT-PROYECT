@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import MiContext from "../Context/Micontext";
+import MisPublicaciones from "../pages_private/MisPublicaciones";
 import Error from "./Error";
 
-const PublicarForm = ({ error, handleSubmit }) => {
+const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
+  //------------------------CONTEXTOS-------------------------------------------//
   const {
     tipo,
     precio,
@@ -58,7 +60,8 @@ const PublicarForm = ({ error, handleSubmit }) => {
         </div>
         <div className="mb-5">
           <label className="form-label">Estado de tu Producto:</label>
-          <select id=""
+          <select
+            id=""
             onChange={(e) => setEstado(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -80,7 +83,7 @@ const PublicarForm = ({ error, handleSubmit }) => {
           <input
             type="number"
             className="form-control"
-            placeholder=""
+            min="1"
             value={precio}
             onChange={(e) => setPrecio(e.target.value)}
           />
@@ -98,6 +101,7 @@ const PublicarForm = ({ error, handleSubmit }) => {
             className="form-control"
             placeholder=""
             value={cantidad}
+            min='1'
             onChange={(e) => setCantidad(e.target.value)}
           />
         </div>
@@ -133,13 +137,13 @@ const PublicarForm = ({ error, handleSubmit }) => {
             onChange={(e) => setDescrip(e.target.value)}
           />
         </div>
-
+        
         <input
           type="submit"
           className="btn btn-info w-100"
           value="Publicar Producto"
         />
-        <input type="submit" className="btn btn-info w-100" value="editar" />
+        <button onClick={()=>edicion(id)} className="btn btn-info w-100">Editar</button>
       </form>
     </>
   );

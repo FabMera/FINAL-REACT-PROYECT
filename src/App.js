@@ -31,7 +31,7 @@ function App() {
   const [imagen, setImagen] = useState("");
   const [descrip, setDescrip] = useState("");
   const [cantidad, setCantidad] = useState(0);
-  const [modoedicion, setModoEdicion] = useState(false);
+
   const { isLoading } = useAuth0();
 
   const endpoint = "https://dummyjson.com/products?limit=10";
@@ -73,13 +73,10 @@ function App() {
   }, [publicacion]);
   useEffect(() => {
     cargarProductos();
-    if (isLoading) {
-      return <Spinner />;
-    }
   }, []);
 
   return (
-    <>
+    <div className="App">
       <Micontext.Provider
         value={{
           productos,
@@ -106,12 +103,11 @@ function App() {
           setDescrip,
           cantidad,
           setCantidad,
-          modoedicion,
-          setModoEdicion,
         }}
       >
         <BrowserRouter>
           <NavBar />
+          {isLoading ? <Spinner /> : ""}
           <Routes>
             {isAuthenticated ? (
               <>
@@ -138,7 +134,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Micontext.Provider>
-    </>
+    </div>
   );
 }
 

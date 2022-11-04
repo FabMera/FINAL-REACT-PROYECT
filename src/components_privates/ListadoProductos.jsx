@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-
 import MiContext from "../Context/Micontext";
 
-const ListadoProductos = ({ deleteItem, setIsEdit }) => {
+const ListadoProductos = ({ deleteItem, edit }) => {
+ 
   const { publicacion } = useContext(MiContext);
 
   //verificamos contenido del objeto para comprobar el formulario
@@ -12,7 +12,7 @@ const ListadoProductos = ({ deleteItem, setIsEdit }) => {
     } else {
       console.log("Formulario Vacio");
     }
-  }, [publicacion]);
+  }, []);
 
   return (
     <div>
@@ -38,7 +38,7 @@ const ListadoProductos = ({ deleteItem, setIsEdit }) => {
 
               <div className="d-flex justify-content-between">
                 <button
-                  onClick={() => setIsEdit(true)}
+                  onClick={()=>edit(item.id)}
                   className="btn btn-success"
                   type="button"
                 >

@@ -3,8 +3,8 @@ import { Carousel } from "react-bootstrap";
 
 const Carrousel = () => {
   return (
-    <Carousel fade >
-      <Carousel.Item  >
+    <Carousel fade>
+      <Carousel.Item>
         <img
           className="d-block w-100"
           src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2068&q=80"
@@ -36,9 +36,7 @@ const Carrousel = () => {
 
         <Carousel.Caption>
           <h3>Todo en Zapatillas</h3>
-          <p>
-            Diferentes Marcas y colores ven por las tuyas..
-          </p>
+          <p>Diferentes Marcas y colores ven por las tuyas..</p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
