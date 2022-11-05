@@ -80,12 +80,12 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-3 border">CATEGORIAS</div>
-          <div className="col-3 border">2</div>
-          <div className="col-3 border">3</div>
-          <div className="col-3 border">4</div>
+        <h2 className="text-center mt-3">Elige tu Categoria!</h2>
+          <Categorias />
         </div>
-        <div className="row">
+
+        <div className="row ">
+        <h2 className="text-center">Productos mas vendidos!</h2>
           <Slider {...settings}>
             {" "}
             {productos.map((product) => (
@@ -97,7 +97,6 @@ const Home = () => {
         <div className="row">
           <div className="col-12 border">FOOTER</div>
         </div>
-        <Categorias />
       </div>
     </>
   );

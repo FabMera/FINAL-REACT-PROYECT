@@ -3,6 +3,7 @@ const CardsMasComprado = ({ product }) => {
   return (
     <>
       <div className="cards">
+
         <div  className="card rounded-5 border border-success border-opacity-10">
           <img
             style={{ width: "100px", height: "220px" }}
