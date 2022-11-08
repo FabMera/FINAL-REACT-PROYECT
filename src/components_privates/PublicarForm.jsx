@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import MiContext from "../Context/Micontext";
-import MisPublicaciones from "../pages_private/MisPublicaciones";
 import Error from "./Error";
 
-const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
+const PublicarForm = ({ error, handleSubmit, edicion, id }) => {
   //------------------------CONTEXTOS-------------------------------------------//
   const {
     tipo,
@@ -12,6 +11,8 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
     descrip,
     cantidad,
     setTipo,
+    categoria,
+    estado,
     setCategoria,
     setEstado,
     setPrecio,
@@ -23,7 +24,7 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
 
   return (
     <>
-      <h4 className="text-center mt-4">Publicar Nuevo Aviso</h4>
+      <h4 className="text-center  mt-4 p-3">Publicar Nuevo Aviso</h4>
 
       <form
         onSubmit={handleSubmit}
@@ -45,7 +46,7 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
         <div className="mb-5">
           <label className="form-label">Categoria de Producto:</label>
           <select
-            id=""
+            value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -61,7 +62,7 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
         <div className="mb-5">
           <label className="form-label">Estado de tu Producto:</label>
           <select
-            id=""
+          value={estado}
             onChange={(e) => setEstado(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -74,7 +75,7 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
 
         <div className="mb-5">
           <label //for o htmlfor en react es para asociar un elemento con algo
-            htmlFor=""
+            htmlFor="precio"
             className="form-label"
           >
             Precio $
@@ -101,7 +102,7 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
             className="form-control"
             placeholder=""
             value={cantidad}
-            min='1'
+            min="1"
             onChange={(e) => setCantidad(e.target.value)}
           />
         </div>
@@ -137,13 +138,15 @@ const PublicarForm = ({ error, handleSubmit,edicion,id }) => {
             onChange={(e) => setDescrip(e.target.value)}
           />
         </div>
-        
+
         <input
           type="submit"
           className="btn btn-info w-100"
           value="Publicar Producto"
         />
-        <button onClick={()=>edicion(id)} className="btn btn-info w-100">Editar</button>
+        <button onClick={() => edicion(id)} className="btn btn-info w-100">
+          Editar
+        </button>
       </form>
     </>
   );

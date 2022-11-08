@@ -1,9 +1,11 @@
 import React from "react";
 
-const TablaCarro = ({ deleteItem, producto, subTotal, handleCantidad }) => {
-
-
-
+const TablaCarro = ({
+  deleteItem,
+  producto,
+  incrementCount,
+  decrementCount,
+}) => {
   return (
     <tbody>
       <tr>
@@ -20,23 +22,40 @@ const TablaCarro = ({ deleteItem, producto, subTotal, handleCantidad }) => {
         </th>
         <td>US${producto.precio} </td>
         <td>
-          <input
-            className="d-flex form-control mx-auto "
-            style={{ width: "55px", height: "35px" }}
-            type="number"
-            min="1"
-            max={producto.cantidad}
-            onChange=""
-          />
+          <div className="mt-1">
+            <button
+              style={{ width: "30px", height: "30px" }}
+              className="btn btn-success "
+              onClick={() => incrementCount(producto)}
+              disabled={producto.cantidades > producto.cantidad}
+            >
+              +
+            </button>
+            <span className="m-2">{producto.cantidades}</span>
+
+            <button
+              style={{ width: "30px", height: "30px" }}
+              disabled={producto.cantidades <= 0}
+              className="btn btn-info"
+              onClick={() => decrementCount(producto)}
+            >
+              -
+            </button>
+            {producto.cantidades > producto.cantidad? (
+              <p className="m-1"  style={{ color: "red", fontWeight: "bold" }}>*Sin Stock</p>
+            ) : (
+              ""
+            )}
+          </div>
         </td>
-        <td></td>
+        <td>{producto.precio * producto.cantidades}</td>
         <td>
           {" "}
           <button
             onClick={() => deleteItem(producto.id)}
             className="btn btn-danger"
           >
-            X
+            <i class="fa-solid fa-trash-can"></i>
           </button>
         </td>
       </tr>

@@ -18,7 +18,7 @@ const ListadoProductos = ({ deleteItem, edit }) => {
     <div>
       {publicacion && publicacion.length ? (
         <>
-          <h4 className=" text-center mt-2">Listado de Tus Productos</h4>
+          <h4 className=" text-center mt-4 p-2">Listado de Tus Productos</h4>
           <p className="text-center">
             Administras tus {""}
             <span style={{ fontWeight: "bold" }} className="text-danger">
@@ -39,14 +39,14 @@ const ListadoProductos = ({ deleteItem, edit }) => {
               <div className="d-flex justify-content-between">
                 <button
                   onClick={()=>edit(item.id)}
-                  className="btn btn-success"
+                  className="btn btn-success btn-sm"
                   type="button"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => deleteItem(item.id)}
-                  className="btn btn-danger"
+                  className="btn btn-danger btn-sm"
                   type="button"
                 >
                   Eliminar

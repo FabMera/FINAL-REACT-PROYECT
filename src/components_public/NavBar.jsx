@@ -13,9 +13,9 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div className="container">
-          <a className="navbar-brand">LOGO DE LA EMPRESA</a>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top ">
+        <div className="container-fluid  ">
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -27,41 +27,35 @@ const NavBar = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active">
-                  <Link
-                    style={{ textDecoration: "none", color: "white" }}
-                    to="/"
-                  >
-                    Home
-                  </Link>
-                </a>
+          <div
+            className="collapse navbar-collapse "
+            id="navbarNavDropdown"
+          >
+            <ul className="navbar-nav  ">
+              <li className="nav-item m-2 ">
+                <Link style={{ textDecoration: "none", color: "white" }} to="/">
+                  Home
+                </Link>
               </li>
               {isAuthenticated ? (
                 <>
-                  <li className="nav-item ">
-                    <a className="nav-link">
-                      <Link
-                        style={{ textDecoration: "none", color: "white" }}
-                        to="/mispublicaciones"
-                      >
-                        Mis Publicaciones
-                      </Link>
-                    </a>
+                  <li className="nav-item m-2 ">
+                    <Link
+                      style={{ textDecoration: "none", color: "white" }}
+                      to="/mispublicaciones"
+                    >
+                      Mis Publicaciones
+                    </Link>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link">
-                      <Link
-                        style={{ textDecoration: "none", color: "white" }}
-                        to="/galeria"
-                      >
-                        Galeria
-                      </Link>
-                    </a>
+                  <li className="nav-item m-2">
+                    <Link
+                      style={{ textDecoration: "none", color: "white" }}
+                      to="/galeria"
+                    >
+                      Galeria
+                    </Link>
                   </li>
-                  <li className="nav-item dropdown">
+                  <li className="nav-item dropdown ">
                     <a
                       style={{ color: "white" }}
                       className="nav-link dropdown-toggle"
@@ -73,24 +67,17 @@ const NavBar = () => {
                     </a>
                     <ul className="dropdown-menu">
                       <li>
-                        <a className="dropdown-item">
-                          <Link
-                            style={{ textDecoration: "none" }}
-                            to="/favoritos"
-                          >
-                            Mis Favoritos
-                          </Link>
-                        </a>
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to="/favoritos"
+                        >
+                          Mis Favoritos
+                        </Link>
                       </li>
                       <li>
-                        <a className="dropdown-item">
-                          <Link
-                            style={{ textDecoration: "none" }}
-                            to="/miperfil"
-                          >
-                            Ver Perfil
-                          </Link>
-                        </a>
+                        <Link style={{ textDecoration: "none" }} to="/miperfil">
+                          Ver Perfil
+                        </Link>
                       </li>
                       <li>
                         <a className="dropdown-item">

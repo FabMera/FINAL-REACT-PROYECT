@@ -2,12 +2,12 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
   
   return (
     <>
-      <div className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3 mx-auto mt-3 ">
-        <div className="card rounded-5 ">
+      <div className="col col-md-6 col-sm-6 col-lg-4 col-xl-3 ">
+        <div className="card rounded-5 mx-auto ">
           <img
-            style={{ width: "180px", height: "220px" }}
+            style={{ width:'100%',height:'200px'}}
             src={product.imagen}
-            className="card-img-top w-100"
+            className="img-fluid"
             alt="foto"
           />
           <div className="card-body">
@@ -38,13 +38,13 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user }) => {
           <div className="card-body d-flex justify-content-between">
             <button
               onClick={() => irAlDetalle(product.id)}
-              className="btn btn-warning"
+              className="btn btn-warning btn-sm"
             >
               Ver Detalle
             </button>
             <button
               onClick={() => addProduct(product)}
-              className="btn btn-info"
+              className="btn btn-info btn-sm"
             >
               Comprar
             </button>

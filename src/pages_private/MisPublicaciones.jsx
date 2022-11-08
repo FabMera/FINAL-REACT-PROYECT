@@ -54,12 +54,13 @@ const MisPublicaciones = () => {
     setCantidad(elemento.cantidad);
     setPublicacion(temp);
     setModoEdicion(true);
-    console.log(elemento)
+    console.log(elemento);
   };
 
-    const edicion = (id) => {
+  const edicion = (id) => {
+    edit();
     const editado = publicacion.map((item) =>
-      item.id === id
+      item.id ===""
         ? { tipo, categoria, estado, precio, imagen, descrip, cantidad }
         : item
     );
@@ -90,7 +91,8 @@ const MisPublicaciones = () => {
       imagen,
       descrip,
       favorito: false,
-      cantidad,
+      cantidad, //lo que publica el usuario,stock.
+      cantidades:0, //valor inicial que una persona puede comprar e incrementa y decrementa.
       id: generarId(),
     };
 
@@ -132,13 +134,14 @@ const MisPublicaciones = () => {
   }, [publicacion]);
 
   return (
-    <div
-      style={{ overflow: "hidden", height: "auto" }}
-      className="container bg-light"
-    >
+    <div className="container bg-light">
       <div className="row">
         <div className="col-12 col-md-6">
-          <PublicarForm error={error} handleSubmit={handleSubmit} edicion={edicion} />
+          <PublicarForm
+            error={error}
+            handleSubmit={handleSubmit}
+            edicion={edicion}
+          />
         </div>
         <div className="col-12 col-md-6">
           {modoedicion ? <ModalForm /> : ""}

@@ -1,10 +1,11 @@
 .slick-slide > div {
-  margin: 0 20px;
+  margin: 0 27px;
 }
 .slick-list {
-  margin: 0 -20px;
+  margin: 0 -27px;
 }
 .card {
+  width: 240px;
   overflow: hidden;
   cursor: default;
   transition: all 350ms ease-in-out; /* tiempo suave */

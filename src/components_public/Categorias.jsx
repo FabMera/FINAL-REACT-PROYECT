@@ -1,6 +1,7 @@
 import React from "react";
 import "../CSS/estilos_categorias.css";
 const Categorias = () => {
+  
   return (
     <div className="contenedor">
     
@@ -16,7 +17,7 @@ const Categorias = () => {
           <span className="cardLabel">Smartphones</span>
         </div>
       </div>
-      <div className="col">
+      <div className="col ">
         <div className="cardItem">
           <i className="fa-solid fa-book-open fa-3x"></i>
           <span className="cardLabel">Books</span>

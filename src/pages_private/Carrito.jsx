@@ -7,30 +7,36 @@ const Carrito = () => {
   const { carroCompra, total, setTotal, publicacion, setCarroCompra } =
     useContext(MiContext);
 
-  const [cantidad, setCantidad] = useState(0);
 
-  /*   const totalCarrito = () => {
+ const totalCarrito = () => {
     setTotal(
-      carroCompra.reduce((acc, item) => acc + item.precio * item.cantidad, 0)
-    );
-  }; */
+      carroCompra.reduce((acc, producto) => acc + producto.precio * producto.cantidades, 0));
+  }; 
 
-  const incrementCount = () => {};
-  const decrementCount = () => {};
-  
+
+
 //funcion para eliminar producto del CARRITO
   const deleteItem = (id) => {
     const productoCarroCompra = carroCompra.filter((item) => item.id !== id);
     setCarroCompra(productoCarroCompra);
   };
 
-/*   const subTotal = (producto) => {
-    return producto.precio*2;
-  }; */
-/*   const handleCantidad = (e,producto) => {
-    const resultado=e.target.value*producto.precio;
-    return resultado;
-  }; */
+  //funcion para aumentar el contador del carrito
+  const incrementCount = (producto) => {
+    const index = carroCompra.findIndex((ele) => ele.id === producto.id);
+    carroCompra[index].cantidades += 1;
+    carroCompra[index].cantidad -= 1;
+    setCarroCompra([...carroCompra]);
+    console.log(carroCompra);
+  };
+//funcion para disminuir el contador del carrito
+  const decrementCount = (producto) => {
+    const index = carroCompra.findIndex((ele) => ele.id === producto.id);
+    carroCompra[index].cantidades -= 1;
+    carroCompra[index].cantidad += 1;
+    setCarroCompra([...carroCompra]);
+  };
+
 
   return (
     <>
@@ -38,9 +44,9 @@ const Carrito = () => {
         <div className="row">
           <div className="col text-center">
             {carroCompra && carroCompra.length ? (
-              <h3 className="text-center m-4">Productos del Carrito</h3>
+              <h3 className="text-center m-4 p-3">Productos del Carrito</h3>
             ) : (
-              <h3 className="text-center m-4">No exiten Productos!</h3>
+              <h3 className="text-center m-4 p-3">No exiten Productos!</h3>
             )}
 
             <table
@@ -61,8 +67,9 @@ const Carrito = () => {
                   key={producto}
                   producto={producto}
                   deleteItem={deleteItem}
-                  handleCantidad=""
-                  subTotal=""
+                  incrementCount={incrementCount}
+                  decrementCount={decrementCount}
+                 
                 />
               ))}
             </table>
@@ -74,11 +81,11 @@ const Carrito = () => {
                     Total:{" "}
                     <span>
                       ${total}
-                      {/* {totalCarrito()} */}
+                      {totalCarrito()}
                     </span>
                   </p>
                 </div>
-                <button className="btn btn-success">Ir a Pagar</button>
+                <button className="btn btn-success mb-3">Ir a Pagar</button>
               </div>
             </li>
           </div>

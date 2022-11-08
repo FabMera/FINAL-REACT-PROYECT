@@ -31,13 +31,13 @@ const MisFavoritos = () => {
             .map((ele) => (
               <div
                 key={ele.id}
-                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3 mx-auto mt-3 "
+                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3  mt-3 "
               >
-                <div className="card  shadow-lg p-3 bg-body rounded-5 h-100 ">
+                <div className="card shadow-lg mx-auto rounded-5  ">
                   <img
-                    style={{ width: "180px", height: "220px" }}
+                    style={{ width:'100%',height:'200px'}}
                     src={ele.imagen}
-                    className="card-img-top w-100"
+                    className="img-fluid"
                     alt="foto"
                   />
                   <div className="card-body">
@@ -59,16 +59,16 @@ const MisFavoritos = () => {
                       </svg>
                     </li>
                   </ul>
-                  <div className="card-body d-flex justify-content-between p-0 m-1">
+                  <div className="card-body d-flex flex-column mx-auto p-0 w-75 ">
                     <button
                       onClick={() => clickDelete(ele)}
-                      className="btn btn-warning"
+                      className="btn btn-warning btn-sm mt-3"
                     >
                       Eliminar de Favoritos
                     </button>
                     <button
                       onClick={() => addProduct(ele)}
-                      className="btn btn-info"
+                      className="btn btn-info btn-sm  mt-3"
                     >
                       Comprar
                     </button>

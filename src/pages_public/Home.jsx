@@ -8,6 +8,8 @@ import Carrousel from "../components_public/Carrousel";
 import Categorias from "../components_public/Categorias";
 import MiContext from "../Context/Micontext";
 import "../CSS/estilos_slider.css";
+import Footer from "../components_public/Footer";
+
 const Home = () => {
   const { productos } = useContext(MiContext);
 
@@ -80,7 +82,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-        <h2 className="text-center mt-3">Elige tu Categoria!</h2>
+        <h2 className="text-center m-3 p-4">Elige tu Categoria!</h2>
           <Categorias />
         </div>
 
@@ -95,7 +97,9 @@ const Home = () => {
         </div>
 
         <div className="row">
-          <div className="col-12 border">FOOTER</div>
+          <div className="col">
+            <Footer/>
+          </div>
         </div>
       </div>
     </>
