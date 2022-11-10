@@ -1,8 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import MiContext from "../Context/Micontext";
+import ModalForm from "./ModalForm";
 
 const ListadoProductos = ({ deleteItem, edit }) => {
- 
   const { publicacion } = useContext(MiContext);
 
   //verificamos contenido del objeto para comprobar el formulario
@@ -13,6 +13,11 @@ const ListadoProductos = ({ deleteItem, edit }) => {
       console.log("Formulario Vacio");
     }
   }, []);
+
+  const handleClickClose = () => {
+    setModal(!modal);
+  };
+  const [modal, setModal] = useState(false);
 
   return (
     <div>
@@ -38,17 +43,27 @@ const ListadoProductos = ({ deleteItem, edit }) => {
 
               <div className="d-flex justify-content-between">
                 <button
-                  onClick={()=>edit(item.id)}
-                  className="btn btn-success btn-sm"
+                  onClick={() => {
+                    edit(item.id);
+                    handleClickClose();
+                  }}
+                  className="btn btn-success m-2 shadow"
                   type="button"
                 >
-                  Editar
+                  <i class="fa-regular fa-pen-to-square m-2"></i>
+                  EDITAR
                 </button>
+                <ModalForm
+                  handleClickClose={handleClickClose}
+                  modal={modal}
+                  setModal={setModal}
+                />
                 <button
                   onClick={() => deleteItem(item.id)}
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-danger m-2 shadow"
                   type="button"
                 >
+                  <i class="fa-regular fa-trash-can m-2"></i>
                   Eliminar
                 </button>
               </div>
@@ -57,7 +72,7 @@ const ListadoProductos = ({ deleteItem, edit }) => {
         </>
       ) : (
         <>
-          <h4 className="text-center mt-3">No hay productos en tu Lista</h4>
+          <h4 className="text-center mt-4 p-2">No hay productos en tu Lista</h4>
           <p className="text-center">
             Comienza agregando Productos a tu lista{" "}
             <span className="text-danger">y apareceran en este lugar</span>

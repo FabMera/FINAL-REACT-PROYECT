@@ -34,6 +34,12 @@ function App() {
 
   const { isLoading } = useAuth0();
 
+  if (isLoading) {
+    setTimeout(() => {
+      return <Spinner />;
+    }, 3000);
+  }
+
   const endpoint = "https://dummyjson.com/products?limit=10";
 
   //api para mostrar productos en portada.
@@ -57,7 +63,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     const obtenerDataLocal = () => {
       const publicacionLS =
         JSON.parse(localStorage.getItem("publicacion")) ?? [];
@@ -71,9 +77,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
   }, [publicacion]);
+
   useEffect(() => {
     cargarProductos();
-  }, []);
+  }, []); 
 
   return (
     <div className="App">
@@ -107,7 +114,6 @@ function App() {
       >
         <BrowserRouter>
           <NavBar />
-          {isLoading ? <Spinner /> : ""}
           <Routes>
             {isAuthenticated ? (
               <>

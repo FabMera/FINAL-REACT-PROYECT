@@ -4,18 +4,20 @@ import TablaCarro from "../components_privates/TablaCarro";
 import MiContext from "../Context/Micontext";
 
 const Carrito = () => {
-  const { carroCompra, total, setTotal, publicacion, setCarroCompra } =
+  const { carroCompra, total, setTotal, setCarroCompra } =
     useContext(MiContext);
 
-
- const totalCarrito = () => {
+  //funcion total del Carrito
+  const totalCarrito = () => {
     setTotal(
-      carroCompra.reduce((acc, producto) => acc + producto.precio * producto.cantidades, 0));
-  }; 
+      carroCompra.reduce(
+        (acc, producto) => acc + producto.precio * producto.cantidades,
+        0
+      )
+    );
+  };
 
-
-
-//funcion para eliminar producto del CARRITO
+  //funcion para eliminar producto del CARRITO
   const deleteItem = (id) => {
     const productoCarroCompra = carroCompra.filter((item) => item.id !== id);
     setCarroCompra(productoCarroCompra);
@@ -29,14 +31,13 @@ const Carrito = () => {
     setCarroCompra([...carroCompra]);
     console.log(carroCompra);
   };
-//funcion para disminuir el contador del carrito
+  //funcion para disminuir el contador del carrito
   const decrementCount = (producto) => {
     const index = carroCompra.findIndex((ele) => ele.id === producto.id);
     carroCompra[index].cantidades -= 1;
     carroCompra[index].cantidad += 1;
     setCarroCompra([...carroCompra]);
   };
-
 
   return (
     <>
@@ -69,7 +70,6 @@ const Carrito = () => {
                   deleteItem={deleteItem}
                   incrementCount={incrementCount}
                   decrementCount={decrementCount}
-                 
                 />
               ))}
             </table>

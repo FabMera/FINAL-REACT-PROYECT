@@ -13,9 +13,8 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top ">
-        <div className="container-fluid  ">
-          
+      <nav className="navbar navbar-expand-lg  fixed-top">
+        <div className="container-fluid">
           <button
             className="navbar-toggler"
             type="button"
@@ -27,57 +26,54 @@ const NavBar = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div
-            className="collapse navbar-collapse "
-            id="navbarNavDropdown"
-          >
-            <ul className="navbar-nav  ">
-              <li className="nav-item m-2 ">
-                <Link style={{ textDecoration: "none", color: "white" }} to="/">
-                  Home
+          <div className="collapse navbar-collapse " id="navbarNavDropdown">
+          <p class="logo" >MARKET PLACE</p>
+            <ul className="navbar-nav mx-auto ">
+              <li className="nav-item m-2">
+                <Link to="/">
+                  <button className="boton">Home</button>
                 </Link>
               </li>
               {isAuthenticated ? (
                 <>
                   <li className="nav-item m-2 ">
-                    <Link
-                      style={{ textDecoration: "none", color: "white" }}
-                      to="/mispublicaciones"
-                    >
-                      Mis Publicaciones
+                    <Link to="/mispublicaciones">
+                      <button className="boton">Mis Publicaciones</button>
                     </Link>
                   </li>
                   <li className="nav-item m-2">
-                    <Link
-                      style={{ textDecoration: "none", color: "white" }}
-                      to="/galeria"
-                    >
-                      Galeria
+                    <Link to="/galeria">
+                      <button className="boton">Galeria</button>
                     </Link>
                   </li>
                   <li className="nav-item dropdown ">
                     <a
-                      style={{ color: "white" }}
                       className="nav-link dropdown-toggle"
-                      role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Mi Perfil
+                      <button className="boton">Mi Perfil</button>
                     </a>
                     <ul className="dropdown-menu">
                       <li>
-                        <Link
-                          style={{ textDecoration: "none" }}
-                          to="/favoritos"
-                        >
-                          Mis Favoritos
-                        </Link>
+                        <a className="dropdown-item">
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to="/favoritos"
+                          >
+                            Mis Favoritos
+                          </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link style={{ textDecoration: "none" }} to="/miperfil">
-                          Ver Perfil
-                        </Link>
+                        <a className="dropdown-item">
+                          <Link
+                            style={{ textDecoration: "none" }}
+                            to="/miperfil"
+                          >
+                            Ver Perfil
+                          </Link>
+                        </a>
                       </li>
                       <li>
                         <a className="dropdown-item">
@@ -96,10 +92,10 @@ const NavBar = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item m-2">
                     <a className="nav-link">
-                      <Link style={{ color: "white" }} to="/carrito">
-                        <FaShoppingCart />
+                      <Link to="/carrito">
+                        <FaShoppingCart style={{ color: "white" }}  />
                       </Link>
                       <span className="badge bg-danger rounded-pill">
                         {carroCompra.length}
@@ -109,12 +105,12 @@ const NavBar = () => {
                 </>
               ) : (
                 <>
-                  <li>
+                  <li className="nav-item m-2">
                     <a className="dropdown-item">
                       <LoginButton />
                     </a>
                   </li>
-                  <li>
+                  <li className="nav-item m-2">
                     <a className="dropdown-item">
                       <RegisterButton />
                     </a>

@@ -4,7 +4,7 @@ import React from "react";
 const LogoutButton = () => {
   const { logout } = useAuth0();
 
-  return <button style={{border:'none',backgroundColor:'white',color:'blue'}} onClick={() => logout()}>Cerrar Sesion</button>;
+  return <button className="boton" onClick={() => logout()}>Cerrar Sesion</button>;
 };
 
 export default LogoutButton;

@@ -16,12 +16,12 @@
   align-items: center;
   text-align: center;
   transition: all 500ms ease-in-out;
-  background-color: #eee;
+  background-color: rgb(245, 229, 224);
 }
 .cardItem:hover {
   cursor: pointer;
-  box-shadow: 0px 12px 30px 0px rgba(0, 0, 0, 0.2);
-  transition: all 500ms cubic-bezier(0.19, 0.2, 0.22, 0.19);
+  box-shadow: 0px 12px 30px 0px rgba(14, 13, 13, 0.2);
+  transition: all 350ms cubic-bezier(0.19, 0.2, 0.22, 0.19);
 }
 .cardLabel {
   margin-top: 24px;

@@ -1,27 +1,21 @@
-import React, { useContext } from "react";
-import MiContext from "../Context/Micontext";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-const ModalForm = () => {
-  const { tipo, setTipo } = useContext(MiContext);
-
-  const handleSubmitModal=(e)=>{
-    e.preventDefault();
-  }
-const handleClickUpdate=()=>{
-  
-}
+const ModalForm = ({ handleClickClose, modal }) => {
   return (
-    <div>
-      <form onSubmit={handleSubmitModal}>
-        <label>Nombre o tipo:</label>
-        <input
-          type="texto"
-          value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
-        />
-        <button onClick={handleClickUpdate} >Update</button>
-      </form>
-    </div>
+    <>
+      <Modal show={modal} onHide={handleClickClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edita tu Publicacion!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>!!Rellena los campos editables del formulario..</Modal.Body>
+        <Modal.Footer>
+          <Button variant="warning" onClick={() => handleClickClose()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

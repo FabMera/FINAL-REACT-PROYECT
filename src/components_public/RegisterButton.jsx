@@ -5,7 +5,7 @@ const RegisterButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
-    <button className="btn btn-primary" onClick={() => loginWithRedirect()}>
+    <button className="boton" onClick={() => loginWithRedirect()}>
       Registrarse
     </button>
   );

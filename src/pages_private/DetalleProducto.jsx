@@ -16,10 +16,10 @@ const DetalleProducto = () => {
   };
 
   return (
-    <>
-      <h3 className="text-center mt-3">Detalle de tu Producto</h3>
+    <><div className="container bg-light">
+      <h1 className="text-center mt-3 p-4">Detalle de tu Producto</h1>
       <div
-        className="card mb-3 d-flex align-items-center mt-5 mx-auto shadow bg-white rounded-5 "
+        className="card  d-flex align-items-center mt-5 mx-auto shadow bg-white rounded-5"
         style={{ width: "60%" }}
       >
         {publicacion
@@ -81,6 +81,7 @@ const DetalleProducto = () => {
               </div>
             </div>
           ))}
+      </div>
       </div>
     </>
   );

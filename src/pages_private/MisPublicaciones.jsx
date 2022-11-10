@@ -29,8 +29,13 @@ const MisPublicaciones = () => {
     setCategories,
   } = useContext(MiContext);
 
+//Estados para el id del formulario actualizado,el error y el modo edicion
+  const [ide, setIde] = useState("");
   const [error, setError] = useState(false);
   const [modoedicion, setModoEdicion] = useState(false);
+
+
+
   //funcion eliminar producto de mis publicaciones
   const deleteItem = (id) => {
     const product = publicacion.filter((ele) => ele.id !== id);
@@ -41,7 +46,7 @@ const MisPublicaciones = () => {
       icon: "warning",
     });
   };
-
+  //funcion para editar reutilizando el FORMULARIO
   const edit = (id) => {
     const temp = [...publicacion];
     const elemento = temp.find((ele) => ele.id === id);
@@ -52,27 +57,10 @@ const MisPublicaciones = () => {
     setImagen(elemento.imagen);
     setDescrip(elemento.descrip);
     setCantidad(elemento.cantidad);
+    setIde(elemento.id);
     setPublicacion(temp);
     setModoEdicion(true);
-    console.log(elemento);
-  };
-
-  const edicion = (id) => {
-    edit();
-    const editado = publicacion.map((item) =>
-      item.id ===""
-        ? { tipo, categoria, estado, precio, imagen, descrip, cantidad }
-        : item
-    );
-    setPublicacion(editado);
-    setModoEdicion(false);
-    setTipo("");
-    setCategoria("");
-    setEstado("");
-    setPrecio("");
-    setImagen("");
-    setDescrip("");
-    setCantidad("");
+    <ModalForm/>
   };
 
   const handleSubmit = (e) => {
@@ -92,13 +80,25 @@ const MisPublicaciones = () => {
       descrip,
       favorito: false,
       cantidad, //lo que publica el usuario,stock.
-      cantidades:0, //valor inicial que una persona puede comprar e incrementa y decrementa.
-      id: generarId(),
+      cantidades: 0, //valor inicial que una persona puede comprar e incrementa y decrementa.
     };
+    //funcion para editar un FORMULARIO de PRODUCTOS.
+    if (publicacion.length) {
+      const temp = [...publicacion];
+      const elemento = temp.find((ele) => ele.id === ide);
+      if (elemento.id) {
+        objProducto.id = elemento.id;
+        const publicacionActual = publicacion.map((object) =>
+          object.id === elemento.id ? objProducto : object
+        );
+        setPublicacion(publicacionActual);
+      }
+    } else {
+      objProducto.id = generarId();
+      setPublicacion([...publicacion, objProducto]);
+    }
 
     setProductos([...productos, objProducto]); //Producto de la API + producto formulario;
-    setPublicacion([...publicacion, objProducto]); //Solo producto agregado desde el formulario;
-
     setTipo("");
     setCategoria("");
     setEstado("");
@@ -106,6 +106,7 @@ const MisPublicaciones = () => {
     setImagen("");
     setDescrip("");
     setCantidad("");
+    setModoEdicion(false)
   };
 
   //Generamos un id aleatorio para el nuevo producto que agregamos
@@ -137,14 +138,9 @@ const MisPublicaciones = () => {
     <div className="container bg-light">
       <div className="row">
         <div className="col-12 col-md-6">
-          <PublicarForm
-            error={error}
-            handleSubmit={handleSubmit}
-            edicion={edicion}
-          />
+          <PublicarForm error={error} handleSubmit={handleSubmit} modoedicion={modoedicion}/>
         </div>
         <div className="col-12 col-md-6">
-          {modoedicion ? <ModalForm /> : ""}
           <ListadoProductos deleteItem={deleteItem} edit={edit} />
         </div>
       </div>

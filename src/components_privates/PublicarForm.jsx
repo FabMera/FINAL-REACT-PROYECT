@@ -2,7 +2,7 @@ import { useContext } from "react";
 import MiContext from "../Context/Micontext";
 import Error from "./Error";
 
-const PublicarForm = ({ error, handleSubmit, edicion, id }) => {
+const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
   //------------------------CONTEXTOS-------------------------------------------//
   const {
     tipo,
@@ -62,7 +62,7 @@ const PublicarForm = ({ error, handleSubmit, edicion, id }) => {
         <div className="mb-5">
           <label className="form-label">Estado de tu Producto:</label>
           <select
-          value={estado}
+            value={estado}
             onChange={(e) => setEstado(e.target.value)}
             className="form-select"
             aria-label="Default select example"
@@ -141,12 +141,10 @@ const PublicarForm = ({ error, handleSubmit, edicion, id }) => {
 
         <input
           type="submit"
+          style={{color:'white',fontSize:'1.5rem',fontWeight:'bold'}}
           className="btn btn-info w-100"
-          value="Publicar Producto"
+          value={modoedicion ? "Editar Producto" : "Publicar Producto"}
         />
-        <button onClick={() => edicion(id)} className="btn btn-info w-100">
-          Editar
-        </button>
       </form>
     </>
   );
