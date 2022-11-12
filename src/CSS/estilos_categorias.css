@@ -16,7 +16,7 @@
   align-items: center;
   text-align: center;
   transition: all 500ms ease-in-out;
-  background-color: rgb(245, 229, 224);
+  background-color: rgb(243, 243, 243);
 }
 .cardItem:hover {
   cursor: pointer;
@@ -32,7 +32,8 @@
 
 @media screen and (max-width: 992px) {
   .contenedor{
-    justify-content: space-around;
+   flex-wrap: wrap;
+   
   }
   .cardItem{
     

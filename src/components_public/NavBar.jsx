@@ -27,18 +27,19 @@ const NavBar = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse " id="navbarNavDropdown">
-          <p class="logo" >MARKET PLACE</p>
+          <p className="logo" >MARKET PLACE</p>
             <ul className="navbar-nav mx-auto ">
               <li className="nav-item m-2">
                 <Link to="/">
-                  <button className="boton">Home</button>
+                  <button className="boton "><i class="fa-solid fa-house-user p-1"></i>Home</button>
                 </Link>
               </li>
               {isAuthenticated ? (
                 <>
                   <li className="nav-item m-2 ">
                     <Link to="/mispublicaciones">
-                      <button className="boton">Mis Publicaciones</button>
+                    
+                      <button className="boton"><i class="fa-solid fa-list-ul p-1"></i>Mis Publicaciones</button>
                     </Link>
                   </li>
                   <li className="nav-item m-2">
@@ -97,6 +98,7 @@ const NavBar = () => {
                       <Link to="/carrito">
                         <FaShoppingCart style={{ color: "white" }}  />
                       </Link>
+
                       <span className="badge bg-danger rounded-pill">
                         {carroCompra.length}
                       </span>
@@ -108,6 +110,7 @@ const NavBar = () => {
                   <li className="nav-item m-2">
                     <a className="dropdown-item">
                       <LoginButton />
+                      
                     </a>
                   </li>
                   <li className="nav-item m-2">

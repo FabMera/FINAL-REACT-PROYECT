@@ -17,6 +17,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
 
 function App() {
+
   const { isAuthenticated } = useAuth0();
   const [productos, setProductos] = useState([]);
   const [publicacion, setPublicacion] = useState([]);
@@ -31,14 +32,19 @@ function App() {
   const [imagen, setImagen] = useState("");
   const [descrip, setDescrip] = useState("");
   const [cantidad, setCantidad] = useState(0);
-
+  const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
 
+  /*   useEffect(() => {
+    const timer = setTimeout(() => {
+      
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
   if (isLoading) {
-    setTimeout(() => {
-      return <Spinner />;
-    }, 3000);
-  }
+    return "Loading...";
+  } */
 
   const endpoint = "https://dummyjson.com/products?limit=10";
 
@@ -62,8 +68,8 @@ function App() {
       console.log("error conexion" + error);
     }
   };
-
-   useEffect(() => {
+// solicito los datos a la local storage y los transformo
+  useEffect(() => {
     const obtenerDataLocal = () => {
       const publicacionLS =
         JSON.parse(localStorage.getItem("publicacion")) ?? [];
@@ -72,15 +78,16 @@ function App() {
     obtenerDataLocal();
   }, []);
 
-  // solicito los datos a la local storage y los transformo
-
+  
+//guardo los estados en localStorage
   useEffect(() => {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
-  }, [publicacion]);
+    localStorage.setItem("carroCompra", JSON.stringify(carroCompra))
+  }, [publicacion],[carroCompra]);
 
   useEffect(() => {
     cargarProductos();
-  }, []); 
+  }, []);
 
   return (
     <div className="App">
@@ -110,6 +117,8 @@ function App() {
           setDescrip,
           cantidad,
           setCantidad,
+          modoedicion,
+          setModoEdicion
         }}
       >
         <BrowserRouter>

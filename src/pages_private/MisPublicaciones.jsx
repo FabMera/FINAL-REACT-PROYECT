@@ -27,14 +27,13 @@ const MisPublicaciones = () => {
     productos,
     setProductos,
     setCategories,
+    modoedicion,
+    setModoEdicion,
   } = useContext(MiContext);
 
-//Estados para el id del formulario actualizado,el error y el modo edicion
+  //Estados para el id del formulario actualizado,el error y el modo edicion
   const [ide, setIde] = useState("");
   const [error, setError] = useState(false);
-  const [modoedicion, setModoEdicion] = useState(false);
-
-
 
   //funcion eliminar producto de mis publicaciones
   const deleteItem = (id) => {
@@ -60,7 +59,7 @@ const MisPublicaciones = () => {
     setIde(elemento.id);
     setPublicacion(temp);
     setModoEdicion(true);
-    <ModalForm/>
+    <ModalForm />;
   };
 
   const handleSubmit = (e) => {
@@ -70,7 +69,7 @@ const MisPublicaciones = () => {
       setError(true);
       return;
     }
-    setError(false);
+
     const objProducto = {
       tipo,
       categoria,
@@ -80,7 +79,7 @@ const MisPublicaciones = () => {
       descrip,
       favorito: false,
       cantidad, //lo que publica el usuario,stock.
-      cantidades: 0, //valor inicial que una persona puede comprar e incrementa y decrementa.
+      cantidades: 1 //valor inicial que una persona puede comprar e incrementa y decrementa.
     };
     //funcion para editar un FORMULARIO de PRODUCTOS.
     if (publicacion.length) {
@@ -106,7 +105,8 @@ const MisPublicaciones = () => {
     setImagen("");
     setDescrip("");
     setCantidad("");
-    setModoEdicion(false)
+    setModoEdicion(false);
+    setError(false);
   };
 
   //Generamos un id aleatorio para el nuevo producto que agregamos
@@ -128,17 +128,21 @@ const MisPublicaciones = () => {
     cargarCategories();
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (Object.keys(publicacion).length > 0) {
       setTipo(publicacion.tipo);
     }
   }, [publicacion]);
-
+ */
   return (
     <div className="container bg-light">
       <div className="row">
         <div className="col-12 col-md-6">
-          <PublicarForm error={error} handleSubmit={handleSubmit} modoedicion={modoedicion}/>
+          <PublicarForm
+            error={error}
+            handleSubmit={handleSubmit}
+            modoedicion={modoedicion}
+          />
         </div>
         <div className="col-12 col-md-6">
           <ListadoProductos deleteItem={deleteItem} edit={edit} />

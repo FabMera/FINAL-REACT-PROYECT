@@ -9,7 +9,7 @@ import MiContext from "../Context/Micontext";
 import "../CSS/estilos_slider.css";
 import Footer from "../components_public/Footer";
 
-import banner from '../img/banner_principal.jpg'
+import banner from "../img/banner_principal.jpg";
 const Home = () => {
   const { productos } = useContext(MiContext);
 
@@ -37,15 +37,23 @@ const Home = () => {
 
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    infinite: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
@@ -82,10 +90,8 @@ const Home = () => {
           </div>
         </div>
         <div className="row ">
-          <div className="col">
-            <h2 className="text-center m-3 p-4">Elige tu Categoria!</h2>
-            <Categorias />
-          </div>
+          <h2 className="text-center m-3 p-4">Elige tu Categoria!</h2>
+          <Categorias />
         </div>
 
         <div className="row">

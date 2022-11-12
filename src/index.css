@@ -1,14 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-.container {
-  padding-left: 0;
-  padding-right: 0;
+.container *{
+  --bs-gutter-x: 0;
 }
 
 body {
@@ -29,11 +23,14 @@ code {
 
 .navbar {
   background-color: #db7069;
+  padding-bottom: 15px;
 }
 
 .img-banner {
   width: 100%;
+ 
 }
+
 
 .boton {
   color: #fff !important;
@@ -65,5 +62,11 @@ code {
   font-size: 2.5rem;
   margin: 5px;
   cursor: pointer;
-  position: relative;
+  opacity: 0.8;
 }
+.logo:hover{
+  opacity: 1.5;
+  transition: all 0.5s ease;
+}
+
+

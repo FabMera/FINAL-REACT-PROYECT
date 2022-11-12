@@ -6,10 +6,11 @@ const Buscador = ({search,handleInput}) => {
     <input
       value={search}
       onChange={handleInput}
-      type="text"
+      type="search"
       placeholder="Busca por tipo o nombre del producto"
       className="form-control me-2"
     />
+  
   </form>
   )
 }
