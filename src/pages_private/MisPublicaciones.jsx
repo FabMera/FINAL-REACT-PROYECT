@@ -65,11 +65,13 @@ const MisPublicaciones = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //validamos formulario
-    if ([tipo, categoria, estado, precio, descrip, cantidad].includes("")) {
+    if (
+      [tipo, categoria, estado, precio, descrip, cantidad, imagen].includes("")
+    ) {
       setError(true);
       return;
     }
-
+    setError(false);
     const objProducto = {
       tipo,
       categoria,
@@ -79,10 +81,10 @@ const MisPublicaciones = () => {
       descrip,
       favorito: false,
       cantidad, //lo que publica el usuario,stock.
-      cantidades: 1 //valor inicial que una persona puede comprar e incrementa y decrementa.
+      cantidades: 1, //valor inicial que una persona puede comprar e incrementa y decrementa.
     };
     //funcion para editar un FORMULARIO de PRODUCTOS.
-    if (publicacion.length) {
+    if (modoedicion) {
       const temp = [...publicacion];
       const elemento = temp.find((ele) => ele.id === ide);
       if (elemento.id) {
@@ -96,8 +98,10 @@ const MisPublicaciones = () => {
       objProducto.id = generarId();
       setPublicacion([...publicacion, objProducto]);
     }
+    setProductos([...productos, objProducto]);
 
-    setProductos([...productos, objProducto]); //Producto de la API + producto formulario;
+    //Producto de la API + producto formulario;
+
     setTipo("");
     setCategoria("");
     setEstado("");
@@ -106,7 +110,6 @@ const MisPublicaciones = () => {
     setDescrip("");
     setCantidad("");
     setModoEdicion(false);
-    setError(false);
   };
 
   //Generamos un id aleatorio para el nuevo producto que agregamos
@@ -128,23 +131,17 @@ const MisPublicaciones = () => {
     cargarCategories();
   }, []);
 
-  /*   useEffect(() => {
-    if (Object.keys(publicacion).length > 0) {
-      setTipo(publicacion.tipo);
-    }
-  }, [publicacion]);
- */
   return (
-    <div className="container bg-light">
+    <div className="container">
       <div className="row">
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 col-lg-4 mx-auto">
           <PublicarForm
             error={error}
             handleSubmit={handleSubmit}
             modoedicion={modoedicion}
           />
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 col-lg-4 mx-auto">
           <ListadoProductos deleteItem={deleteItem} edit={edit} />
         </div>
       </div>

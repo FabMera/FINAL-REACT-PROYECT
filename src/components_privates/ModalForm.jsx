@@ -8,7 +8,7 @@ const ModalForm = ({ handleClickClose, modal }) => {
         <Modal.Header closeButton>
           <Modal.Title>Edita tu Publicacion!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>......</Modal.Body>
+        <Modal.Body>Completa el formulario y edita tu producto</Modal.Body>
         <Modal.Footer>
           <Button variant="warning" onClick={() => handleClickClose()}>
             Cerrar

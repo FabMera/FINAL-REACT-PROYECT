@@ -4,6 +4,7 @@ const SelectOrderby = ({handleSelectPrecio}) => {
 
   return (
     <div className="mb-3  p-3">
+    <p className="p-search">Puedes ordenar por Precio</p>
       <select
         className="form-select"
         onChange={handleSelectPrecio}
@@ -13,11 +14,6 @@ const SelectOrderby = ({handleSelectPrecio}) => {
         <option value="mayoramenor">Ordenar Precio $ de Mayor a Menor: </option>
         <option value="menoramayor">Ordenar Precio $ de Menor a Mayor:</option>
       </select>
-      <div className="d-flex justify-content-center">
-        <button className="btn btn-info m-3 " onClick="">
-          Buscar
-        </button>
-        </div>
     </div>
   )
 }

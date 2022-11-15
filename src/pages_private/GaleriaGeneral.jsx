@@ -185,7 +185,7 @@ const GaleriaGeneral = () => {
   return (
     <>
       <div className="container bg-light">
-        <h1 className="text-center mt-4">Galeria Publicaciones</h1>
+        <h1 className="text-center mt-4 p-5">Galeria Publicaciones</h1>
         <div className="row">
           <div className="col-12 col-md-4">
             <Buscador search={search} handleInput={handleInput} />

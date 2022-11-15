@@ -8,10 +8,13 @@ import Categorias from "../components_public/Categorias";
 import MiContext from "../Context/Micontext";
 import "../CSS/estilos_slider.css";
 import Footer from "../components_public/Footer";
-
 import banner from "../img/banner_principal.jpg";
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
   const { productos } = useContext(MiContext);
+  const navigate = useNavigate();
+
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -42,8 +45,6 @@ const Home = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1600,
@@ -80,6 +81,10 @@ const Home = () => {
       },
     ],
   };
+  const irAlDetalle = (id) => {
+    navigate(`/producto/${id}`);
+   
+  };
 
   return (
     <>
@@ -100,7 +105,11 @@ const Home = () => {
             <Slider {...settings}>
               {" "}
               {productos.map((product) => (
-                <CardsMasComprado key={product.id} product={product} />
+                <CardsMasComprado
+                  key={product.id}
+                  product={product}
+                  irAlDetalle={irAlDetalle}
+                />
               ))}
             </Slider>
           </div>

@@ -24,11 +24,11 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
 
   return (
     <>
-      <h4 className="text-center  mt-4 p-3">Publicar Nuevo Aviso</h4>
+      <h4 className="text-center  mt-5 p-4 ">Publicar Nuevo Aviso</h4>
 
       <form
         onSubmit={handleSubmit}
-        className="form-control mb-4 mt-4 shadow p-3  bg-body rounded"
+        className="form-control mb-4 mt-3 shadow p-3  bg-body rounded"
       >
         {error && <Error>*Todos los campos son necesarios</Error>}
 

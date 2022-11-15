@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg  fixed-top">
+      <nav className="navbar navbar-dark navbar-expand-lg  fixed-top">
         <div className="container-fluid">
           <button
             className="navbar-toggler"

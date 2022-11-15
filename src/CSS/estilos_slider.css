@@ -19,17 +19,3 @@
   box-shadow: 0px 12px 30px 0px rgba(0, 0, 0, 0.2); /* sombra al pasar */
   transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1); /* tiempo suave de movimiento */
 }
-
-.slick-prev::before,
-.slick-next::before {
-  background-color: #fcdcdc;
-  border: none;
-  color: rgb(248, 248, 248);
-}
-
-.slick-prev {
-  left: -25px;
-}
-.slick-next{
-  right: -25px;
-}

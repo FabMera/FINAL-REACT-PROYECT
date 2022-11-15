@@ -5,19 +5,17 @@ const Footer = () => {
     <>
       <footer
         className="text-center text-white "
-        style={{ backgroundColor: "#db7069" }}
+        style={{ backgroundImage: 'linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%'}}
       >
-        <div className="container ">
+        <div className="footer-contenedor">
           <hr className="my-5" />
 
           <section className="mb-2">
             <div className="row d-flex justify-content-center">
               <div className="col-lg-8">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                  distinctio earum repellat quaerat voluptatibus placeat nam,
-                  commodi optio pariatur est quia magnam eum harum corrupti
-                  dicta, aliquam sequi voluptate quas.
+                <p className="mx-auto" style={{width:'80%'}}>
+                  Registrate en nuestra web y comienza a vender y comprar miles de productos.
+                  
                 </p>
               </div>
             </div>
@@ -46,7 +44,6 @@ const Footer = () => {
 
         <div
           className=" text-center p-3  "
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           © 2022 Copyright: Market Place in React.
         </div>

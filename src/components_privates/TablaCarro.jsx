@@ -25,7 +25,7 @@ const TablaCarro = ({
           <div className="mt-1">
             <button
               style={{ width: "30px", height: "30px" }}
-              className="btn btn-success "
+              className="btn btn-success p-0 "
               onClick={() => incrementCount(producto)}
               disabled={producto.cantidades > producto.cantidad}
             >
@@ -36,19 +36,19 @@ const TablaCarro = ({
             <button
               style={{ width: "30px", height: "30px" }}
               disabled={producto.cantidades <= 0}
-              className="btn btn-info"
+              className="btn btn-info p-0"
               onClick={() => decrementCount(producto)}
             >
               -
             </button>
             {producto.cantidades > producto.cantidad? (
-              <p className="m-1"  style={{ color: "red", fontWeight: "bold" }}>*Sin Stock</p>
+              <p className="m-1"  style={{ color: "red", fontWeight: "bold" }}>*Excede el máximo de productos</p>
             ) : (
               ""
             )}
           </div>
         </td>
-        <td>{producto.precio * producto.cantidades}</td>
+        <td>US$ :{producto.precio * producto.cantidades}</td>
         <td>
           {" "}
           <button

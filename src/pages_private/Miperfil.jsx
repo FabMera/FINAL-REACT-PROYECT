@@ -8,39 +8,48 @@ const Miperfil = () => {
   const { publicacion } = useContext(MiContext);
   return (
     isAuthenticated && (
-      <div  className="container bg-light ">
-        <h1 className="mt-4 text-center p-3">Mi Perfil</h1>
-        <div style={{ width: "50%" }} className="card mb-3 mx-auto p-3">
-          <div className="row g-0">
-            <div className="col-md-6">
-              <img
-                src={user.picture}
-                className="img-fluid rounded-start"
-                alt={user.name}
-              />
-            </div>
-            <div className="col-md-8">
+      <div className="container bg-light ">
+        <h1 className="mt-4 text-center p-5">Mi Perfil</h1>
+        <div className="row ">
+          <div className="col-10 col-md-6 mx-auto">
+            <div style={{ width: "100%" }} className="card p-3 ">
+              <div className="text-center">
+                <img
+                  src={user.picture}
+                  className="rounded-circle"
+                  alt={user.name}
+                />
+              </div>
               <div className="card-body">
-                <h5 className="card-title">Mi Perfil de Usuario</h5>
+                <h5 className="card-title text-center">Mi Perfil de Usuario</h5>
+                <hr />
                 <p className="card-text">
                   <span>Total de publicaciones: </span> {publicacion.length}
+                  <hr />
                 </p>
                 <p className="card-text">
                   <span>Usuario :{user.nickname}</span>
                 </p>
                 <p className="card-text">
-                  <span>Correo electronico:{user.email}</span>
+                  <span>Email: {user.email}</span>
                 </p>
-
+                <hr />
                 <p className="card-text">
                   <small className="text-muted">
                     Logueado como :{user.name}
                   </small>
                 </p>
               </div>
-              <LogoutButton />
+              <div className="text-center">
+                <LogoutButton />
+              </div>
+
+              <hr />
             </div>
           </div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
         </div>
       </div>
     )

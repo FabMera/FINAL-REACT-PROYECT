@@ -1,5 +1,4 @@
-const CardsMasComprado = ({ product }) => {
-  const irAlDetalle = () => {};
+const CardsMasComprado = ({ product, irAlDetalle }) => {
   return (
     <>
       <div className="cards ">
@@ -15,8 +14,12 @@ const CardsMasComprado = ({ product }) => {
             <p className="card-text"></p>
           </div>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item text-center">Precio: US$ {product.precio}</li>
-            <li className="list-group-item text-center">Categoria : {product.categoria}</li>
+            <li className="list-group-item text-center">
+              Precio: US$ {product.precio}
+            </li>
+            <li className="list-group-item text-center">
+              Categoria : {product.categoria}
+            </li>
           </ul>
           <div className="d-flex justify-content-center mt-2 p-2">
             <button

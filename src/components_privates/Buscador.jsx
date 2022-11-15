@@ -1,18 +1,20 @@
-import React from 'react'
+import React from "react";
 
-const Buscador = ({search,handleInput}) => {
+const Buscador = ({ search, handleInput }) => {
   return (
-    <form className="d-flex mb-3 p-3">
-    <input
-      value={search}
-      onChange={handleInput}
-      type="search"
-      placeholder="Busca por tipo o nombre del producto"
-      className="form-control me-2"
-    />
-  
-  </form>
-  )
-}
+    <div className="mb-3 p-3">
+      <p className="p-search">Busca por el nombre del producto:</p>
+      <form >
+        <input
+          value={search}
+          onChange={handleInput}
+          type="search"
+          placeholder="Busca por tipo o nombre del producto"
+          className="form-control me-2"
+        />
+      </form>
+    </div>
+  );
+};
 
-export default Buscador
+export default Buscador;

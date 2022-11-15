@@ -23,7 +23,7 @@ const ListadoProductos = ({ deleteItem, edit }) => {
     <div>
       {publicacion && publicacion.length ? (
         <>
-          <h4 className=" text-center mt-4 p-2">Listado de Tus Productos</h4>
+          <h4 className=" text-center mt-5 p-2 m-2">Listado de Tus Productos</h4>
           <p className="text-center">
             Administras tus {""}
             <span style={{ fontWeight: "bold" }} className="text-danger">
@@ -31,14 +31,17 @@ const ListadoProductos = ({ deleteItem, edit }) => {
             </span>
           </p>
           {publicacion.map((item) => (
-            <div key={item.id} className="m-2 p-3 shadow-lg  bg-body rounded">
+            <div key={item.id} className="m-2 p-3 mt-4 shadow-lg  bg-body rounded">
               <p>Tipo de Producto:{item.tipo}</p>
+              <hr/>
               <p className="">Categoria:{item.categoria}</p>
-
+              <hr/>
               <p className="">Estado del Producto:{item.estado}</p>
-
-              <p className="">Precio $:{item.precio}</p>
+              <hr/>
+              <p className="">Precio US$:{item.precio}</p>
+              <hr/>
               <p className="">Unidades ofrecidas :{item.cantidad}</p>
+              <hr/>
               <p className="">Descripcion de tu producto: {item.descrip}</p>
 
               <div className="d-flex justify-content-between">
@@ -72,7 +75,7 @@ const ListadoProductos = ({ deleteItem, edit }) => {
         </>
       ) : (
         <>
-          <h4 className="text-center mt-4 p-2">No hay productos en tu Lista</h4>
+          <h4 className="text-center mt-3 pt-5">No hay productos en tu Lista</h4>
           <p className="text-center">
             Comienza agregando Productos a tu lista{" "}
             <span className="text-danger">y apareceran en este lugar</span>

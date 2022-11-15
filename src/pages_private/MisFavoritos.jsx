@@ -24,18 +24,18 @@ const MisFavoritos = () => {
   return (
     <>
       <div className="container bg-light">
-        <h1 className="text-center mt-4">Mis Favoritos</h1>
+        <h1 className="text-center mt-4 p-5">Mis Favoritos</h1>
         <div className="row">
           {publicacion
             .filter((ele) => ele.favorito)
             .map((ele) => (
               <div
                 key={ele.id}
-                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3  mt-3 "
+                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3  "
               >
                 <div className="card shadow-lg mx-auto rounded-5  ">
                   <img
-                    style={{ width:'100%',height:'200px'}}
+                    style={{ width: "100%", height: "180px" }}
                     src={ele.imagen}
                     className="img-fluid"
                     alt="foto"

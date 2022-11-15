@@ -1,87 +1,109 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Comentarios from "../components_privates/Comentarios";
+import DetalleCards from "../components_privates/DetalleCards";
+import TodoComentarios from "../components_privates/TodoComentarios";
 import MiContext from "../Context/Micontext";
 
 const DetalleProducto = () => {
-  const { publicacion, setPublicacion } = useContext(MiContext);
+  const { publicacion, productos } = useContext(MiContext);
   const { id } = useParams();
   const { user } = useAuth0();
+  //hook para los comentarios
+  const [comentario, setComentario] = useState("");
+  //hook para enlistar los comentarios []
+  const [list, setList] = useState([]);
 
-  const onClickHeart = (ele) => {
-    const favoritas = [...publicacion];
-    const index = favoritas.findIndex((item) => item.id === ele.id);
-    favoritas[index].favorito = !favoritas[index].favorito;
-    setPublicacion(favoritas);
+
+  useEffect(() => {
+    const obtenerDataLocal = () => {
+      const listaLS =
+        JSON.parse(localStorage.getItem("list")) ?? [];
+      setList(listaLS);
+    };
+    obtenerDataLocal();
+  }, []);
+
+  //guardo los estados en localStorage
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
+
+
+  const handleCommitChange = (e) => {
+    setComentario(e.target.value);
+    console.log(e.target.value);
   };
 
-  return (
-    <><div className="container bg-light">
-      <h1 className="text-center mt-3 p-4">Detalle de tu Producto</h1>
-      <div
-        className="card  d-flex align-items-center mt-5 mx-auto shadow bg-white rounded-5"
-        style={{ width: "60%" }}
-      >
-        {publicacion
-          .filter((item) => item.id === id)
+  const handleCommitSubmit = (e) => {
+    e.preventDefault();
 
-          .map((item) => (
-            <div key={item.id} className="row g-2 mt-5 p-2">
-              <div className="col-md-4">
-                <img
-                  src={item.imagen}
-                  className="img-fluid rounded-start"
-                  alt="producto"
-                />
-              </div>
-              <div className="col">
-                <div className="card-body">
-                  <h5 className="card-title">{item.tipo}</h5>
-                  <hr />
-                  <p className="card-text"></p>
-                  <ul className="list-group list-group-flush">
-                    <b>Estado del Producto: </b>
-                    {item.estado}
-                    <li className="list-group-item">
-                      <span>Vendido por :{user.name}</span>
-                    </li>
-                    <li className="list-group-item">
-                      Descripcion: {item.descrip}
-                    </li>
-                    <li className="list-group-item">
-                      <span>Cantidades disponibles:{item.cantidad}</span>
-                    </li>
-                    <li className="list-group-item">
-                      Marcar como Favorito:
-                      <svg
-                        style={{ cursor: "pointer" }}
-                        onClick={() => onClickHeart(item)}
-                        width="40px"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill={item.favorito ? "red" : "#fe9393"}
-                          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-                        />
-                      </svg>
-                    </li>
-                  </ul>
-                  <h3 className="m-3">
-                    $<span>{item.precio}</span>
-                  </h3>
-                  <div className="d-flex justify-content-between">
-                    <Link to="/galeria">
-                      <button className="btn btn-info ">Regresar</button>
-                    </Link>
-                    <Link to="">
-                      <button className="btn btn-danger">Añadir</button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
+    const commits = {
+      id: Date.now(),
+      commit: comentario,
+    };
+    const temp = [...list, commits];
+    setList(temp);
+    setComentario("");
+    console.log(comentario);
+  };
+//funcion para borrar un comentario 
+  const deleteComment=(id)=>{
+    const deleteElement=list.filter((item)=>item.id !==id)
+    setList(deleteElement)
+  }
+
+  const editComment=(id)=>{
+    const temp=[...list];
+    const elemento=temp.find((ele)=>ele.id === id);
+    console.log(elemento)
+    setComentario(elemento.commit)
+  }
+
+  return (
+    <>
+      <div className="container">
+        <h1 className="text-center mt-2 p-5">Detalle del Producto</h1>
+        <div className="row">
+          <div className="col-10 col-md-6 col-sm-10 card  d-flex align-items-center mt-5 shadow bg-white rounded-5">
+            {productos
+              .filter((item) => item.id === Number(id))
+
+              .map((item) => (
+                <DetalleCards item={item} user={user} />
+              ))}
+            {publicacion
+              .filter((item) => item.id === id)
+
+              .map((item) => (
+                <DetalleCards key={item.id} item={item} user={user} />
+              ))}
+          </div>
+        </div>
+        <Comentarios
+          handleCommitSubmit={handleCommitSubmit}
+          comentario={comentario}
+          setComentario={setComentario}
+          handleCommitChange={handleCommitChange}
+        />
+        <p>Ultimos comentarios de usuarios:</p>
+        <hr />
+
+        <div className="row">
+          <div className="col col-sm-6 col-md-6">
+            {list.map((item) => (
+              <TodoComentarios
+                list={list}
+                key={item.id}
+                item={item}
+                user={user}
+                deleteComment={deleteComment}
+                editComment={editComment}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

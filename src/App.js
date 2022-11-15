@@ -15,9 +15,10 @@ import DetalleProducto from "./pages_private/DetalleProducto";
 import Carrito from "./pages_private/Carrito";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
+import Page404 from "./pages_public/Page404";
 
 function App() {
-
+  
   const { isAuthenticated } = useAuth0();
   const [productos, setProductos] = useState([]);
   const [publicacion, setPublicacion] = useState([]);
@@ -35,17 +36,6 @@ function App() {
   const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
 
-  /*   useEffect(() => {
-    const timer = setTimeout(() => {
-      
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return "Loading...";
-  } */
-
   const endpoint = "https://dummyjson.com/products?limit=10";
 
   //api para mostrar productos en portada.
@@ -62,13 +52,15 @@ function App() {
         tipo: ele.title,
         precio: ele.price,
         favorito: false,
+        estado: "nuevo",
+        cantidad: ele.stock,
       }));
       setProductos(dataProductos);
     } catch (error) {
       console.log("error conexion" + error);
     }
   };
-// solicito los datos a la local storage y los transformo
+  // solicito los datos a la local storage y los transformo
   useEffect(() => {
     const obtenerDataLocal = () => {
       const publicacionLS =
@@ -78,16 +70,18 @@ function App() {
     obtenerDataLocal();
   }, []);
 
-  
-//guardo los estados en localStorage
+  //guardo los estados en localStorage
   useEffect(() => {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
-    localStorage.setItem("carroCompra", JSON.stringify(carroCompra))
-  }, [publicacion],[carroCompra]);
+  }, [publicacion]);
 
   useEffect(() => {
     cargarProductos();
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="App">
@@ -118,7 +112,7 @@ function App() {
           cantidad,
           setCantidad,
           modoedicion,
-          setModoEdicion
+          setModoEdicion,
         }}
       >
         <BrowserRouter>
@@ -142,10 +136,12 @@ function App() {
               <>
                 {" "}
                 <Route path="/" element={<Home />} />
+                {/* <Route path="*" element={<Navigate to="/404" />} /> */}
                 <Route path="/inicio" element={<InicioSesion />} />
                 <Route path="/registro" element={<Registro />} />{" "}
               </>
             )}
+            {<Route path="*" element={<Page404 />} />}
           </Routes>
         </BrowserRouter>
       </Micontext.Provider>
