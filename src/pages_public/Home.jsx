@@ -16,27 +16,6 @@ const Home = () => {
   const navigate = useNavigate();
 
 
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "#d5dbece8" }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "#d5dbece8" }}
-        onClick={onClick}
-      />
-    );
-  }
 
   const settings = {
     dots: true,

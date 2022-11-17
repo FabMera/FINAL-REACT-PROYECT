@@ -34,7 +34,7 @@ const MisPublicaciones = () => {
   //Estados para el id del formulario actualizado,el error y el modo edicion
   const [ide, setIde] = useState("");
   const [error, setError] = useState(false);
-
+  const [cover, setCover] = useState("");
   //funcion eliminar producto de mis publicaciones
   const deleteItem = (id) => {
     const product = publicacion.filter((ele) => ele.id !== id);
@@ -59,15 +59,14 @@ const MisPublicaciones = () => {
     setIde(elemento.id);
     setPublicacion(temp);
     setModoEdicion(true);
+    setCover("");
     <ModalForm />;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //validamos formulario
-    if (
-      [tipo, categoria, estado, precio, descrip, cantidad, imagen].includes("")
-    ) {
+    if ([tipo, categoria, estado, precio, descrip, cantidad].includes("")) {
       setError(true);
       return;
     }
@@ -82,6 +81,7 @@ const MisPublicaciones = () => {
       favorito: false,
       cantidad, //lo que publica el usuario,stock.
       cantidades: 1, //valor inicial que una persona puede comprar e incrementa y decrementa.
+      cover,
     };
     //funcion para editar un FORMULARIO de PRODUCTOS.
     if (modoedicion) {
@@ -130,15 +130,26 @@ const MisPublicaciones = () => {
   useEffect(() => {
     cargarCategories();
   }, []);
+//funcion para cargar y leer imagen de un archivo local
+  function handleOnChangeFile(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+      setCover(reader.result.toString());
+    };
+  }
 
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12 col-md-6 col-lg-4 mx-auto">
+        <div className="col-12 col-md-8 col-lg-4 mx-auto">
           <PublicarForm
             error={error}
             handleSubmit={handleSubmit}
             modoedicion={modoedicion}
+            handleOnChangeFile={handleOnChangeFile}
+            cover={cover}
           />
         </div>
         <div className="col-12 col-md-6 col-lg-4 mx-auto">

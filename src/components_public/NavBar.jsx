@@ -9,7 +9,7 @@ import MiContext from "../Context/Micontext";
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth0();
-  const { carroCompra } = useContext(MiContext);
+  const { carroCompra,isAuth,setIsAuth } = useContext(MiContext);
 
   return (
     <>
@@ -34,7 +34,7 @@ const NavBar = () => {
                   <button className="boton "><i class="fa-solid fa-house-user p-1"></i>Home</button>
                 </Link>
               </li>
-              {isAuthenticated ? (
+              {isAuth ||isAuthenticated ? (
                 <>
                   <li className="nav-item m-2 ">
                     <Link to="/mispublicaciones">
@@ -88,7 +88,7 @@ const NavBar = () => {
                       </li>
                       <li>
                         <a className="dropdown-item">
-                          <LogoutButton />
+                        {isAuth? <button onClick={()=>setIsAuth(false)} className="boton-logout"> <Link to="/"></Link>Cerrar Sesion</button>:<LogoutButton />}
                         </a>
                       </li>
                     </ul>
@@ -109,13 +109,17 @@ const NavBar = () => {
                 <>
                   <li className="nav-item m-2">
                     <a className="dropdown-item">
+                    <Link to="/inicio">
                       <LoginButton />
-                      
+                      </Link>
                     </a>
                   </li>
                   <li className="nav-item m-2">
                     <a className="dropdown-item">
-                      <RegisterButton />
+                    <Link to="/registro">
+                    <RegisterButton />
+                    </Link>
+                      
                     </a>
                   </li>
                 </>

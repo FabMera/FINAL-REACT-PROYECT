@@ -11,9 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 
 const GaleriaGeneral = () => {
-
-
-//---------------------------Estados para el input de busqueda y selectores----------//
+  //---------------------------Estados para el input de busqueda y selectores----------//
   const [search, setSearch] = useState(""); //Estado de la busqueda por includes.
   const [busqueda, setBusqueda] = useState([{}]); //muestra los resultados de search
   const [select, setSelect] = useState(""); //Estado del select de categorias
@@ -22,6 +20,7 @@ const GaleriaGeneral = () => {
   const [errorBusqueda, setErrorBusqueda] = useState(false);
   //-----------------------------------CONTEXTOS----------------------------------------//
   const {
+    isAuth,
     publicacion,
     setPublicacion,
     carroCompra,
@@ -29,6 +28,23 @@ const GaleriaGeneral = () => {
     setCategories,
   } = useContext(MiContext);
 
+  //------------------Funcion axios para llamar a la api y cargar categorias------------------//
+  const url = "https://dummyjson.com/products/categories";
+
+  const cargarCategories = async () => {
+    try {
+      const res = await axios.get(url);
+      const info = res.data;
+      setCategories(info);
+    } catch (error) {
+      console.log("error conexion" + error);
+    }
+  };
+
+  useEffect(() => {
+    cargarCategories();
+  }, []);
+  //------------------------------------fin ----------------------------------------------//
   //-------------------------funciones autenticacion y navigate por id------------------//
   const { user } = useAuth0();
   const navigate = useNavigate();
@@ -54,23 +70,6 @@ const GaleriaGeneral = () => {
   };
   //------------------------------------fin ---------------------------------------------------//
 
-  //------------------Funcion axios para llamar a la api y cargar categorias------------------//
-  const url = "https://dummyjson.com/products/categories";
-
-  const cargarCategories = async () => {
-    try {
-      const res = await axios.get(url);
-      const info = res.data;
-      setCategories(info);
-    } catch (error) {
-      console.log("error conexion" + error);
-    }
-  };
-
-  useEffect(() => {
-    cargarCategories();
-  }, []);
-  //------------------------------------fin ----------------------------------------------//
   const handleInput = (e) => {
     setSearch(e.target.value);
     searchProducto(e.target.value);
@@ -81,7 +80,8 @@ const GaleriaGeneral = () => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
         return valor;
       } else {
-        return setErrorBusqueda(true);
+        setErrorBusqueda(true);
+        return console.log("no hay resultados");
       }
     });
     setBusqueda(results);
@@ -151,6 +151,7 @@ const GaleriaGeneral = () => {
         <Cards
           key={product.id}
           product={product}
+          isAuth={isAuth}
           onClickHeart={onClickHeart}
           user={user}
           addProduct={addProduct}
@@ -164,6 +165,7 @@ const GaleriaGeneral = () => {
           product={product}
           onClickHeart={onClickHeart}
           user={user}
+          isAuth={isAuth}
           addProduct={addProduct}
           irAlDetalle={irAlDetalle}
         />
@@ -173,6 +175,7 @@ const GaleriaGeneral = () => {
         <Cards
           key={product.id}
           product={product}
+          isAuth={isAuth}
           onClickHeart={onClickHeart}
           user={user}
           addProduct={addProduct}

@@ -14,12 +14,12 @@ const DetalleProducto = () => {
   const [comentario, setComentario] = useState("");
   //hook para enlistar los comentarios []
   const [list, setList] = useState([]);
-
+  const [modoedit, setModoEdit] = useState(false);
+  const [iDeditar, setIdeditar] = useState("");
 
   useEffect(() => {
     const obtenerDataLocal = () => {
-      const listaLS =
-        JSON.parse(localStorage.getItem("list")) ?? [];
+      const listaLS = JSON.parse(localStorage.getItem("list")) ?? [];
       setList(listaLS);
     };
     obtenerDataLocal();
@@ -30,7 +30,6 @@ const DetalleProducto = () => {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
 
-
   const handleCommitChange = (e) => {
     setComentario(e.target.value);
     console.log(e.target.value);
@@ -38,28 +37,45 @@ const DetalleProducto = () => {
 
   const handleCommitSubmit = (e) => {
     e.preventDefault();
-
     const commits = {
       id: Date.now(),
       commit: comentario,
     };
     const temp = [...list, commits];
     setList(temp);
-    setComentario("");
-    console.log(comentario);
-  };
-//funcion para borrar un comentario 
-  const deleteComment=(id)=>{
-    const deleteElement=list.filter((item)=>item.id !==id)
-    setList(deleteElement)
-  }
 
-  const editComment=(id)=>{
-    const temp=[...list];
-    const elemento=temp.find((ele)=>ele.id === id);
-    console.log(elemento)
-    setComentario(elemento.commit)
-  }
+    if (modoedit) {
+      const temp = [...list];
+      const elemento = temp.find((ele) => ele.id === iDeditar);
+      if (elemento.id) {
+        commits.id = elemento.id;
+        const publicacionActual = list.map((object) =>
+          object.id === elemento.id ? commits : object
+        );
+        setList(publicacionActual);
+      }
+    } else {
+      commits.id = Date.now();
+      setList([...list, commits]);
+    }
+    setComentario("");
+    setModoEdit(false);
+  };
+
+  //funcion para borrar un comentario
+  const deleteComment = (id) => {
+    const deleteElement = list.filter((item) => item.id !== id);
+    setList(deleteElement);
+  };
+
+  const editComment = (id) => {
+    const temp = [...list];
+    const elemento = temp.find((ele) => ele.id === id);
+    console.log(elemento);
+    setComentario(elemento.commit);
+    setIdeditar(elemento.id)
+    setModoEdit(true);
+  };
 
   return (
     <>
@@ -86,12 +102,13 @@ const DetalleProducto = () => {
           comentario={comentario}
           setComentario={setComentario}
           handleCommitChange={handleCommitChange}
+          modoedit={modoedit}
         />
         <p>Ultimos comentarios de usuarios:</p>
         <hr />
 
         <div className="row">
-          <div className="col col-sm-6 col-md-6">
+          <div className="col-8 col-md-6 mx-auto ">
             {list.map((item) => (
               <TodoComentarios
                 list={list}

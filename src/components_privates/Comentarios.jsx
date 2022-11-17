@@ -1,6 +1,11 @@
 import React from "react";
 
-const Comentarios = ({ comentario,handleCommitChange,handleCommitSubmit }) => {
+const Comentarios = ({
+  comentario,
+  handleCommitChange,
+  handleCommitSubmit,
+  modoedit,
+}) => {
   return (
     <div className="row">
       <div className="col-8 col-md-6 mx-auto">
@@ -16,9 +21,11 @@ const Comentarios = ({ comentario,handleCommitChange,handleCommitSubmit }) => {
           />
           <label htmlFor="floatingTextarea2">Comenta aqui..</label>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-primary mb-4 mt-3" type="submit">
-              Comentar Articulo
-            </button>
+            <input
+              className="btn btn-primary mb-4 mt-3"
+              type="submit"
+              value={modoedit ? "Editar Comentario" : "Publicar Comentario"}
+            />
           </div>
         </form>
       </div>

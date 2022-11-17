@@ -6,13 +6,13 @@ const Selector = ({ handleChangeSelect }) => {
 
   return (
     <div className="mb-3  p-3 ">
-      <p className="p-search">Utiliza la busqueda por Categorias</p>
+      <p className="p-search">Filtra por Categoria</p>
       <select
         onChange={handleChangeSelect}
         className="form-select "
         aria-label="Default select example"
       >
-        <option value="">--Busca por Categoria--</option>
+        <option value="">--Selecciona por Categoria--</option>
         {categories.map((item) => (
           <option key={item} value={item}>
             {item}

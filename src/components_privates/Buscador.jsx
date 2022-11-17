@@ -4,12 +4,13 @@ const Buscador = ({ search, handleInput }) => {
   return (
     <div className="mb-3 p-3">
       <p className="p-search">Busca por el nombre del producto:</p>
-      <form >
+
+      <form>
         <input
           value={search}
           onChange={handleInput}
           type="search"
-          placeholder="Busca por tipo o nombre del producto"
+          placeholder="Search.."
           className="form-control me-2"
         />
       </form>

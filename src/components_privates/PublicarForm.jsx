@@ -2,7 +2,12 @@ import { useContext } from "react";
 import MiContext from "../Context/Micontext";
 import Error from "./Error";
 
-const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
+const PublicarForm = ({
+  error,
+  handleSubmit,
+  modoedicion,
+  handleOnChangeFile,
+}) => {
   //------------------------CONTEXTOS-------------------------------------------//
   const {
     tipo,
@@ -32,8 +37,8 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
       >
         {error && <Error>*Todos los campos son necesarios</Error>}
 
-        <div className="mb-5">
-          <label className="form-label">Tipo de Producto:</label>
+        <div className="mb-2">
+          <label className="form-label">Nombre de tu Producto:</label>
 
           <input
             className="form-control"
@@ -43,7 +48,7 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             onChange={(e) => setTipo(e.target.value)}
           />
         </div>
-        <div className="mb-5">
+        <div className="mb-2">
           <label className="form-label">Categoria de Producto:</label>
           <select
             value={categoria}
@@ -59,7 +64,7 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             ))}
           </select>
         </div>
-        <div className="mb-5">
+        <div className="mb-2">
           <label className="form-label">Estado de tu Producto:</label>
           <select
             value={estado}
@@ -67,13 +72,13 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             className="form-select"
             aria-label="Default select example"
           >
-            <option value="">---Selecciona estado---</option>
+            <option value="">---Selecciona una opcion---</option>
             <option value="nuevo">Nuevo</option>
             <option value="usado">Usado</option>
           </select>
         </div>
 
-        <div className="mb-5">
+        <div className="mb-2">
           <label //for o htmlfor en react es para asociar un elemento con algo
             htmlFor="precio"
             className="form-label"
@@ -89,7 +94,7 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             onChange={(e) => setPrecio(e.target.value)}
           />
         </div>
-        <div className="mb-5">
+        <div className="mb-2">
           <label //for o htmlfor en react es para asociar un elemento con algo
             htmlFor=""
             className="form-label"
@@ -111,7 +116,7 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             htmlFor=""
             className="form-label"
           >
-            Sube una imagen:
+            Sube una imagen local o desde una URL:
           </label>
 
           <input
@@ -120,6 +125,11 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
             placeholder="Ingresa la URL: debe ser formato imagen PNG,IMG,"
             value={imagen}
             onChange={(e) => setImagen(e.target.value)}
+          />
+          <input
+            type="file"
+            className="form-control mt-3"
+            onChange={handleOnChangeFile}
           />
         </div>
         <div className="mb-5">
@@ -141,7 +151,7 @@ const PublicarForm = ({ error, handleSubmit, modoedicion }) => {
 
         <input
           type="submit"
-          style={{color:'white',fontSize:'1.5rem',fontWeight:'bold'}}
+          style={{ color: "white", fontSize: "1.5rem", fontWeight: "bold" }}
           className="btn btn-info w-100"
           value={modoedicion ? "Editar Producto" : "Publicar Producto"}
         />

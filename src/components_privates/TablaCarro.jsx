@@ -14,7 +14,7 @@ const TablaCarro = ({
           <img
             style={{ cursor: "pointer" }}
             className="d-flex mx-auto mt-2"
-            src={producto.imagen}
+            src={producto.cover ? producto.cover : producto.imagen}
             alt="picfoto"
             width="35"
             height="30"
@@ -24,7 +24,7 @@ const TablaCarro = ({
         <td>
           <div className="mt-1">
             <button
-              style={{ width: "30px", height: "30px" }}
+              style={{ width: "20px", height: "20px" }}
               className="btn btn-success p-0 "
               onClick={() => incrementCount(producto)}
               disabled={producto.cantidades > producto.cantidad}
@@ -34,12 +34,11 @@ const TablaCarro = ({
             <span className="m-2">{producto.cantidades}</span>
 
             <button
-              style={{ width: "30px", height: "30px" }}
+              style={{ width: "20px", height: "20px" }}
               disabled={producto.cantidades <= 0}
               className="btn btn-info p-0"
               onClick={() => decrementCount(producto)}
-            >
-              -
+            > -
             </button>
             {producto.cantidades > producto.cantidad? (
               <p className="m-1"  style={{ color: "red", fontWeight: "bold" }}>*Excede el máximo de productos</p>

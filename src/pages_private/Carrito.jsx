@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import TablaCarro from "../components_privates/TablaCarro";
-
 import MiContext from "../Context/Micontext";
 
 const Carrito = () => {
@@ -46,7 +46,7 @@ const Carrito = () => {
           <div className="col text-center">
             {carroCompra && carroCompra.length ? (
               <>
-                <h3 className="text-center m-4 p-3">Productos del Carrito</h3>
+                <h3 className="text-center m-5 p-3">Productos del Carrito</h3>
                 <table
                   style={{ cursor: "pointer" }}
                   className="table table-hover shadow"
@@ -71,25 +71,41 @@ const Carrito = () => {
                   ))}
                 </table>
                 <li className="list-group-item d-flex justify-content-end">
-                  <div className="ms-1 me-auto ">
-                    <div className="fw-bold h4">
-                      <p className="mx-2 ">
+                  <div className="">
+                    <div className="fw-bold m-3">
+                      <h5 className="mx-2 ">
                         Total:{" "}
-                        <span>
+                        <span className="text-danger">
                           ${total}
                           {totalCarrito()}
                         </span>
-                      </p>
+                      </h5>
                     </div>
-
+                    <hr />
                     <button className="btn btn-success mb-3">Ir a Pagar</button>
                   </div>
                 </li>
               </>
             ) : (
-              <h3 className="text-center mt-5 p-3">
-                Carrito <span style={{ color: "red" }}>Vacio</span>
-              </h3>
+              <>
+                <h1 className="text-center mt-5 p-3">
+                  Carrito <span style={{ color: "red" }}>Vacio</span>
+                </h1>
+                <div className="row">
+                  <div className="col">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/256/3394/3394009.png"
+                      alt=""
+                    />
+                    <h3 className="text-muted p-3">
+                      Comienza a escoger tus productos y agregalos..AQUI.
+                    </h3>
+                    <Link to="/galeria">
+                      <button className="btn btn-primary">Galeria</button>
+                    </Link>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>

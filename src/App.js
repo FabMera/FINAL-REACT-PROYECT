@@ -17,15 +17,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
 import Page404 from "./pages_public/Page404";
 
+
 function App() {
-  
   const { isAuthenticated } = useAuth0();
+  const [isAuth,setIsAuth]=useState(false)
   const [productos, setProductos] = useState([]);
   const [publicacion, setPublicacion] = useState([]);
   const [categories, setCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [carroCompra, setCarroCompra] = useState([]);
-
+  const [users, setUsers] = useState([]);
   const [tipo, setTipo] = useState("");
   const [categoria, setCategoria] = useState([]);
   const [estado, setEstado] = useState("");
@@ -36,7 +37,8 @@ function App() {
   const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
 
-  const endpoint = "https://dummyjson.com/products?limit=10";
+  const endpoint = "https://dummyjson.com/products?limit=30";
+  const endpointuser ='http://localhost:8000/users';
 
   //api para mostrar productos en portada.
   const cargarProductos = async () => {
@@ -60,6 +62,33 @@ function App() {
       console.log("error conexion" + error);
     }
   };
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+
+  //Funcion async con axiios para traer USERS de apifake
+  const cargarUsuarios = async () => {
+    const res = await axios.get(endpointuser);
+    const info = res.data;
+    const dataUsuarios = info.map((ele) => ({
+      id: ele.id,
+      firstName: ele.firstName,
+      lastName: ele.lastName,
+      image:ele.image,
+      email:ele.email,
+      username:ele.username,
+      password:ele.password
+    }));
+    setUsers(dataUsuarios)
+  };
+
+  useEffect(() => {
+    cargarUsuarios();
+    
+  }, []);
+
   // solicito los datos a la local storage y los transformo
   useEffect(() => {
     const obtenerDataLocal = () => {
@@ -75,10 +104,9 @@ function App() {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
   }, [publicacion]);
 
-  useEffect(() => {
-    cargarProductos();
-  }, []);
 
+
+  //Muestro el Spinner mientras exista una carga del usuario.
   if (isLoading) {
     return <Spinner />;
   }
@@ -87,6 +115,10 @@ function App() {
     <div className="App">
       <Micontext.Provider
         value={{
+          isAuth,
+          setIsAuth,
+          users,
+          setUsers,
           productos,
           setProductos,
           publicacion,
@@ -118,7 +150,7 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            {isAuthenticated ? (
+            {isAuth||isAuthenticated ? (
               <>
                 {" "}
                 <Route

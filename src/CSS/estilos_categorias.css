@@ -3,8 +3,9 @@
   flex-wrap: wrap;
   width: 100%;
   margin-bottom: 50px;
- 
 }
+
+
 .cardItem {
   display: flex;
   flex-direction: column;
@@ -31,25 +32,29 @@
 }
 
 @media screen and (max-width: 992px) {
-  .contenedor{
-   flex-wrap: wrap;
-   
+  .contenedor {
+    flex-wrap: wrap;
   }
-  .cardItem{
-    
+  .cardItem {
     margin-bottom: 10px;
-    
   }
 }
 @media screen and (max-width: 500px) {
   .contenedor {
     flex-wrap: wrap;
     padding: 20px;
-   
   }
-  .cardItem{
+  .cardItem {
     margin: auto;
     margin-bottom: 10px;
   }
 }
-
+.fa-laptop-code,.fa-bicycle {
+  color: #6557e4;
+}
+.fa-mobile,.fa-tv{
+  color: #fc6076;
+}
+.fa-book-open,.fa-shirt{
+color: rgb(223, 226, 37);
+}

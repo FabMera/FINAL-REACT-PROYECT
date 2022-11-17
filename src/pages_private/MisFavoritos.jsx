@@ -3,8 +3,14 @@ import React, { useContext } from "react";
 import MiContext from "../Context/Micontext";
 
 const MisFavoritos = () => {
-  const { publicacion, setPublicacion, carroCompra, setCarroCompra } =
-    useContext(MiContext);
+  const {
+    publicacion,
+    setPublicacion,
+    carroCompra,
+    setCarroCompra,
+    isAuth,
+    users,
+  } = useContext(MiContext);
   const { user } = useAuth0();
 
   const clickDelete = (ele) => {
@@ -36,7 +42,7 @@ const MisFavoritos = () => {
                 <div className="card shadow-lg mx-auto rounded-5  ">
                   <img
                     style={{ width: "100%", height: "180px" }}
-                    src={ele.imagen}
+                    src={ele.cover ? ele.cover : ele.imagen}
                     className="img-fluid"
                     alt="foto"
                   />
@@ -75,7 +81,8 @@ const MisFavoritos = () => {
                   </div>
                   <div className="card-footer mt-2 ">
                     <small className="text-muted">
-                      Publicado por :{user.name}..
+                      Publicado por :
+                      {isAuth ? users.map((item) => item.firstName) : user.name}
                     </small>
                   </div>
                 </div>
