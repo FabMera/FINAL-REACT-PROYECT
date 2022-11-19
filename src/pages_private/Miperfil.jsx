@@ -12,7 +12,7 @@ const Miperfil = () => {
     <>
       {isAuthenticated ? (
         <div className="container bg-light ">
-          <h1 className="mt-4 text-center p-5">Mi Perfil</h1>
+          <h1 className="mt-4 text-center p-5">Hola,{user.name}</h1>
           <div className="row ">
             <div className="col-10 col-md-6 mx-auto">
               <div style={{ width: "100%" }} className="card p-3 ">

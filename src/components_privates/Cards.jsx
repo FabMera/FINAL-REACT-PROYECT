@@ -1,4 +1,10 @@
-const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user,isAuth}) => {
+import { useContext } from "react";
+import MiContext from "../Context/Micontext";
+
+const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user}) => {
+
+const {isAuth,users}=useContext(MiContext)
+
   return (
     <>
       <div className="col col-md-6 col-sm-6 col-lg-4 col-xl-3 ">
@@ -45,7 +51,7 @@ const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user,isAuth}) =
             </button>
           </div>
           <div className="card-footer mt-2 ">
-            <small className="text-muted">Publicado por {isAuth?product.username:user.name} ..</small>
+            <small className="text-muted">Publicado por {isAuth?users.map((item)=>item.username):user.name} ..</small>
           </div>
         </div>
       </div>

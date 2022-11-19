@@ -25,7 +25,7 @@ const TablaCarro = ({
           <div className="mt-1">
             <button
               style={{ width: "20px", height: "20px" }}
-              className="btn btn-success p-0 "
+              className="btn btn-info p-0 "
               onClick={() => incrementCount(producto)}
               disabled={producto.cantidades > producto.cantidad}
             >

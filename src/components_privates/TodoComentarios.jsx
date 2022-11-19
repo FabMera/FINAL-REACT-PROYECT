@@ -33,12 +33,14 @@ const TodoComentarios = ({
         </p>
         <div className=" d-flex justify-content-end ">
           <i
+          title="Editar comentario"
             onClick={() => editComment(item.id)}
             className="iconos-commit fa-regular fa-pen-to-square m-2"
           >
             {" "}
           </i>
           <i
+          title="Eliminar comentario"
             onClick={() => deleteComment(item.id)}
             className="iconos-commit fa-regular fa-trash-can m-2"
           ></i>

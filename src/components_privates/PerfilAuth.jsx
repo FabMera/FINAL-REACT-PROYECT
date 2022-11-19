@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MiContext from "../Context/Micontext";
-
+import { cargarUsuarios } from "../data/users";
 //Perfil del usuario autenticado en la pagina
 
 const PerfilAuth = () => {
@@ -13,12 +13,12 @@ console.log(users)
       {isAuth
         ? users.map((item,index) => (
             <div className="container bg-light ">
-              <h1 className="mt-4 text-center p-5">Mi Perfil</h1>
+              <h1 className="mt-4 text-center p-5">Hola,{item.firstName}!</h1>
               <div  key={index}  className="row ">
                 <div className="col-10 col-md-6 mx-auto">
                   <div style={{ width: "100%" }} className="card p-3 ">
                     <div className="text-center">
-                      <img src={item.image} className="rounded-circle" alt="" />
+                      <img style={{width:'100px'}} src={item.image} className="rounded-circle" alt="" />
                     </div>
                     <div className="card-body">
                       <h5 className="card-title text-center">
@@ -50,7 +50,7 @@ console.log(users)
                       <Link to="/">
                         <button
                           className="boton-logout"
-                          onClick={() => setIsAuth(false)}
+                          onClick={() => {setIsAuth(false);cargarUsuarios(setUsers)}}
                         >
                           Cerrar Sesion
                         </button>

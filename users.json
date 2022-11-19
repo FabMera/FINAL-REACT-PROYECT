@@ -46,33 +46,6 @@
       "image": "https://robohash.org/aliquamcumqueiure.png"
     },
     {
-      "firstName": "rewrwerwe",
-      "lastName": "rwerewrwer",
-      "username": "sfsfsf",
-      "password": "fdfsf",
-      "email": "sdfsf",
-      "id": "laljxo1n0th2h57ffggr",
-      "image": null
-    },
-    {
-      "firstName": "rewrwerwe",
-      "lastName": "rwerewrwer",
-      "username": "sfsfsf",
-      "password": "fdfsf",
-      "email": "sdfsf",
-      "id": "laljzp4a9ur9f6rf8xp",
-      "image": null
-    },
-    {
-      "firstName": "dsadsad",
-      "lastName": "dsdsd",
-      "username": "dsdsd",
-      "password": "dsdsd",
-      "email": "dsdsdsd",
-      "id": "lalk4m5mykmk8y2hovh",
-      "image": null
-    },
-    {
       "firstName": "FABIAN ",
       "lastName": "mera romero",
       "username": "fmera",
@@ -89,6 +62,33 @@
       "email": "ssaldivar@gmail.com",
       "id": "lalkdwdmuv5dxub6bu",
       "image": null
+    },
+    {
+      "firstName": "Agustin",
+      "lastName": "Krausse",
+      "username": "akrausse",
+      "password": "12345",
+      "email": "fa.mera@hotmail.com",
+      "id": "lamt0vsf7t4uf85vhtk",
+      "image": null
+    },
+    {
+      "firstName": "Emma",
+      "lastName": "Smith",
+      "username": "emma123",
+      "password": "123456",
+      "email": "emma1987@gcorreo.com",
+      "image": "https://i.pinimg.com/originals/19/87/90/198790eb7e08830027c1ae1686496c72.png",
+      "id": "lanwpd6fk4z9g47q2a"
+    },
+    {
+      "firstName": "jose",
+      "lastName": "diaz",
+      "username": "jdiaz",
+      "password": "123456",
+      "email": "jdiaz10@yahoo.cl",
+      "image": "",
+      "id": "lanwy26wjfeh5divze"
     }
   ]
 }

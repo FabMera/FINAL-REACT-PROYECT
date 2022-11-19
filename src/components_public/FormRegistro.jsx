@@ -23,7 +23,7 @@ const FormRegistro = () => {
 
   const endpointuser = "http://localhost:8000/users";
 
-  const customSubmit = (data,e) => {
+  const customSubmit = (data, e) => {
     const result = () => {
       const resultado = users.some(
         (item) => item.username === data.username || item.email === data.email
@@ -35,18 +35,18 @@ const FormRegistro = () => {
       }
       const send = async () => {
         data.id = generarId();
-        data.image=null
+        /* data.image = null; */
         const response = await axios.post(endpointuser, data);
-        console.log(response)
-        setUsers([...users,data])
+        console.log(response);
+        setUsers([...users, data]);
         setErrorForm(false);
       };
-      send()
+      send();
       e.target.reset();
     };
     result();
     console.log(data);
-    console.log(users)
+    console.log(users);
   };
 
   return (
@@ -77,7 +77,7 @@ const FormRegistro = () => {
             className="form-control"
             placeholder="indica tu apellido"
             type="text"
-            {...register("lastName", { required: true, minLength: 5 })}
+            {...register("lastName", { required: true, minLength: 4 })}
           />
           {errors.lastName?.type === "required" && (
             <small className="fail">
@@ -119,7 +119,7 @@ const FormRegistro = () => {
           <input
             className="form-control"
             placeholder="ejemplo@mail.com"
-            type="text"
+            type="email"
             {...register(
               "email",
               { required: true },
@@ -132,6 +132,15 @@ const FormRegistro = () => {
           {errors.email?.type === "pattern" && (
             <small className="fail">El formato de email es incorrecto</small>
           )}
+        </div>
+        <div className="mb-2">
+          <label className="form-label">Imagen de Perfil (opcional)</label>
+          <input
+            className="form-control"
+            placeholder="ingresa una url para tu imagen"
+            type="url"
+            {...register("image", { required: false })}
+          />
         </div>
         <button type="submit">Registrarme</button>
         {errorForm && <Error>*El usuario y/o mail ya existen!</Error>}

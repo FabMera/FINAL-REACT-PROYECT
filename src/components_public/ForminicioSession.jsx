@@ -1,4 +1,4 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../CSS/formcss.css";
 import { useForm } from "react-hook-form";
 import MiContext from "../Context/Micontext";
@@ -6,18 +6,18 @@ import { useNavigate } from "react-router-dom";
 import Error from "../components_privates/Error";
 
 const ForminicioSession = () => {
-  const { users, setUsers,setIsAuth } = useContext(MiContext);
+  const { users, setUsers, setIsAuth } = useContext(MiContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-const [errorInicio,setErrorInicio] =useState(false)
-const navigate=useNavigate();
+  const [errorInicio, setErrorInicio] = useState(false);
+  const navigate = useNavigate();
 
-const goHome=()=>{
-  navigate("/")
-}
+  const goHome = () => {
+    navigate("/");
+  };
 
 
   //Pra iniciar sesion debemos buscar al array users de objetos si existe un item y contraseña igual al que le pasamos
@@ -29,26 +29,23 @@ const goHome=()=>{
           item.password === usuario.password
       );
       if (result) {
-       
         console.log(result);
         setUsers([result]);
-        setErrorInicio(false)
+        setErrorInicio(false);
         setIsAuth(true);
-        return  goHome()
+        return goHome();
       } else {
         console.log("no existe usuario");
         setIsAuth(false);
+        setErrorInicio(true);
         setUsers(users);
-        setErrorInicio(true)
-        console.log(users);
         console.log(usuario);
-        
       }
     };
     usuarios();
     e.target.reset();
+  
   };
-
 
   return (
     <>

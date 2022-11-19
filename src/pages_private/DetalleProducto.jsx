@@ -3,11 +3,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comentarios from "../components_privates/Comentarios";
 import DetalleCards from "../components_privates/DetalleCards";
+import DetalleCardsPublica from "../components_privates/DetalleCardsPublica";
 import TodoComentarios from "../components_privates/TodoComentarios";
 import MiContext from "../Context/Micontext";
+import Swal from "sweetalert2";
+
 
 const DetalleProducto = () => {
-  const { publicacion, productos } = useContext(MiContext);
+  const { publicacion, productos, carroCompra, setCarroCompra,setProductos } =
+    useContext(MiContext);
   const { id } = useParams();
   const { user } = useAuth0();
   //hook para los comentarios
@@ -73,10 +77,37 @@ const DetalleProducto = () => {
     const elemento = temp.find((ele) => ele.id === id);
     console.log(elemento);
     setComentario(elemento.commit);
-    setIdeditar(elemento.id)
+    setIdeditar(elemento.id);
     setModoEdit(true);
   };
 
+  //Funcion que agrega productos al carrito desde la API
+   const addProduct = (item) => {
+    const carrito = [...productos];
+    const resultado = carrito.find((ele) => ele.id === item.id);
+    setCarroCompra([...carroCompra, resultado]);
+  };
+  //Funcion que agrega productos desde las publicaciones del usuario
+  const addProductPublica = (item) => {
+    const carrito = [...publicacion];
+    const resultado = carrito.find((ele) => ele.id === item.id);
+    setCarroCompra([...carroCompra, resultado]);
+  };
+
+
+  const onClickHeart = (item) => {
+    const favoritas = [...productos];
+    const index = favoritas.findIndex((ele) => ele.id === item.id);
+    favoritas[index].favorito = !favoritas[index].favorito;
+    setProductos(favoritas);
+    if (favoritas[index].favorito) {
+      return Swal.fire({
+        title: "!Perfecto!",
+        text: "Agregado a tus Favoritos",
+        icon: "success",
+      });
+    }
+  };
   return (
     <>
       <div className="container">
@@ -87,13 +118,24 @@ const DetalleProducto = () => {
               .filter((item) => item.id === Number(id))
 
               .map((item) => (
-                <DetalleCards item={item} user={user} />
+                <DetalleCards
+                  key={item.id}
+                  addProduct={addProduct}
+                  item={item}
+                  user={user}
+                  onClickHeart={onClickHeart}
+                />
               ))}
             {publicacion
               .filter((item) => item.id === id)
 
               .map((item) => (
-                <DetalleCards key={item.id} item={item} user={user} />
+                <DetalleCardsPublica
+                  addProductPublica={addProductPublica}
+                  key={item.id}
+                  item={item}
+                  user={user}
+                />
               ))}
           </div>
         </div>

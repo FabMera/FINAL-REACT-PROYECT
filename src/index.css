@@ -118,3 +118,12 @@ code {
   top: 50%;
   transform: translateY(-50%);
 }
+.favorito-img{
+  cursor: pointer;
+  opacity: 0.8;
+  width: 200px;
+}
+
+.favorito-img:hover{
+  opacity: 1;
+}

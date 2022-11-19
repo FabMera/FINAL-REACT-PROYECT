@@ -16,11 +16,12 @@ import Carrito from "./pages_private/Carrito";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
 import Page404 from "./pages_public/Page404";
-
+import { cargarUsuarios } from "./data/users";
+import { cargarProductos } from "./data/productos";
 
 function App() {
   const { isAuthenticated } = useAuth0();
-  const [isAuth,setIsAuth]=useState(false)
+  const [isAuth, setIsAuth] = useState(false);
   const [productos, setProductos] = useState([]);
   const [publicacion, setPublicacion] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -37,56 +38,13 @@ function App() {
   const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
 
-  const endpoint = "https://dummyjson.com/products?limit=30";
-  const endpointuser ='http://localhost:8000/users';
-
-  //api para mostrar productos en portada.
-  const cargarProductos = async () => {
-    try {
-      const res = await axios.get(endpoint);
-      const info = res.data.products;
-
-      const dataProductos = info.map((ele) => ({
-        id: ele.id,
-        descrip: ele.description,
-        categoria: ele.category,
-        imagen: ele.thumbnail,
-        tipo: ele.title,
-        precio: ele.price,
-        favorito: false,
-        estado: "nuevo",
-        cantidad: ele.stock,
-      }));
-      setProductos(dataProductos);
-    } catch (error) {
-      console.log("error conexion" + error);
-    }
-  };
-
+  //Mostrar productos desde la api de Dummy ..
   useEffect(() => {
-    cargarProductos();
+    cargarProductos(setProductos);
   }, []);
-
-
-  //Funcion async con axiios para traer USERS de apifake
-  const cargarUsuarios = async () => {
-    const res = await axios.get(endpointuser);
-    const info = res.data;
-    const dataUsuarios = info.map((ele) => ({
-      id: ele.id,
-      firstName: ele.firstName,
-      lastName: ele.lastName,
-      image:ele.image,
-      email:ele.email,
-      username:ele.username,
-      password:ele.password
-    }));
-    setUsers(dataUsuarios)
-  };
-
+  //Cargo los usuarios del users.json
   useEffect(() => {
-    cargarUsuarios();
-    
+    cargarUsuarios(setUsers);
   }, []);
 
   // solicito los datos a la local storage y los transformo
@@ -103,8 +61,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem("publicacion", JSON.stringify(publicacion));
   }, [publicacion]);
-
-
 
   //Muestro el Spinner mientras exista una carga del usuario.
   if (isLoading) {
@@ -150,7 +106,7 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            {isAuth||isAuthenticated ? (
+            {isAuth || isAuthenticated ? (
               <>
                 {" "}
                 <Route
