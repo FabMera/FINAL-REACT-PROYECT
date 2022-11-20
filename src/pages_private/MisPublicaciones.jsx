@@ -29,6 +29,7 @@ const MisPublicaciones = () => {
     setCategories,
     modoedicion,
     setModoEdicion,
+    users
   } = useContext(MiContext);
 
   //Estados para el id del formulario actualizado,el error y el modo edicion
@@ -71,6 +72,7 @@ const MisPublicaciones = () => {
       return;
     }
     setError(false);
+    const usuario = users.find((ele)=>ele.username)
     const objProducto = {
       tipo,
       categoria,
@@ -82,6 +84,7 @@ const MisPublicaciones = () => {
       cantidad, //lo que publica el usuario,stock.
       cantidades: 1, //valor inicial que una persona puede comprar e incrementa y decrementa.
       cover,
+      username:usuario.username
     };
     //funcion para editar un FORMULARIO de PRODUCTOS.
     if (modoedicion) {
@@ -111,7 +114,7 @@ const MisPublicaciones = () => {
     setCantidad("");
     setModoEdicion(false);
   };
-
+console.log(publicacion)
   //Generamos un id aleatorio para el nuevo producto que agregamos
   const generarId = () => {
     const fecha = Date.now().toString(36);
@@ -139,7 +142,18 @@ const MisPublicaciones = () => {
       setCover(reader.result.toString());
     };
   }
+/* Funcion que muestra u oculta las publicaciones si son de otro USUARIO */
+  const mostrar=()=>{
+    const usuario=publicacion.find((ele)=>ele.username)
+    const user1=users.find((ele)=>ele.username)
+    const mostrarResult=user1.username===usuario.username
 
+    if(mostrarResult){
+      return <ListadoProductos deleteItem={deleteItem} edit={edit}/>
+    }else{
+      return "";
+    }
+  }
   return (
     <div className="container">
       <div className="row">
@@ -153,7 +167,7 @@ const MisPublicaciones = () => {
           />
         </div>
         <div className="col-12 col-md-6 col-lg-4 mx-auto">
-          <ListadoProductos deleteItem={deleteItem} edit={edit} />
+        {mostrar()}
         </div>
       </div>
     </div>

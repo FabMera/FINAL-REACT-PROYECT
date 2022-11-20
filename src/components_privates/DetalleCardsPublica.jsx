@@ -60,14 +60,14 @@ const DetalleCardsPublica = ({item, addProductPublica}) => {
             </h3>
             <div className="d-flex justify-content-between">
               <Link to="/galeria">
-                <button style={{ color: "white" }} className="btn btn-info ">
+                <button style={{ color: "white" }} className="boton-general">
                   <i class="fa-solid fa-angles-left"></i>Regresar
                 </button>
               </Link>
               <Link to="">
                 <button
-                  //onClick={() => addProductPublica(item)}
-                  className="btn btn-danger "
+                  onClick={() => addProductPublica(item)}
+                  className="boton-general "
                 >
                   <i className="m-1 fa-solid fa-cart-shopping"></i>Añadir
                 </button>

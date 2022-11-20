@@ -1,11 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import MiContext from "../Context/Micontext";
 import "../CSS/formcss.css";
 import Error from "../components_privates/Error";
 import axios from "axios";
+import ModalRegistroOK from "../components_privates/ModalRegistroOK";
 
 const FormRegistro = () => {
+  const [modalReg, setModalReg] = useState(false);
   const [errorForm, setErrorForm] = useState(false);
   //funcion para generar id al usuario,reat-hook-form no la crea.
   const generarId = () => {
@@ -40,13 +42,19 @@ const FormRegistro = () => {
         console.log(response);
         setUsers([...users, data]);
         setErrorForm(false);
+        <ModalRegistroOK/>
       };
       send();
       e.target.reset();
+      
     };
     result();
     console.log(data);
     console.log(users);
+  };
+  const handleClickCloseReg = () => {
+    setModalReg(!modalReg);
+    console.log(modalReg)
   };
 
   return (
@@ -88,6 +96,7 @@ const FormRegistro = () => {
             <small className="fail">El minimo de caracteres es 5</small>
           )}
         </div>
+        <ModalRegistroOK handleClickCloseReg={handleClickCloseReg} modalReg={modalReg}/>
         <div className="mb-2">
           <label className="form-label">Elige un usuario:</label>
           <input

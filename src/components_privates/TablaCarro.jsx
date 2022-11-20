@@ -24,8 +24,8 @@ const TablaCarro = ({
         <td>
           <div className="mt-1">
             <button
-              style={{ width: "20px", height: "20px" }}
-              className="btn btn-info p-0 "
+              style={{ width: "20px", height: "20px",color:'white' }}
+              className="btn btn-info p-0"
               onClick={() => incrementCount(producto)}
               disabled={producto.cantidades > producto.cantidad}
             >
@@ -34,7 +34,7 @@ const TablaCarro = ({
             <span className="m-2">{producto.cantidades}</span>
 
             <button
-              style={{ width: "20px", height: "20px" }}
+              style={{ width: "20px", height: "20px",color:'white' }}
               disabled={producto.cantidades <= 0}
               className="btn btn-info p-0"
               onClick={() => decrementCount(producto)}

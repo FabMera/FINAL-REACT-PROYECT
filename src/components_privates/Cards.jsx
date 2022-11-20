@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import MiContext from "../Context/Micontext";
+import MisPublicaciones from "../pages_private/MisPublicaciones";
 
-const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user}) => {
+const Cards = ({ product, onClickHeart, irAlDetalle, addProduct, user,publicacion}) => {
 
 const {isAuth,users}=useContext(MiContext)
 
@@ -51,7 +52,7 @@ const {isAuth,users}=useContext(MiContext)
             </button>
           </div>
           <div className="card-footer mt-2 ">
-            <small className="text-muted">Publicado por {isAuth?users.map((item)=>item.username):user.name} ..</small>
+            <small className="text-muted">Publicado por {product.username} ..</small>
           </div>
         </div>
       </div>

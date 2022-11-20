@@ -54,6 +54,7 @@ function App() {
         JSON.parse(localStorage.getItem("publicacion")) ?? [];
       setPublicacion(publicacionLS);
     };
+    const result=publicacion.find((ele)=>ele.username)
     obtenerDataLocal();
   }, []);
 

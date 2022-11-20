@@ -18,6 +18,7 @@ const GaleriaGeneral = () => {
   const [selectBusqueda, setSelectBusqueda] = useState([{}]); //muestra los resultados del Select por Categoria
   const [selectprecio, setSelectPrecio] = useState(""); //Estado del select por precio
   const [errorBusqueda, setErrorBusqueda] = useState(false);
+  const [errorBusquedaCat,setErrorBusquedaCat]=useState(false)
   //-----------------------------------CONTEXTOS----------------------------------------//
   const {
     isAuth,
@@ -78,14 +79,14 @@ const GaleriaGeneral = () => {
   const searchProducto = (buscar) => {
     const results = publicacion.filter((valor) => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
+        setErrorBusqueda(false);
         return valor;
       } else {
         setErrorBusqueda(true);
-        return console.log("no hay resultados");
       }
     });
     setBusqueda(results);
-    setErrorBusqueda(false);
+    console.log(errorBusqueda);
   };
   //------------------------------------fin ---------------------------------------------//
 
@@ -129,7 +130,10 @@ const GaleriaGeneral = () => {
   const categoriasresult = (select) => {
     const filterporCat = publicacion.filter((valor) => {
       if (valor.categoria === select) {
+        setErrorBusquedaCat(false)
         return valor;
+      }else{
+        setErrorBusquedaCat(true)
       }
     });
     setSelectBusqueda(filterporCat);
@@ -199,6 +203,9 @@ const GaleriaGeneral = () => {
 
           <div className="col-12 col-md-4">
             <Selector handleChangeSelect={handleChangeSelect} />
+            {errorBusquedaCat && (
+              <Error>*No existen productos de esta categoria!</Error>
+            )}
           </div>
           <div className="col-12 col-md-4">
             <SelectOrderby handleSelectPrecio={handleSelectPrecio} />

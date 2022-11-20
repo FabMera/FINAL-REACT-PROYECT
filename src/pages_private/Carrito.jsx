@@ -72,7 +72,7 @@ const Carrito = () => {
                 </table>
                 <li className="list-group-item d-flex justify-content-end">
                   <div className="">
-                    <div className="fw-bold m-3">
+                    <div className="fw-bold m-3 border">
                       <h5 className="mx-2 ">
                         Total:{" "}
                         <span className="text-danger">
@@ -81,7 +81,6 @@ const Carrito = () => {
                         </span>
                       </h5>
                     </div>
-                    <hr />
                     <button className="btn btn-success mb-3">Ir a Pagar</button>
                   </div>
                 </li>

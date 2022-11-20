@@ -127,3 +127,15 @@ code {
 .favorito-img:hover{
   opacity: 1;
 }
+.boton-general{
+  background-color: rgb(210, 118, 91);
+  border: none;
+  color: white;
+  width: 120px;
+  padding: 5px;
+  opacity: 1;
+}
+
+.boton-general:hover{
+  opacity: 0.8;
+}

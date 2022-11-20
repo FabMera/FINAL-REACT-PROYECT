@@ -58,7 +58,8 @@ const DetalleCards = ({ item,addProduct,onClickHeart }) => {
               </li>
               <li className="list-group-item">
               <svg
-                style={{ cursor: "pointer",width:'25',borderColor:'black' }}
+              
+                style={{ cursor: "pointer",width:'25' }}
                 onClick={() => onClickHeart(item)}
                 viewBox="0 0 24 24"
               >
@@ -74,14 +75,14 @@ const DetalleCards = ({ item,addProduct,onClickHeart }) => {
             </h3>
             <div className="d-flex justify-content-between">
               <Link to="/galeria">
-                <button style={{ color: "white" }} className="btn btn-info ">
+                <button className="boton-general ">
                   <i class="fa-solid fa-angles-left"></i>Regresar
                 </button>
               </Link>
               <Link to="">
                 <button 
                 onClick={()=>addProduct(item)} 
-                className="btn btn-danger ">
+                className="boton-general ">
                   <i className="m-1 fa-solid fa-cart-shopping"></i>Añadir
                 </button>
               </Link>
