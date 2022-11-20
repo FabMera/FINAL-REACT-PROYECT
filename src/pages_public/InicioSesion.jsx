@@ -7,9 +7,6 @@ import "../CSS/formcss.css";
 const InicioSesion = () => {
   const { loginWithRedirect } = useAuth0();
 
-
-  
-
   return (
     <>
       <div className="container">

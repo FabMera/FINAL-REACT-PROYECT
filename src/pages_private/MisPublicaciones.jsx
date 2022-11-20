@@ -143,7 +143,7 @@ console.log(publicacion)
     };
   }
 /* Funcion que muestra u oculta las publicaciones si son de otro USUARIO */
-  const mostrar=()=>{
+ /*  const mostrar=()=>{
     const usuario=publicacion.find((ele)=>ele.username)
     const user1=users.find((ele)=>ele.username)
     const mostrarResult=user1.username===usuario.username
@@ -153,7 +153,7 @@ console.log(publicacion)
     }else{
       return "";
     }
-  }
+  } */
   return (
     <div className="container">
       <div className="row">
@@ -167,7 +167,7 @@ console.log(publicacion)
           />
         </div>
         <div className="col-12 col-md-6 col-lg-4 mx-auto">
-        {mostrar()}
+        <ListadoProductos deleteItem={deleteItem} edit={edit}/>
         </div>
       </div>
     </div>

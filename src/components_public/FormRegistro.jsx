@@ -4,10 +4,10 @@ import MiContext from "../Context/Micontext";
 import "../CSS/formcss.css";
 import Error from "../components_privates/Error";
 import axios from "axios";
-import ModalRegistroOK from "../components_privates/ModalRegistroOK";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const FormRegistro = () => {
-  const [modalReg, setModalReg] = useState(false);
   const [errorForm, setErrorForm] = useState(false);
   //funcion para generar id al usuario,reat-hook-form no la crea.
   const generarId = () => {
@@ -42,19 +42,19 @@ const FormRegistro = () => {
         console.log(response);
         setUsers([...users, data]);
         setErrorForm(false);
-        <ModalRegistroOK/>
+
+        return Swal.fire({
+          title: "Gracias por Registrarte",
+          text: "Ahora puedes iniciar sesion.",
+          icon: "success",
+        });
       };
       send();
       e.target.reset();
-      
     };
     result();
     console.log(data);
     console.log(users);
-  };
-  const handleClickCloseReg = () => {
-    setModalReg(!modalReg);
-    console.log(modalReg)
   };
 
   return (
@@ -96,7 +96,7 @@ const FormRegistro = () => {
             <small className="fail">El minimo de caracteres es 5</small>
           )}
         </div>
-        <ModalRegistroOK handleClickCloseReg={handleClickCloseReg} modalReg={modalReg}/>
+
         <div className="mb-2">
           <label className="form-label">Elige un usuario:</label>
           <input
@@ -154,6 +154,15 @@ const FormRegistro = () => {
         <button type="submit">Registrarme</button>
         {errorForm && <Error>*El usuario y/o mail ya existen!</Error>}
       </form>
+      <div className="registrarse">
+        <br />
+        <div className="d-flex flex-column align-items-center p-2">
+          <p >¿Ya tienes una cuenta?</p>
+          <Link style={{ textDecoration: "none" }} to="/inicio">
+            <p>Inicia Sesion..aqui</p>
+          </Link>
+        </div>
+      </div>
     </>
   );
 };

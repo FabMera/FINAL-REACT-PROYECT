@@ -18,6 +18,7 @@ import Spinner from "./components_privates/Spinner";
 import Page404 from "./pages_public/Page404";
 import { cargarUsuarios } from "./data/users";
 import { cargarProductos } from "./data/productos";
+import EditarUsuario,{loader as editarUsuarioLoader} from "./pages_private/EditarUsuario";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -54,7 +55,6 @@ function App() {
         JSON.parse(localStorage.getItem("publicacion")) ?? [];
       setPublicacion(publicacionLS);
     };
-    const result=publicacion.find((ele)=>ele.username)
     obtenerDataLocal();
   }, []);
 
@@ -117,6 +117,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/galeria" element={<GaleriaGeneral />} />
                 <Route path="/miperfil" element={<Miperfil />} />
+                <Route path="/miperfil/:usuarioId/editar" element={<EditarUsuario />} loader='editarUsuarioLoader' />
                 <Route path="/favoritos" element={<MisFavoritos />} />
                 <Route path="/producto/:id" element={<DetalleProducto />} />
                 <Route path="/carrito" element={<Carrito />} />
