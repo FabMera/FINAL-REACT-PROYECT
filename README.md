@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+Proyecto Market Place 2022,DESAFIO LATAM-.
+El proyecto incluye la utilizacion de CSS,HTML,JAVASCRIPT Y REACT JS.
+Se usaron las siguientes dependencias:
+-React Router 6 para rutas dinamicas.
+-Sweet Alert 2 (ventanas modales)
+-React Hook Form (para validaciones y formularios de creacion,registro e inicio de sesion de usuarios).
+-Axios para la solicitud y envio de datos al archivo local .json de usuarios registrados  y solicitud tipo get para la API DUMMY de productos y categorias.
+-React Icons ,para la utilizacion de algunos de los iconos como FontAwesone.
+-React Slick para el uso de Tarjetas de eproductos con Slider.
+-React Bootstrap y Bootstrap con CDN.
+-Auth0 para validar usuarios bajo el estandar OAUTH2 -.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+La aplicacion en si,es un sitio web creado con REACT JS el cual permite a los usuarios iniciar sesion y registrarse en la misma aplicacion,a traves de dos mecanismos
+con la libreria Auth0 si el usuario tiene cuenta Google o GitHub,la aplicacion tambien cuenta con un inicio de sesion para usuarios que no tengan este tipo de cuentas.
 
-In the project directory, you can run:
+-La aplicacion permite crear publicaciones,editar las publicaciones,mostrar y seleccionar elementos como favoritos,navegar por rutas privadas y dinamicas,permite acceder al perfil de la persona o usuario que esta en ese momento en la sesion y autenticado.
+-La aplicacion tambien permite agregar productos a un carrito y calcular el stock de los productos y entregar el monto total y el monto por cantidades de productos.
+-La aplicacion no utiliza framework de react como Nextjs o similares,esta realizada en react a traves de NPX CREATE-REACT-APP.
+-Los datos de las publicaciones se almacenan en el local storage del navegador del usuario.
+-La aplicacion reconoce al usuario que a creado los productos,tambien permite vender un producto agregando imagenes locales o a traves de un ruta URL.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
