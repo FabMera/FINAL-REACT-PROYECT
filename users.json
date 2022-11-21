@@ -46,31 +46,13 @@
       "image": "https://robohash.org/aliquamcumqueiure.png"
     },
     {
-      "firstName": "FABIAN ",
-      "lastName": "mera romero",
-      "username": "fmera",
-      "password": "12345",
-      "email": "fabianmeraromero@gmail.com",
-      "id": "lalk9stwmwl3j8emibq",
-      "image": null
-    },
-    {
-      "firstName": "solange",
-      "lastName": "saldivar muñoz",
+      "firstName": "SOLANGE",
+      "lastName": "SALDIVAR",
       "username": "ssaldivar",
-      "password": "12345",
       "email": "ssaldivar@gmail.com",
-      "id": "lalkdwdmuv5dxub6bu",
-      "image": null
-    },
-    {
-      "firstName": "Agustin",
-      "lastName": "Krausse",
-      "username": "akrausse",
       "password": "12345",
-      "email": "fa.mera@hotmail.com",
-      "id": "lamt0vsf7t4uf85vhtk",
-      "image": null
+      "image": "",
+      "id": "lamt0vsf7t4uf85vhtk"
     },
     {
       "firstName": "Emma",
@@ -98,7 +80,15 @@
       "email": "lucas123@gmail.com",
       "image": "https://img.freepik.com/vector-premium/perfil-hombre-dibujos-animados_18591-58482.jpg?w=740",
       "id": "laokkki68uxhem2oex"
+    },
+    {
+      "firstName": "Williams",
+      "lastName": "romero",
+      "username": "wromero",
+      "password": "12345",
+      "email": "wromero@hotmail.com",
+      "image": "https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Free-PNG.png",
+      "id": "lapsbo8odrnrp7pbel4"
     }
-
   ]
 }
