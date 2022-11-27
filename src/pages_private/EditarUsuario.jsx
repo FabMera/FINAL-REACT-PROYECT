@@ -9,7 +9,12 @@ const EditarUsuario = () => {
   const [errorEditForm, setErrorEditForm] = useState(false);
   const [usersEdit, setUsersEdit] = useState([]);
   const { users } = useContext(MiContext);
-  const {register, handleSubmit,formState: { errors }} = useForm();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const endpoint = `http://localhost:8000/users/`;
 
@@ -20,19 +25,26 @@ const EditarUsuario = () => {
       setUsersEdit(info);
     };
     getUser();
-    console.log(usersEdit)
-  },[]);
+  }, []);
 
+  useEffect(() => {
+    const usuarioActual = users.find((item) => item.username);
+    console.log(usuarioActual);
+    const firstName = usuarioActual.firstName;
+    const lastName = usuarioActual.lastName;
+    const username = usuarioActual.username;
+    setValue("firstName", firstName);
+    setValue("lastName", lastName);
+    setValue("username", username);
+  });
 
   const editSubmit = (data, e) => {
-    
-
     const result = () => {
-      const resultado = usersEdit.some(
-        (item) => item.username === data.username || item.email === data.email
-      );
+
+      const resultado = usersEdit.some((item) => item.email === data.email);//busco si existe el mismo correo dentro de los usuarios en uso.
+
       if (resultado) {
-        console.log("usuario o mail ya esta registrado");
+        console.log("Mail ya se encuentra registrado");
         setErrorEditForm(true);
         return;
       }
@@ -50,11 +62,10 @@ const EditarUsuario = () => {
           icon: "success",
         });
       };
-
       editarUsuario();
       e.target.reset();
     };
-    result()
+    result();
   };
 
   return (
@@ -68,46 +79,31 @@ const EditarUsuario = () => {
               className="form-control p-5 shadow rounded-4 "
             >
               <div className="mb-2">
-                <label className="form-label">Ingresa un nuevo Nombre:</label>
+                <label className="form-label">Tu nombre:</label>
                 <input
+                  disabled="true"
                   className="form-control"
-                  placeholder="indica tu nombre"
                   type="text"
-                  {...register("firstName", { required: true })}
+                  {...register("firstName")}
                 />
-                {errors.firstName?.type === "required" && (
-                  <small className="fail">
-                    Debes ingresar tu actual nombre o uno nuevo.
-                  </small>
-                )}
               </div>
               <div className="mb-2">
-                <label className="form-label">Ingresa un nuevo apellido:</label>
+                <label className="form-label">Tu Apellido:</label>
                 <input
+                  disabled="true"
                   className="form-control"
-                  placeholder="indica tu apellido"
                   type="text"
-                  {...register("lastName", { required: true })}
+                  {...register("lastName")}
                 />
-                {errors.lastName?.type === "required" && (
-                  <small className="fail">
-                    Debes ingresar tu apellido actual o uno nuevo..
-                  </small>
-                )}
               </div>
               <div className="mb-2">
-                <label className="form-label">Cambia tu usuario:</label>
+                <label className="form-label">Tu usuario:</label>
                 <input
+                  disabled="true"
                   className="form-control"
-                  placeholder="Usuario"
                   type="text"
-                  {...register("username", { required: true })}
+                  {...register("username")}
                 />
-                {errors.username?.type === "required" && (
-                  <small className="fail">
-                    Debes reingresar tu nombre de usuario o ingresar uno nuevo..
-                  </small>
-                )}
               </div>
               <div className="mb-2">
                 <label className="form-label">
@@ -125,7 +121,7 @@ const EditarUsuario = () => {
                 />
                 {errors.email?.type === "required" && (
                   <small className="fail">
-                    Debes ingresar tu correo actual o uno nuevo..
+                    Debes ingresar tu correo actual o uno nuevo para confirmar..
                   </small>
                 )}
                 {errors.email?.type === "pattern" && (
@@ -136,7 +132,7 @@ const EditarUsuario = () => {
               </div>
               <div className="mb-2">
                 <label className="form-label">
-                  Ingresa tu contraseña o cambiala aqui:
+                  Cambia tu contraseña:
                 </label>
                 <input
                   className="form-control"
@@ -162,7 +158,9 @@ const EditarUsuario = () => {
                 />
               </div>
               <button type="submit">Editar mi Perfil</button>
-              {errorEditForm && <Error>*El usuario y/o mail ya existen!</Error>}
+              {errorEditForm && (
+                <Error>*El mail ya se encuentra Registrado!</Error>
+              )}
             </form>
           </div>
         </div>

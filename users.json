@@ -46,10 +46,10 @@
       "image": "https://robohash.org/aliquamcumqueiure.png"
     },
     {
-      "firstName": "SOLANGE",
-      "lastName": "SALDIVAR",
-      "username": "ssaldivar",
-      "email": "ssaldivar@gmail.com",
+      "firstName": "Loreto",
+      "lastName": "Saldivar",
+      "username": "ssaldivarsol",
+      "email": "sol@correo.com",
       "password": "12345",
       "image": "",
       "id": "lamt0vsf7t4uf85vhtk"
@@ -58,17 +58,17 @@
       "firstName": "Emma",
       "lastName": "Smith",
       "username": "emma123",
-      "password": "123456",
-      "email": "emma1987@gcorreo.com",
-      "image": "https://i.pinimg.com/originals/19/87/90/198790eb7e08830027c1ae1686496c72.png",
+      "email": "emma123@google.cl",
+      "password": "12345",
+      "image": "",
       "id": "lanwpd6fk4z9g47q2a"
     },
     {
       "firstName": "jose",
       "lastName": "diaz",
-      "username": "jdiaz",
+      "username": "jdiaz123",
+      "email": "jodiaz123@google.com",
       "password": "123456",
-      "email": "jdiaz10@yahoo.cl",
       "image": "",
       "id": "lanwy26wjfeh5divze"
     },
@@ -89,6 +89,42 @@
       "email": "wromero@hotmail.com",
       "image": "https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Free-PNG.png",
       "id": "lapsbo8odrnrp7pbel4"
+    },
+    {
+      "firstName": "Maria",
+      "lastName": "Navarro",
+      "username": "mnavarro",
+      "password": "12345",
+      "email": "maria@emol.com",
+      "image": "",
+      "id": "lavb7d0q5r86p0v89ud"
+    },
+    {
+      "firstName": "Ernesto",
+      "lastName": "Krausse",
+      "username": "ekrausse",
+      "email": "editandoperfil@gmail.com",
+      "password": "12345",
+      "image": "https://static.vecteezy.com/system/resources/previews/011/675/374/non_2x/man-avatar-image-for-profile-png.png",
+      "id": "lawecjqk5pwz2lkevdd"
+    },
+    {
+      "firstName": "usuario",
+      "lastName": "usuario",
+      "username": "usuario123",
+      "password": "12345",
+      "email": "correo123@correo.com",
+      "image": "https://static.vecteezy.com/system/resources/previews/011/675/374/non_2x/man-avatar-image-for-profile-png.png",
+      "id": "lawwp8b41l86aqoribe"
+    },
+    {
+      "firstName": "lucas",
+      "lastName": "ojeda",
+      "username": "lucas123",
+      "password": "12345",
+      "email": "correo@correo.com",
+      "image": "",
+      "id": "lax44uk621jqayg8ye2"
     }
   ]
 }

@@ -5,7 +5,6 @@ import Cards from "../components_privates/Cards";
 import Selector from "../components_privates/Selector";
 import SelectOrderby from "../components_privates/SelectOrderby";
 import MiContext from "../Context/Micontext";
-import Error from "../components_privates/Error";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
@@ -17,8 +16,7 @@ const GaleriaGeneral = () => {
   const [select, setSelect] = useState(""); //Estado del select de categorias
   const [selectBusqueda, setSelectBusqueda] = useState([{}]); //muestra los resultados del Select por Categoria
   const [selectprecio, setSelectPrecio] = useState(""); //Estado del select por precio
-  const [errorBusqueda, setErrorBusqueda] = useState(false);
-  const [errorBusquedaCat,setErrorBusquedaCat]=useState(false)
+
   //-----------------------------------CONTEXTOS----------------------------------------//
   const {
     isAuth,
@@ -69,24 +67,20 @@ const GaleriaGeneral = () => {
       });
     }
   };
-  //------------------------------------fin ---------------------------------------------------//
+  //------------------------------------fin -------------------------------------------------//
 
   const handleInput = (e) => {
     setSearch(e.target.value);
     searchProducto(e.target.value);
   };
-  //----------------------funcion para busqueda en el input-------------------------------//
+  //----------------------funcion para busqueda en el input---------------------------------//
   const searchProducto = (buscar) => {
     const results = publicacion.filter((valor) => {
       if (valor.tipo.toLowerCase().includes(buscar.toLocaleLowerCase())) {
-        setErrorBusqueda(false);
         return valor;
-      } else {
-        setErrorBusqueda(true);
       }
     });
     setBusqueda(results);
-    console.log(errorBusqueda);
   };
   //------------------------------------fin ---------------------------------------------//
 
@@ -121,23 +115,23 @@ const GaleriaGeneral = () => {
     renderSelect(selectprecio);
   };
   //------------------------------------fin -------------------------------------------//
-  const handleChangeSelect = (e) => {
-    setSelect(e.target.value);
-    categoriasresult(e.target.value);
-  };
 
   //-----------------------funcion para busqueda por categorias----------------------//
   const categoriasresult = (select) => {
     const filterporCat = publicacion.filter((valor) => {
       if (valor.categoria === select) {
-        setErrorBusquedaCat(false)
         return valor;
-      }else{
-        setErrorBusquedaCat(true)
       }
     });
     setSelectBusqueda(filterporCat);
   };
+ 
+
+  const handleChangeSelect = (e) => {
+    setSelect(e.target.value);
+    categoriasresult(e.target.value);
+  };
+
   //------------------------------------fin ------------------------------------------//
 
   //-----------------------funcion para agregar producto al carrito------------------//
@@ -145,8 +139,11 @@ const GaleriaGeneral = () => {
     const carrito = [...publicacion];
     const resultado = carrito.find((item) => item.id === product.id);
     setCarroCompra([...carroCompra, resultado]);
-    console.log(resultado);
-    console.log(carroCompra);
+    return Swal.fire({
+      title: "1 Producto añadido",
+      text: "Producto agregado al Carrito",
+      icon: "success",
+    });
   };
   //--------------funcion para limitar la busqueda por input y select----------------//
   const busquedaTotal = () => {
@@ -160,6 +157,7 @@ const GaleriaGeneral = () => {
           user={user}
           addProduct={addProduct}
           irAlDetalle={irAlDetalle}
+          publicacion={publicacion}
         />
       ));
     } else if (search === "" && select !== "") {
@@ -172,6 +170,7 @@ const GaleriaGeneral = () => {
           isAuth={isAuth}
           addProduct={addProduct}
           irAlDetalle={irAlDetalle}
+          publicacion={publicacion}
         />
       ));
     } else if (search !== "" && select === "") {
@@ -184,6 +183,7 @@ const GaleriaGeneral = () => {
           user={user}
           addProduct={addProduct}
           irAlDetalle={irAlDetalle}
+          publicacion={publicacion}
         />
       ));
     }
@@ -196,22 +196,14 @@ const GaleriaGeneral = () => {
         <div className="row">
           <div className="col-12 col-md-4">
             <Buscador search={search} handleInput={handleInput} />
-            {errorBusqueda && (
-              <Error>*No hay resultados para su busqueda</Error>
-            )}
           </div>
-
           <div className="col-12 col-md-4">
             <Selector handleChangeSelect={handleChangeSelect} />
-            {errorBusquedaCat && (
-              <Error>*No existen productos de esta categoria!</Error>
-            )}
           </div>
           <div className="col-12 col-md-4">
             <SelectOrderby handleSelectPrecio={handleSelectPrecio} />
           </div>
         </div>
-
         <div className="row">{busquedaTotal()}</div>
       </div>
     </>

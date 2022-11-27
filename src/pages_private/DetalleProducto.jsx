@@ -8,9 +8,8 @@ import TodoComentarios from "../components_privates/TodoComentarios";
 import MiContext from "../Context/Micontext";
 import Swal from "sweetalert2";
 
-
 const DetalleProducto = () => {
-  const { publicacion, productos, carroCompra, setCarroCompra,setProductos } =
+  const { publicacion, productos, carroCompra, setCarroCompra, setProductos } =
     useContext(MiContext);
   const { id } = useParams();
   const { user } = useAuth0();
@@ -82,18 +81,27 @@ const DetalleProducto = () => {
   };
 
   //Funcion que agrega productos al carrito desde la API
-   const addProduct = (item) => {
+  const addProduct = (item) => {
     const carrito = [...productos];
     const resultado = carrito.find((ele) => ele.id === item.id);
     setCarroCompra([...carroCompra, resultado]);
+    return Swal.fire({
+      title: "1 Producto añadido",
+      text: "Producto agregado al Carrito",
+      icon: "success",
+    });
   };
   //Funcion que agrega productos desde las publicaciones del usuario
   const addProductPublica = (item) => {
     const carrito = [...publicacion];
     const resultado = carrito.find((ele) => ele.id === item.id);
     setCarroCompra([...carroCompra, resultado]);
+    return Swal.fire({
+      title: "1 Producto añadido",
+      text: "Producto agregado al Carrito",
+      icon: "success",
+    });
   };
-
 
   const onClickHeart = (item) => {
     const favoritas = [...productos];
@@ -111,9 +119,9 @@ const DetalleProducto = () => {
   return (
     <>
       <div className="container">
-        <h1 className="text-center mt-2 p-5">Detalle del Producto</h1>
+        <h1 className="text-center mt-5 p-5">Detalle del Producto</h1>
         <div className="row">
-          <div className="col-10 col-md-6 col-sm-10 card  d-flex align-items-center mt-5 shadow bg-white rounded-5">
+          <div className="col-10 col-md-6 col-sm-10 card  d-flex align-items-center mt-4 shadow bg-white rounded-5">
             {productos
               .filter((item) => item.id === Number(id))
 

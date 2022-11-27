@@ -29,7 +29,7 @@ const MisPublicaciones = () => {
     setCategories,
     modoedicion,
     setModoEdicion,
-    users
+    users,
   } = useContext(MiContext);
 
   //Estados para el id del formulario actualizado,el error y el modo edicion
@@ -72,7 +72,7 @@ const MisPublicaciones = () => {
       return;
     }
     setError(false);
-    const usuario = users.find((ele)=>ele.username)
+    const usuario = users.find((ele) => ele.username);
     const objProducto = {
       tipo,
       categoria,
@@ -84,12 +84,13 @@ const MisPublicaciones = () => {
       cantidad, //lo que publica el usuario,stock.
       cantidades: 1, //valor inicial que una persona puede comprar e incrementa y decrementa.
       cover,
-      username:usuario.username
+      username: usuario.username,
     };
     //funcion para editar un FORMULARIO de PRODUCTOS.
     if (modoedicion) {
       const temp = [...publicacion];
       const elemento = temp.find((ele) => ele.id === ide);
+      //existe un id?
       if (elemento.id) {
         objProducto.id = elemento.id;
         const publicacionActual = publicacion.map((object) =>
@@ -101,7 +102,7 @@ const MisPublicaciones = () => {
       objProducto.id = generarId();
       setPublicacion([...publicacion, objProducto]);
     }
-    setProductos([...productos, objProducto]);
+    /* setProductos([...productos, objProducto]); solo si quiero agregar el producto al array de la API*/
 
     //Producto de la API + producto formulario;
 
@@ -114,7 +115,7 @@ const MisPublicaciones = () => {
     setCantidad("");
     setModoEdicion(false);
   };
-console.log(publicacion)
+  console.log(publicacion);
   //Generamos un id aleatorio para el nuevo producto que agregamos
   const generarId = () => {
     const fecha = Date.now().toString(36);
@@ -133,7 +134,7 @@ console.log(publicacion)
   useEffect(() => {
     cargarCategories();
   }, []);
-//funcion para cargar y leer imagen de un archivo local
+  //funcion para cargar y leer imagen de un archivo local
   function handleOnChangeFile(e) {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -142,18 +143,9 @@ console.log(publicacion)
       setCover(reader.result.toString());
     };
   }
-/* Funcion que muestra u oculta las publicaciones si son de otro USUARIO */
- /*  const mostrar=()=>{
-    const usuario=publicacion.find((ele)=>ele.username)
-    const user1=users.find((ele)=>ele.username)
-    const mostrarResult=user1.username===usuario.username
 
-    if(mostrarResult){
-      return <ListadoProductos deleteItem={deleteItem} edit={edit}/>
-    }else{
-      return "";
-    }
-  } */
+
+
   return (
     <div className="container">
       <div className="row">
@@ -167,7 +159,16 @@ console.log(publicacion)
           />
         </div>
         <div className="col-12 col-md-6 col-lg-4 mx-auto">
-        <ListadoProductos deleteItem={deleteItem} edit={edit}/>
+          <h4 className=" text-center mt-5 pt-4 m-2">
+            Listado de Tus Productos
+          </h4>
+          <p className="text-center">
+            Administras tus {""}
+            <span style={{ fontWeight: "bold" }} className="text-danger">
+              Productos
+            </span>
+          </p>
+          <ListadoProductos deleteItem={deleteItem} edit={edit} />
         </div>
       </div>
     </div>

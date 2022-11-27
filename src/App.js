@@ -46,6 +46,7 @@ function App() {
   //Cargo los usuarios del users.json
   useEffect(() => {
     cargarUsuarios(setUsers);
+    console.log(users)
   }, []);
 
   // solicito los datos a la local storage y los transformo

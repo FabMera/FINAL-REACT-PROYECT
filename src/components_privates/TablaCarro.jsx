@@ -22,26 +22,32 @@ const TablaCarro = ({
         </th>
         <td>US${producto.precio} </td>
         <td>
-          <div className="mt-1">
+          <div className="mt-1 mb-1">
             <button
-              style={{ width: "20px", height: "20px",color:'white' }}
+              title="agregar"
+              style={{ width: "25px", height: "25px", color: "white" }}
               className="btn btn-info p-0"
               onClick={() => incrementCount(producto)}
-              disabled={producto.cantidades > producto.cantidad}
+              disabled={producto.cantidades === producto.cantidad}
             >
               +
             </button>
             <span className="m-2">{producto.cantidades}</span>
 
             <button
-              style={{ width: "20px", height: "20px",color:'white' }}
+              title="quitar"
+              style={{ width: "25px", height: "25px", color: "white" }}
               disabled={producto.cantidades <= 0}
               className="btn btn-info p-0"
               onClick={() => decrementCount(producto)}
-            > -
+            >
+              {" "}
+              -
             </button>
-            {producto.cantidades > producto.cantidad? (
-              <p className="m-1"  style={{ color: "red", fontWeight: "bold" }}>*Excede el máximo de productos</p>
+            {producto.cantidades === producto.cantidad ? (
+              <p className="m-1" style={{ color: "red", fontWeight: "bold" }}>
+                *Solo puedes llevar {producto.cantidad}
+              </p>
             ) : (
               ""
             )}
@@ -51,6 +57,7 @@ const TablaCarro = ({
         <td>
           {" "}
           <button
+            title="Eliminar del Carrito"
             onClick={() => deleteItem(producto.id)}
             className="btn btn-danger"
           >

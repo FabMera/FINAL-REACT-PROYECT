@@ -12,23 +12,24 @@ const ListadoProductos = ({ deleteItem, edit }) => {
     } else {
       console.log("Formulario Vacio");
     }
-  }, []);
+  }, [publicacion]);
 
   const handleClickClose = () => {
     setModal(!modal);
   };
   const [modal, setModal] = useState(false);
 
+
+//variables para filtrar que solo se muestren los listados de productos del usuario que se encuentra en la sesion activa.
+  const usuarioProducto = users.find((user) => user.username); //capturamos el usuario actual
+  const usuarioactual = usuarioProducto.username; //accedo al usuario actual para solo mostrar sus productos..
+  const filtrarPublicaciones = publicacion.filter(
+    (user) => user.username === usuarioactual
+  );
+  
   return (
     <>
-      <h4 className=" text-center mt-5 p-2 m-2">Listado de Tus Productos</h4>
-      <p className="text-center">
-        Administras tus {""}
-        <span style={{ fontWeight: "bold" }} className="text-danger">
-          Productos
-        </span>
-      </p>
-      {publicacion.map((item) => (
+      {filtrarPublicaciones.map((item) => (
         <div key={item.id} className="m-2 p-3 mt-4 shadow-lg  bg-body rounded">
           <p>Tipo de Producto:{item.tipo}</p>
           <hr />

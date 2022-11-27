@@ -5,7 +5,7 @@ import "../CSS/formcss.css";
 import Error from "../components_privates/Error";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FormRegistro = () => {
   const [errorForm, setErrorForm] = useState(false);
@@ -22,8 +22,12 @@ const FormRegistro = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+//json-server 
   const endpointuser = "http://localhost:8000/users";
+  const navigate=useNavigate()
+
+
+
 
   const customSubmit = (data, e) => {
     const result = () => {
@@ -42,12 +46,13 @@ const FormRegistro = () => {
         console.log(response);
         setUsers([...users, data]);
         setErrorForm(false);
-
+        navigate('/inicio')
         return Swal.fire({
           title: "Gracias por Registrarte",
           text: "Ahora puedes iniciar sesion.",
           icon: "success",
         });
+        
       };
       send();
       e.target.reset();
@@ -72,12 +77,12 @@ const FormRegistro = () => {
             type="text"
             {...register("firstName", { required: true, maxLength: 10 })}
           />
-          {errors.firstName?.type === "required" && (
+          {errors.firstName?.type === "required" &&
             <small className="fail">El campo nombre no puede estar vacio</small>
-          )}
-          {errors.firstName?.type === "maxLength" && (
+          }
+          {errors.firstName?.type === "maxLength" &&
             <small className="fail">El maximo de caracteres es 10</small>
-          )}
+          }
         </div>
         <div className="mb-2">
           <label className="form-label">Apellido:</label>
@@ -87,14 +92,8 @@ const FormRegistro = () => {
             type="text"
             {...register("lastName", { required: true, minLength: 4 })}
           />
-          {errors.lastName?.type === "required" && (
-            <small className="fail">
-              El campo apellido no puede estar vacio
-            </small>
-          )}
-          {errors.lastname?.type === "min" && (
-            <small className="fail">El minimo de caracteres es 5</small>
-          )}
+          {errors.lastName?.type === "required" && <small className="fail">El campo apellido no puede estar vacio</small>}
+          {errors.lastName?.type === "minLength" && <small className="fail">El minimo de caracteres es 4</small>}
         </div>
 
         <div className="mb-2">
@@ -105,11 +104,8 @@ const FormRegistro = () => {
             type="text"
             {...register("username", { required: true, minLength: 4 })}
           />
-          {errors.username?.type === "required" && (
-            <small className="fail">
-              El campo usuario no puede estar vacio
-            </small>
-          )}
+          {errors.username?.type === "required" && <small className="fail">El campo usuario no puede estar vacio</small>}
+
         </div>
         <div className="mb-2">
           <label className="form-label">Elige una contraseña:</label>
@@ -117,11 +113,10 @@ const FormRegistro = () => {
             className="form-control"
             placeholder="Contraseña"
             type="password"
-            {...register("password", { required: true, minLength: 4 })}
+            {...register("password", { required: true ,minLength: 4} )}
           />
-          {errors.password?.type === "required" && (
-            <small className="fail">Debes ingresar una contraseña</small>
-          )}
+          {errors.password?.type === "required" && <small className="fail">Debes ingresar una contraseña</small>}
+          {errors.password?.type === "minLength" && <small className="fail">Tu contraseña debe tener mas de 4 caracteres.</small>}
         </div>
         <div className="mb-2">
           <label className="form-label">Correo Electronico:</label>
@@ -132,15 +127,12 @@ const FormRegistro = () => {
             {...register(
               "email",
               { required: true },
-              { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i }
+              { pattern: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ }
             )}
           />
-          {errors.email?.type === "required" && (
-            <small className="fail">El campo email no puede estar vacio</small>
-          )}
-          {errors.email?.type === "pattern" && (
-            <small className="fail">El formato de email es incorrecto</small>
-          )}
+          {errors.email?.type === "required" && <small className="fail">El campo email no puede estar vacio</small>}
+          {errors.email?.type === "pattern" && <small className="fail">El formato de email es incorrecto</small>
+          }
         </div>
         <div className="mb-2">
           <label className="form-label">Imagen de Perfil (opcional)</label>
@@ -153,16 +145,15 @@ const FormRegistro = () => {
         </div>
         <button type="submit">Registrarme</button>
         {errorForm && <Error>*El usuario y/o mail ya existen!</Error>}
-      </form>
-      <div className="registrarse">
-        <br />
-        <div className="d-flex flex-column align-items-center p-2">
-          <p >¿Ya tienes una cuenta?</p>
-          <Link style={{ textDecoration: "none" }} to="/inicio">
-            <p>Inicia Sesion..aqui</p>
-          </Link>
+        <div className="registrarse">
+          <div className="d-flex flex-column align-items-center p-2">
+            <p>¿Ya tienes una cuenta?</p>
+            <Link style={{ textDecoration: "none" }} to="/inicio">
+              <p className="">Inicia Sesion..aqui</p>
+            </Link>
+          </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };

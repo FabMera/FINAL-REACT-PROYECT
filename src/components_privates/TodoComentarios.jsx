@@ -13,7 +13,7 @@ const TodoComentarios = ({
 
 
   return (
-    <div className="caja-commit">
+    <div className="caja-commit mx-auto">
       <div className="comentario-p rounded shadow  ">
         <div className="picture-profile m-1 ">
           <img

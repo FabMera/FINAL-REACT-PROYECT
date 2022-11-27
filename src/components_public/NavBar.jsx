@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import RegisterButton from "./RegisterButton";
@@ -10,7 +10,8 @@ import { cargarUsuarios } from "../data/users";
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth0();
-  const { carroCompra, isAuth, setIsAuth,users,setUsers } = useContext(MiContext);
+  const { carroCompra, isAuth, setIsAuth,setUsers } = useContext(MiContext);
+  const navigate = useNavigate()
 
   return (
     <>
@@ -87,10 +88,10 @@ const NavBar = () => {
                       <a className="dropdown-item">
                         {isAuth ? (
                           <button
-                            onClick={() => {setIsAuth(false);cargarUsuarios(setUsers)}}
+                            onClick={() => {setIsAuth(false);cargarUsuarios(setUsers);navigate('/')}}
                             className="boton-logout"
                           >
-                            <Link to="/"></Link>Cerrar Sesion
+                           Cerrar Sesion
                           </button>
                         ) : (
                           <LogoutButton />

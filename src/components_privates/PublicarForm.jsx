@@ -53,7 +53,7 @@ const PublicarForm = ({
           <select
             value={categoria}
             onChange={(e) => setCategoria(e.target.value)}
-            className="form-select"
+            className="form-select text-center"
             aria-label="Default select example"
           >
             <option value="">---Elige una Categoria---</option>
@@ -69,7 +69,7 @@ const PublicarForm = ({
           <select
             value={estado}
             onChange={(e) => setEstado(e.target.value)}
-            className="form-select"
+            className="form-select text-center"
             aria-label="Default select example"
           >
             <option value="">---Selecciona una opcion---</option>

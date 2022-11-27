@@ -48,24 +48,17 @@ const MisFavoritos = () => {
   return (
     <>
       <div className="container bg-light">
-        <h1 className="text-center mt-4 p-5">Mis Favoritos</h1>
-        <p className="text-center"><em>Aqui puedes agregar tus productos favoritos..</em></p>
-        <div className="d-flex justify-content-center ">
-          <img
-            alt=""
-            className="favorito-img rounded-circle shadow"
-            src="https://st.depositphotos.com/2229436/2404/v/450/depositphotos_24043161-stock-illustration-yellow-heart-favorite-web-2.jpg"
-          />
-        </div>
+        <h1 className="text-center mt-4 pt-5">Mis Favoritos</h1>
+        <p className="text-center"><em >Aqui puedes agregar tus favoritos..haz click en el 💛 de un producto que te guste..</em></p>
         <div className="row">
           {publicacion
             .filter((ele) => ele.favorito)
             .map((ele) => (
               <div
                 key={ele.id}
-                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3  "
+                className="col-8 col-md-6 col-sm-6 col-lg-4 col-xl-3 mx-auto  "
               >
-                <div className="card shadow-lg mx-auto rounded-5  ">
+                <div style={{border:'none'}} className="card shadow-sm mx-auto rounded-4   ">
                   <img
                     style={{ width: "100%", height: "180px" }}
                     src={ele.cover ? ele.cover : ele.imagen}
@@ -74,21 +67,14 @@ const MisFavoritos = () => {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{ele.tipo}</h5>
-                    <p className="card-text">
-                      <b>Estado del Producto: </b>
-                      {ele.estado}
-                    </p>
+                    
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">Precio: $ {ele.precio}</li>
                     <li className="list-group-item">
-                      Favorito :
-                      <svg width="40px" viewBox="0 0 24 24">
-                        <path
-                          fill={ele.favorito ? "red" : "#fe9393"}
-                          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-                        />
-                      </svg>
+                    <p className="card-text">
+                      Estado del Producto: {ele.estado}
+                    </p>
                     </li>
                   </ul>
                   <div className="card-body d-flex flex-column mx-auto p-0 w-75 ">
@@ -100,16 +86,10 @@ const MisFavoritos = () => {
                     </button>
                     <button
                       onClick={() => addProductPublic(ele)}
-                      className="btn btn-info btn-sm  mt-3"
+                      className="btn btn-info btn-sm mb-3 mt-3"
                     >
                       Comprar
                     </button>
-                  </div>
-                  <div className="card-footer mt-2 ">
-                    <small className="text-muted">
-                      Publicado por :
-                      {isAuth ? users.map((item) => item.firstName) : user.name}
-                    </small>
                   </div>
                 </div>
               </div>
@@ -120,9 +100,9 @@ const MisFavoritos = () => {
             .map((ele) => (
               <div
                 key={ele.id}
-                className="col-8 col-md-4 col-sm-6 col-lg-4 col-xl-3  "
+                className="col-8 col-md-6 col-sm-6 col-lg-4 col-xl-3 mx-auto  "
               >
-                <div className="card shadow-lg mx-auto rounded-5  ">
+                <div style={{border:'none'}} className="card shadow-sm mx-auto rounded-4"   >
                   <img
                     style={{ width: "100%", height: "180px" }}
                     src={ele.cover ? ele.cover : ele.imagen}
@@ -131,21 +111,14 @@ const MisFavoritos = () => {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{ele.tipo}</h5>
-                    <p className="card-text">
-                      <b>Estado del Producto: </b>
-                      {ele.estado}
-                    </p>
+
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-item">Precio: $ {ele.precio}</li>
                     <li className="list-group-item">
-                      Favorito :
-                      <svg width="40px" viewBox="0 0 24 24">
-                        <path
-                          fill={ele.favorito ? "red" : "#fe9393"}
-                          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-                        />
-                      </svg>
+                    <p className="card-text">
+                     Estado del Producto:{ele.estado}
+                    </p>
                     </li>
                   </ul>
                   <div className="card-body d-flex flex-column mx-auto p-0 w-75 ">
@@ -157,16 +130,10 @@ const MisFavoritos = () => {
                     </button>
                     <button
                       onClick={() => addProduct(ele)}
-                      className="btn btn-info btn-sm  mt-3"
+                      className="btn btn-info btn-sm  mt-3 mb-3"
                     >
                       Comprar
                     </button>
-                  </div>
-                  <div className="card-footer mt-2 ">
-                    <small className="text-muted">
-                      Publicado por :
-                      {isAuth ? users.map((item) => item.firstName) : user.name}
-                    </small>
                   </div>
                 </div>
               </div>
