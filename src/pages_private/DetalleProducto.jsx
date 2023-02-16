@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 const DetalleProducto = () => {
   const { publicacion, productos, carroCompra, setCarroCompra, setProductos } =
     useContext(MiContext);
+
   const { id } = useParams();
   const { user } = useAuth0();
   //hook para los comentarios

@@ -5,8 +5,7 @@ import { cargarUsuarios } from "../data/users";
 //Perfil del usuario autenticado en la pagina
 
 const PerfilAuth = () => {
-  const { isAuth, users, setIsAuth, setUsers } =
-    useContext(MiContext);
+  const { isAuth, users, setIsAuth, setUsers } = useContext(MiContext);
   console.log(users);
 
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const PerfilAuth = () => {
                           onClick={() => {
                             setIsAuth(false);
                             cargarUsuarios(setUsers);
-                            navigate('/');
+                            navigate("/");
                           }}
                         >
                           Cerrar Sesion

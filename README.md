@@ -9,6 +9,7 @@ Se usaron las siguientes dependencias:
 -React Slick para el uso de Tarjetas de eproductos con Slider.
 -React Bootstrap y Bootstrap con CDN.
 -Auth0 para validar usuarios bajo el estandar OAUTH2 -.
+-Se utilizo JSON SERVER para simular las consultas a una API REST.
 
 
 La aplicacion en si,es un sitio web creado con REACT JS el cual permite a los usuarios iniciar sesion y registrarse en la misma aplicacion,a traves de dos mecanismos

@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import Micontext from "./Context/Micontext";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,9 +16,9 @@ import Carrito from "./pages_private/Carrito";
 import { useAuth0 } from "@auth0/auth0-react";
 import Spinner from "./components_privates/Spinner";
 import Page404 from "./pages_public/Page404";
-import { cargarUsuarios } from "./data/users";
 import { cargarProductos } from "./data/productos";
 import EditarUsuario from "./pages_private/EditarUsuario";
+import { cargarUsuarios } from "./data/users";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -38,6 +38,8 @@ function App() {
   const [cantidad, setCantidad] = useState(0);
   const [modoedicion, setModoEdicion] = useState(false);
   const { isLoading } = useAuth0();
+
+
 
   //Mostrar productos desde la api de Dummy ..
   useEffect(() => {

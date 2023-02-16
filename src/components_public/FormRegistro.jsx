@@ -23,11 +23,8 @@ const FormRegistro = () => {
     formState: { errors },
   } = useForm();
 //json-server 
-  const endpointuser = "http://localhost:8000/users";
+  const endpointuser ="http://localhost:8000/users"
   const navigate=useNavigate()
-
-
-
 
   const customSubmit = (data, e) => {
     const result = () => {

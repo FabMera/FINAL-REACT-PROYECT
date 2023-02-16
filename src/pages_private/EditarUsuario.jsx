@@ -40,8 +40,7 @@ const EditarUsuario = () => {
 
   const editSubmit = (data, e) => {
     const result = () => {
-
-      const resultado = usersEdit.some((item) => item.email === data.email);//busco si existe el mismo correo dentro de los usuarios en uso.
+      const resultado = usersEdit.some((item) => item.email === data.email); //busco si existe el mismo correo dentro de los usuarios en uso.
 
       if (resultado) {
         console.log("Mail ya se encuentra registrado");
@@ -131,9 +130,7 @@ const EditarUsuario = () => {
                 )}
               </div>
               <div className="mb-2">
-                <label className="form-label">
-                  Cambia tu contraseña:
-                </label>
+                <label className="form-label">Cambia tu contraseña:</label>
                 <input
                   className="form-control"
                   placeholder="Contraseña"
